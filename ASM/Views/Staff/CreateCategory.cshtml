@@ -1,0 +1,47 @@
+﻿@model ASM.Models.CourseCategoryEntity
+@{
+    ViewBag.Title = "CreateCategory";
+    Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+}
+<br>
+<br>
+
+    <div class="container">
+        <h1 class="display-4">New ClassRoom</h1>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+        }
+
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name,
+                  htmlAttributes: new { @class = "font-weight-bold" })
+
+
+                @Html.EditorFor(m => m.Name,
+                 new
+                 {
+                   htmlAttributes = new { @class = "form-control" }
+                 })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "font-weight-bold" })
+                @Html.EditorFor(m => m.Description,
+                new
+                {
+                  htmlAttributes = new { @class = "form-control" }
+                })
+            </div>
+            <br />
+            
+            <button type="submit" class="btn btn-dark">Submit</button>
+        }
+
+    </div>
+
+
+

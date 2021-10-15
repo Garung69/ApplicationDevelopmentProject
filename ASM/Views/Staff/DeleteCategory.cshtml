@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "DeleteCategory";
+    Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+}
+
+@model ASM.Models.CourseCategoryEntity
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name,
+          htmlAttributes: new { @class = "font-weight-bold" })
+
+
+        @Html.EditorFor(m => m.Name,
+         new
+         {
+           htmlAttributes = new { @class = "form-control" }
+         })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.Description,
+        new
+        {
+          htmlAttributes = new { @class = "form-control" }
+        })
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-dark">Submit</button>
+}
+
+
+
+
+
