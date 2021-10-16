@@ -14,7 +14,6 @@ namespace ASM.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-<<<<<<< HEAD
         public ActionResult Index()
         {
             using (var ASMCtx = new EF.CMSContext())
@@ -24,40 +23,6 @@ namespace ASM.Controllers
             }
         }
 
-=======
-        [HttpGet]
-        public ActionResult AdminCreateStaff()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> AdminCreateStaff(UserInfor staff)
-        {
-
-            var context = new CMSContext();
-            var store = new UserStore<UserInfor>(context);
-            var manager = new UserManager<UserInfor>(store);
-
-            var user = await manager.FindByEmailAsync(staff.Email);
-
-            if (user == null)
-            {
-                user = new UserInfor
-                {
-                    UserName = staff.Email.Split('@')[0],
-                    Email = staff.Email,
-                    PhoneNumber = "None!",
-                    Name = staff.Email.Split('@')[0],
-
-                };
-                await manager.CreateAsync(user, staff.PasswordHash);
-                await CreateRole(staff.Email, "staff");
-            }
-
-            return RedirectToAction("LogIn");
-        }
->>>>>>> bfbc4f08236c6d47977b37cc373e33e55cac0b3b
 
         public async Task<ActionResult> CreateRole(string email, string role)
         {
@@ -79,20 +44,14 @@ namespace ASM.Controllers
             }
             if (!await roleManager.RoleExistsAsync(SecurityRoles.Trainee))
             {
-<<<<<<< HEAD
+
                 await roleManager.CreateAsync(new IdentityRole { Name = SecurityRoles.Trainee });
-=======
-                await roleManager.CreateAsync(new IdentityRole { Name = SecurityRoles.Staff });
->>>>>>> bfbc4f08236c6d47977b37cc373e33e55cac0b3b
 
             }
             if (!await roleManager.RoleExistsAsync(SecurityRoles.Trainer))
             {
-<<<<<<< HEAD
                 await roleManager.CreateAsync(new IdentityRole { Name = SecurityRoles.Trainer });
-=======
-                await roleManager.CreateAsync(new IdentityRole { Name = SecurityRoles.Staff });
->>>>>>> bfbc4f08236c6d47977b37cc373e33e55cac0b3b
+
             }
 
             var User = await userManager.FindByEmailAsync(email);
@@ -113,7 +72,6 @@ namespace ASM.Controllers
             {
                 userManager.AddToRole(User.Id, SecurityRoles.Trainee);
             }
-<<<<<<< HEAD
             return Content("done!");
         }
 
@@ -229,7 +187,7 @@ namespace ASM.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> DeleteStaff(string id)
+        public ActionResult DeleteStaff(string id)
         {
             using (var FAPCtx = new EF.CMSContext())
             {
@@ -432,16 +390,5 @@ namespace ASM.Controllers
 
         }
 
-
-
-
-
-
-
-=======
-            return Content("admin done!");
-        }
-
->>>>>>> bfbc4f08236c6d47977b37cc373e33e55cac0b3b
     }
 }
