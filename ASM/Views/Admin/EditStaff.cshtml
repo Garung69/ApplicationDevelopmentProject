@@ -1,0 +1,21 @@
+﻿@model ASM.Models.UserInfor
+@{
+    Layout = "~/Views/Admin/_LayoutForAdmin.cshtml";
+}
+
+<div class="manage">
+    <img src="https://png.pngtree.com/png-vector/20190411/ourlarge/pngtree-business-male-icon-vector-png-image_916468.jpg" alt="Alternate Text" width="70%" height="auto" /> <br />
+    <a class="btn btn-success" href="@Url.Action("DStaff", new {id = TempData["StaffId"]})" role="button">Go Back</a> <br />
+</div>
+<div class="show-info">
+    <span class="title" style="margin: 5px 20%;">Change Staff Infomation</span>
+    <div class="info">
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            @Html.LabelFor(m => m.Email) @Html.EditorFor(m => m.Email) <br />
+            <label>Password</label> @Html.PasswordFor(m => m.PasswordHash) <br />
+
+            <button type="submit" class="btn btn-success">Save</button>
+        }
+    </div>
+</div>

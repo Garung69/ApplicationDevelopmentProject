@@ -1,0 +1,66 @@
+﻿@model ASM.Models.UserInfor
+@{
+    Layout = "~/Views/Admin/_LayoutForAdmin.cshtml";
+}
+
+
+<div class="manage">
+    <img src="https://png.pngtree.com/png-vector/20190411/ourlarge/pngtree-business-male-icon-vector-png-image_916468.jpg" alt="Alternate Text" width="70%" height="auto" /> <br />
+    <a class="btn btn-primary" href="@Url.Action("EditStaff", new {id = TempData["StaffId"]})" role="button">Edit account</a> <br />
+    <a role="button" class="btn btn-danger btn-sm"
+       data-class="@String.Format("{0}|{1}",TempData["StaffUN"], new {id =TempData["StaffId"]}, Url.Action("DeleteStaff"))"
+       data-toggle="modal" data-target="#deleteStaff">Delete Account</a> <br />
+    <a class="btn btn-success" href="@Url.Action("Index","Admin")" role="button">Go back</a> <br />
+</div>
+<div class="show-info">
+    <span class="title" style="margin: 5px 30%;">Staff Infomation</span>
+    <div class="info">
+        @Html.DisplayNameFor(m => m.UserName) :     @Html.DisplayFor(m => m.UserName) <br />
+
+    </div>
+    <div class="modal fade" tabindex="-1" id="deleteStaff" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you Sure Delete This Staff?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <form id="deleteForm" method="post">
+                    <div class="modal-body">
+                        <fieldset disabled>
+                            <div class="form-group">
+                                <label for="Username">Staff's Username:</label>
+                                <input type="text" class="form-control" id="Username" name="Username">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Delete">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('document').ready(function () {
+            $('a[data-class]').on('click', function (evt)
+            {
+                let bData = $(this).attr('data-class').split("|");
+                console.log(bData);
+                $('#Username').attr('value', bData[0]);
+                $('#deleteForm').attr('action', bData[1]);
+            });
+        });
+    </script>
+
+}
