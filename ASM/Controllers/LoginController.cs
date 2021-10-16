@@ -3,9 +3,11 @@ using ASM.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +16,17 @@ namespace ASM.Controllers
 {
     public class LoginController : Controller
     {
+
+        public  ActionResult Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
+
+            return RedirectToAction("LogIn", "Login");
+        }
+
         // GET: Login
         [HttpGet]
         public ActionResult LogIn()
