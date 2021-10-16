@@ -22,7 +22,7 @@ namespace ASM.Models
         public string WorkingPlace { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime DoB { get; set; }
+        public string DoB { get; set; }
 
         public string ProgrammingLanguage { get; set; }
 
