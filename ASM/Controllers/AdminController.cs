@@ -13,7 +13,7 @@ namespace ASM.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult Index()
         {
             using (var ASMCtx = new EF.CMSContext())
@@ -22,7 +22,6 @@ namespace ASM.Controllers
                 return View(Staff); 
             }
         }
-
 
         public async Task<ActionResult> CreateRole(string email, string role)
         {
@@ -75,13 +74,14 @@ namespace ASM.Controllers
             return Content("done!");
         }
 
-
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult CreateStaff()
         {
             return View();
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> CreateStaff(UserInfor staff, FormCollection fc)
         {
@@ -120,6 +120,7 @@ namespace ASM.Controllers
 
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult DStaff(string id)
         {
             using (var FAPCtx = new EF.CMSContext())
@@ -141,6 +142,7 @@ namespace ASM.Controllers
 
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult EditStaff(string id)
         {
@@ -161,6 +163,7 @@ namespace ASM.Controllers
             }
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> EditStaff(string id, UserInfor staff)
         {
@@ -186,6 +189,7 @@ namespace ASM.Controllers
             }
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult DeleteStaff(string id)
         {
@@ -207,7 +211,7 @@ namespace ASM.Controllers
             }
         }
 
-
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> DeleteStaff(string id, UserInfor staff)
         {
@@ -231,6 +235,7 @@ namespace ASM.Controllers
         /// </summary>
         /// <returns></returns>
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult AMTrainer()
         {
             using (var ASMCtx = new EF.CMSContext())
@@ -240,12 +245,14 @@ namespace ASM.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult CreateTrainer()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> CreateTrainer(UserInfor staff, FormCollection fc)
         {
@@ -284,6 +291,7 @@ namespace ASM.Controllers
 
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult DTrainer(string id)
         {
             using (var FAPCtx = new EF.CMSContext())
@@ -305,6 +313,7 @@ namespace ASM.Controllers
 
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult EditTrainer(string id)
         {
@@ -325,6 +334,7 @@ namespace ASM.Controllers
             }
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> EditTrainer(string id, UserInfor staff)
         {
@@ -350,6 +360,7 @@ namespace ASM.Controllers
             }
         }
 
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult DeleteTrainer(string id)
         {
@@ -371,7 +382,7 @@ namespace ASM.Controllers
             }
         }
 
-
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> DeleteTrainer(string id, UserInfor staff)
         {

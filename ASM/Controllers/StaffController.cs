@@ -9,18 +9,18 @@ namespace ASM.Controllers
 {
     public class StaffController : Controller
     {
-        // GET: Staff
+        [Authorize(Roles = SecurityRoles.Staff)]
         public ActionResult Index()
         {
             return View();
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpGet]
         public ActionResult CreateCategory()
         {
             return View();
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult CreateCategory(CourseCategoryEntity a) 
         {
@@ -32,9 +32,9 @@ namespace ASM.Controllers
 
             TempData["message"] = $"Successfully add class {a.Name} to system!";
 
-            return RedirectToAction("LogIn","Login");
+            return RedirectToAction("ShowCategory");
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         public ActionResult ShowCategory()
         {
             using (var classes = new EF.CMSContext())
@@ -52,7 +52,7 @@ namespace ASM.Controllers
                 return View(Class);
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult EditCategory(int id, CourseCategoryEntity a)
         {
@@ -65,6 +65,7 @@ namespace ASM.Controllers
 
             return RedirectToAction("ShowCategory");
         }
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpGet]
         public ActionResult DeleteCategory(int id, CourseCategoryEntity a)
         {
@@ -74,7 +75,7 @@ namespace ASM.Controllers
                 return View(Class);
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult DeleteCategory(int id)
         {
@@ -91,6 +92,7 @@ namespace ASM.Controllers
             }
         }
         //-------------------------------------------------------------------------------------------------//
+        
         private List<SelectListItem> getList()
         {
             using (var abc = new EF.CMSContext())
@@ -103,14 +105,14 @@ namespace ASM.Controllers
                 return stx;
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpGet]
         public ActionResult AddCourse()
         {
             ViewBag.Class = getList();
             return View();
         }
-        
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult AddCourse(CourseEntity a)
         {
@@ -124,7 +126,7 @@ namespace ASM.Controllers
 
             return RedirectToAction("ShowCourse");
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpGet]
         public ActionResult EditCourse(int id,CourseEntity a)
         {
@@ -135,7 +137,7 @@ namespace ASM.Controllers
                 return View(Class);
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult EditCourse(CourseEntity a)
         {
@@ -148,7 +150,7 @@ namespace ASM.Controllers
 
             return RedirectToAction("ShowCategory");
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         public ActionResult ShowCourse()
         {
             using (var classes = new EF.CMSContext())
@@ -157,7 +159,7 @@ namespace ASM.Controllers
                 return View(Classroom);
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpGet]
         public ActionResult DeleteCourse(int id, CourseCategoryEntity a)
         {
@@ -167,7 +169,7 @@ namespace ASM.Controllers
                 return View(Class);
             }
         }
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         [HttpPost]
         public ActionResult DeleteCourse(int id)
         {
