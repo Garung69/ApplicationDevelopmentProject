@@ -174,17 +174,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110151217554_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110151217554_InitialCreate.designer.cs">
-      <DependentUpon>202110151217554_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110160147560_AddPropety.cs" />
-    <Compile Include="EF\Migrations\202110160147560_AddPropety.designer.cs">
-      <DependentUpon>202110160147560_AddPropety.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110160328330_ModyfyPropety.cs" />
-    <Compile Include="EF\Migrations\202110160328330_ModyfyPropety.designer.cs">
-      <DependentUpon>202110160328330_ModyfyPropety.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110160256282_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110160256282_InitialCreate.Designer.cs">
+      <DependentUpon>202110160256282_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -389,21 +381,15 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110151217554_InitialCreate.resx">
-      <DependentUpon>202110151217554_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110160147560_AddPropety.resx">
-      <DependentUpon>202110160147560_AddPropety.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110160328330_ModyfyPropety.resx">
-      <DependentUpon>202110160328330_ModyfyPropety.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EF\Migrations\202110160256282_InitialCreate.resx">
+      <DependentUpon>202110160256282_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
