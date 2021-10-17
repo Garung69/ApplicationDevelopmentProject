@@ -18,7 +18,7 @@
     <AssemblyName>ASM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44377</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -371,6 +371,9 @@
     <Content Include="Views\Admin\DTrainer.cshtml" />
     <Content Include="Views\Admin\EditTrainer.cshtml" />
     <Content Include="Views\Admin\DeleteTrainer.cshtml" />
+    <Content Include="Views\Staff\CreateTrainee.cshtml" />
+    <Content Include="Views\Staff\Edit.cshtml" />
+    <Content Include="Views\Staff\ShowTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -410,7 +413,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60988</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60988/</IISUrl>
+          <IISUrl>http://localhost/ASM</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
