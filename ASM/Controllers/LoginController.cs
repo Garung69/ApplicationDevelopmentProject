@@ -26,7 +26,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("PasswordHash", "Please input PassWord");
             }
-            if (!string.IsNullOrEmpty(user.Email) && (user.Email.Split('@')[1] != "gmail.com"))
+            if (!string.IsNullOrEmpty(user.Email) && (user.Email.Split('@')[0] == null) && (user.Email.Split('@')[1] == null)  && (user.Email.Split('@')[1] != "gmail.com"))
             {
                 ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
             }
@@ -45,6 +45,7 @@ namespace ASM.Controllers
             {
                 HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 ViewData.Clear();
+                Session.RemoveAll();
             }
 
             return RedirectToAction("LogIn", "Login");
@@ -88,17 +89,19 @@ namespace ASM.Controllers
 
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
                     {
+                        /*SessionLogin(fuser.UserName);*/
                         TempData["acb"] = fuser.UserName;
                         return RedirectToAction( "Index", "Admin");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
                     {
+                        TempData["UN"] = fuser.UserName;
                         return RedirectToAction("ShowCategory", "Staff");
                     }
                     
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
                     {
-                        TempData["acb"] = fuser.Id;
+                        TempData["acb"] = fuser.Id;                  
                         return RedirectToAction( "Index", "Trainer");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
@@ -117,6 +120,17 @@ namespace ASM.Controllers
 
         }
 
+/*        private void SessionLogin(string username)
+        {
+            if (HttpContext.Session["login"] == null)
+            {
+                HttpContext.Session["login"] = username;
+            }
+        }
+        public string GetLoginSession()
+        {
+            return HttpContext.Session["login"] as string;
+        }*/
 
         public async Task<ActionResult> CreateAdmin()
         {

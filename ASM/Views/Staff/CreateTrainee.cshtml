@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "CreateTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+    TempData["user"] = TempData["user"];
 }
 @{ List<int> abc = new List<int>();
     if (TempData["abc"] != null)
