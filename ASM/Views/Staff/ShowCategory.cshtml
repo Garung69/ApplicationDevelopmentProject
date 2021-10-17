@@ -9,7 +9,11 @@
     @if (TempData["message"] != null)
     {
         ViewBag.Message = TempData["message"];
+        
     }
+     @{ 
+         ViewBag.UN = TempData["UN"];
+     }
 
     <table class="table table-hover">
         <thead class="thead-dark">

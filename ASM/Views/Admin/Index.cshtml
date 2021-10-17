@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ASM.Models.UserInRole>
 @{
     Layout = "~/Views/Admin/_LayoutForAdmin.cshtml";
+    ViewBag.Message = TempData["acb"];
 }
 
 <div class="row-cols-sm-1">
@@ -31,8 +32,7 @@
                         <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.UserId })">Delete Account</a>
                     </td>
                 </tr>
-                }
-                @ViewBag.username
+                }               
             </tbody>
         </table>
     </div>

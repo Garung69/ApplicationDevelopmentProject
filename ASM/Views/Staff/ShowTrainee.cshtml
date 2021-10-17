@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+    TempData["user"] = TempData["user"];
 }
 
 <div class="row-cols-sm-1">
@@ -23,25 +24,20 @@
                 </tr>
             </thead>
             <tbody>
-                @{
-                    var i = 1;
-                }
                 @foreach (var c in Model)
                 {
-                <tr style="border: 1px solid #8b46be;">
-                    <th scope="row">@i</th>
-                    <td>@Html.DisplayFor(model => c.Name)</td>
-                    <td>@Html.DisplayFor(model => c.Type)</td>
-                    <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
-                    <td>@Html.DisplayFor(model => c.Phone)</td>
-                    <td>@Html.DisplayFor(model => c.Email)</td>
-                    <th scope="col">&nbsp;</th>
-                    <td><a class="btn btn-primary" href="@Url.Action("Edit", new {id = c.UserId})" role="button">ViewMore</a></td>
-                    <td>
-                        <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.UserId })">Delete Account</a>
-                    </td>
-                </tr>
-                    i++;
+                    <tr style="border: 1px solid #8b46be;">
+                        <td>@Html.DisplayFor(model => c.Name)</td>
+                        <td>@Html.DisplayFor(model => c.Type)</td>
+                        <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
+                        <td>@Html.DisplayFor(model => c.Phone)</td>
+                        <td>@Html.DisplayFor(model => c.Email)</td>
+                        <th scope="col">&nbsp;</th>
+                        <td><a class="btn btn-primary" href="@Url.Action("Edit", new {id = c.UserId})" role="button">ViewMore</a></td>
+                        <td>
+                            <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.UserId })">Delete Account</a>
+                        </td>
+                    </tr>
                 }
 
             </tbody>

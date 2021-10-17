@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> @ViewBag.Title - ASM2</title>
     @Styles.Render("~/Content/css")
-    @{
-        var a = ViewBag.Message;
+    @{        
+        var a = "ab";
+        if (TempData["user"] != null)
+        {
+            a = TempData["user"].ToString();
+        }
+        else
+        {
+            a = ViewBag.Message;
+        }
+
+        TempData["user"] = a;
+
     }
 </head>
 <body>
