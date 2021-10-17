@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> @ViewBag.Title - ASM2</title>
     @Styles.Render("~/Content/css")
+    @{
+        var a = ViewBag.Message;
+    }
 </head>
 <body>
     <div class="header col-xl-auto">
@@ -39,10 +42,10 @@
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <p>
+                    &nbsp; &nbsp;
+                </p>
+                <p class="font-weight-bold">Admin: @a</p>
                 <p>
                     &nbsp; &nbsp;
                 </p>

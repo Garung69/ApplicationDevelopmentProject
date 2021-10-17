@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
     <Compile Include="EF\Migrations\202110161454588_InitialCreate.cs" />
     <Compile Include="EF\Migrations\202110161454588_InitialCreate.designer.cs">
@@ -373,6 +374,7 @@
     <Content Include="Views\Admin\DeleteTrainer.cshtml" />
     <Content Include="Views\Staff\ShowTrainer.cshtml" />
     <Content Include="Views\Staff\EditTrainer.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

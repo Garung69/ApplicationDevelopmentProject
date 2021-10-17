@@ -11,20 +11,15 @@
         <table class="table">
             <thead>
                 <tr style="border: 1px solid #8b46be;">
-                    <th scope="col">NO</th>
                     <th scope="col">@Html.DisplayNameFor(m => m.UserName)</th>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                @{
-                    var i = 1;
-                }
                 @foreach (var c in Model)
                 {
                     <tr style="border: 1px solid #8b46be;">
-                        <th scope="row">@i</th>
                         <td>@Html.DisplayFor(m => c.UserName)</td>
                         <th scope="col">&nbsp;</th>
                         <td><a class="btn btn-primary" href="@Url.Action("DStaff", new {id = c.Id})" role="button">ViewMore</a></td>
@@ -32,9 +27,8 @@
                             <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.Id })">Delete Account</a>
                         </td>
                     </tr>
-                    i++;
                 }
-
+                @ViewBag.username
             </tbody>
         </table>
     </div>

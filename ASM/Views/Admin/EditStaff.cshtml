@@ -35,4 +35,10 @@
             <button type="submit" class="btn btn-success">Save</button>
         }
     </div>
+    <div class="message" style="float: none; padding: 0 15%; width: 100%;">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" });
+        }
+    </div>
 </div>

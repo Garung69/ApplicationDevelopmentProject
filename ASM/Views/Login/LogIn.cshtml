@@ -50,6 +50,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 mx-auto">
+                    <div class="message">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" });
+                        }
+                    </div>
                     <div class="card card-body">
                         @using (Html.BeginForm("LogIn", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form", _lpchecked = "1" }))
                         {

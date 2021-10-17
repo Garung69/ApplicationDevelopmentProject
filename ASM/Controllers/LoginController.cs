@@ -16,12 +16,35 @@ namespace ASM.Controllers
 {
     public class LoginController : Controller
     {
-
+        private void CustomValidation(UserInfor user)
+        {
+            if (string.IsNullOrEmpty(user.Email))
+            {
+                ModelState.AddModelError("Email", "Please input Email");
+            }
+            if (string.IsNullOrEmpty(user.PasswordHash))
+            {
+                ModelState.AddModelError("PasswordHash", "Please input PassWord");
+            }
+            if (!string.IsNullOrEmpty(user.Email) && (user.Email.Split('@')[1] != "gmail.com"))
+            {
+                ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
+            }
+            if (!string.IsNullOrEmpty(user.Email) && (user.Email.Length >= 21))
+            {
+                ModelState.AddModelError("Email", "This email is not valid!");
+            }
+            if (!string.IsNullOrEmpty(user.PasswordHash) && user.PasswordHash.Length <= 7)
+            {
+                ModelState.AddModelError("PasswordHash", "PassWord need more than 7 characters");
+            }
+        }
         public  ActionResult Logout()
         {
             if (User.Identity.IsAuthenticated)
             {
                 HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                ViewData.Clear();
             }
 
             return RedirectToAction("LogIn", "Login");
@@ -38,37 +61,54 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> LogIn(UserInfor user)
         {
-            var context = new CMSContext();
-            var store = new UserStore<UserInfor>(context);
-            var manager = new UserManager<UserInfor>(store);
+            CustomValidation(user);
 
-            var signInManager
-                = new SignInManager<UserInfor, string>(manager, HttpContext.GetOwinContext().Authentication);
-
-            var fuser = await manager.FindByEmailAsync(user.Email);
-
-            var result = await signInManager.PasswordSignInAsync(userName: user.Email.Split('@')[0], password: user.PasswordHash, isPersistent: false, shouldLockout: false);
-
-            if (result == SignInStatus.Success)
+            if (!ModelState.IsValid)
             {
-                var userStore = new UserStore<UserInfor>(context);
-                var userManager = new UserManager<UserInfor>(userStore);
-
-
-                if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-                if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
-                {
-                    return RedirectToAction("ShowCategory", "Staff");
-                }
-                else return Content($"Comming Soon!!!");
-            }else
-            {
-                return View();
+                return View(user);
             }
-       
+            else
+            {
+                var context = new CMSContext();
+                var store = new UserStore<UserInfor>(context);
+                var manager = new UserManager<UserInfor>(store);
+
+                var signInManager
+                    = new SignInManager<UserInfor, string>(manager, HttpContext.GetOwinContext().Authentication);
+
+                var fuser = await manager.FindByEmailAsync(user.Email);
+
+                var result = await signInManager.PasswordSignInAsync(userName: user.Email.Split('@')[0], password: user.PasswordHash, isPersistent: false, shouldLockout: false);
+
+                if (result == SignInStatus.Success)
+                {
+                    var userStore = new UserStore<UserInfor>(context);
+                    var userManager = new UserManager<UserInfor>(userStore);
+                    
+
+                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
+                    {
+                        TempData["acb"] = fuser.UserName;
+                        return RedirectToAction( "Index", "Admin");
+                    }
+                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
+                    {
+                        return RedirectToAction("ShowCategory", "Staff");
+                    }
+                    
+                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
+                    {
+                        TempData["acb"] = fuser.Id;
+                        return RedirectToAction( "Index", "Trainer");
+                    }
+                    else return Content($"Comming Soon!!!");
+                }
+                else
+                {
+                    ModelState.AddModelError("PasswordHash", "User Name or Password incorrect!");
+                    return View();
+                }
+            }
 
         }
 
