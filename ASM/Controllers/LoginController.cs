@@ -101,6 +101,11 @@ namespace ASM.Controllers
                         TempData["acb"] = fuser.Id;
                         return RedirectToAction( "Index", "Trainer");
                     }
+                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
+                    {
+                        TempData["xyz"] = fuser.Id;
+                        return RedirectToAction("Index", "Trainee");
+                    }
                     else return Content($"Comming Soon!!!");
                 }
                 else

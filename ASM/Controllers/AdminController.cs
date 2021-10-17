@@ -37,24 +37,29 @@ namespace ASM.Controllers
         [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult Index()
         {
-            using (var ASMCtx = new EF.CMSContext())
+            using (CMSContext context = new CMSContext())
             {
-                var Staff = ASMCtx.Users.Where(s => s.Role == "staff").ToList();
-                ViewBag.UN = TempData["acb"];
-                return View(Staff);
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          //More Propety
 
-/*                using (CMSContext db = new CMSContext())
-                {
-                    var users = (from user in db.Users
-                                 from roles in user.Roles
-                                 join role in db.Roles
-                                 on roles.RoleId equals role.Id
-                                 where role.Name == "admin"
-                                 select new { }
-                                 ).ToList();
-                    return View(users);
-                }*/
+                                          RoleNames = (from userRole in user.Roles
+                                                       join role in context.Roles on userRole.RoleId
+                                                       equals role.Id 
+                                                       select role.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "staff").Select(p => new UserInRole()
 
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Email = p.Email,
+                                          Role = string.Join(",", p.RoleNames)
+                                      });
+                return View(usersWithRoles);
             }
         }
 
@@ -268,18 +273,34 @@ namespace ASM.Controllers
 
         }
 
-        /// <summary>
-        ///  //////////////////////////////////////////////////Trainer///////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
+      
 
         [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult AMTrainer()
         {
-            using (var ASMCtx = new EF.CMSContext())
+            using (CMSContext context = new CMSContext())
             {
-                var Staff = ASMCtx.Users.Where(s => s.Role == "trainer").ToList();
-                return View(Staff);
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          //More Propety
+
+                                          RoleNames = (from userRole in user.Roles
+                                                       join role in context.Roles on userRole.RoleId
+                                                       equals role.Id
+                                                       select role.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainer").Select(p => new UserInRole()
+
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Email = p.Email,
+                                          Role = string.Join(",", p.RoleNames)
+                                      });
+                return View(usersWithRoles);
             }
         }
 

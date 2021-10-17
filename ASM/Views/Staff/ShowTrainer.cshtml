@@ -3,9 +3,9 @@
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
 }
-@model IEnumerable<ASM.Models.UserInfor>
+@model IEnumerable<ASM.Models.UserInRole>
 <div class="container">
-    <h1 class="display-4">ClassRoom OverView</h1>
+    <h1 class="display-4">All Trainer</h1>
     @if (TempData["message"] != null)
     {
         ViewBag.Message = TempData["message"];
@@ -17,7 +17,7 @@
                 <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Type)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.WorkingPlace)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Phone)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
                 <th scope="col">&nbsp;</th>
             </tr>
@@ -27,18 +27,18 @@
         <tbody>
             @foreach (var c in Model)
             {
-            <tr>
-                <td>@Html.DisplayFor(model => c.Name)</td>
-                <td>@Html.DisplayFor(model => c.Type)</td>
-                <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
-                <td>@Html.DisplayFor(model => c.PhoneNumber)</td>
-                <td>@Html.DisplayFor(model => c.Email)</td>
+                <tr>
+                    <td>@Html.DisplayFor(model => c.Name)</td>
+                    <td>@Html.DisplayFor(model => c.Type)</td>
+                    <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
+                    <td>@Html.DisplayFor(model => c.Phone)</td>
+                    <td>@Html.DisplayFor(model => c.Email)</td>
 
-                <td>
-                    <a type="button" class="btn btn-success btn-sm"
-                       href="@Url.Action("EditTrainer", new {id = c.Id})">Edit</a>
-                </td>
-            </tr>
+                    <td>
+                        <a type="button" class="btn btn-success btn-sm"
+                           href="@Url.Action("EditTrainer", new {id = c.UserId})">Edit</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

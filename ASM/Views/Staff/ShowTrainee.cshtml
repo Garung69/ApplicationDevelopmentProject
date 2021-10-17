@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASM.Models.UserInfor>
+﻿@model IEnumerable<ASM.Models.UserInRole>
 @{
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
@@ -6,14 +6,18 @@
 
 <div class="row-cols-sm-1">
     <div class="title">
-        <span class="title font-weight-bold">All Staff</span>
+        <span class="title font-weight-bold">All Trainee</span>
     </div>
     <div class="row-cols-md-1">
         <table class="table">
             <thead>
                 <tr style="border: 1px solid #8b46be;">
                     <th scope="col">NO</th>
-                    <th scope="col">@Html.DisplayNameFor(m => m.UserName)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Type)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.WorkingPlace)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Phone)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
                 </tr>
@@ -24,15 +28,19 @@
                 }
                 @foreach (var c in Model)
                 {
-                    <tr style="border: 1px solid #8b46be;">
-                        <th scope="row">@i</th>
-                        <td>@Html.DisplayFor(m => c.UserName)</td>
-                        <th scope="col">&nbsp;</th>
-                        <td><a class="btn btn-primary" href="@Url.Action("Edit", new {id = c.Id})" role="button">ViewMore</a></td>
-                        <td>
-                            <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.Id })">Delete Account</a>
-                        </td>
-                    </tr>
+                <tr style="border: 1px solid #8b46be;">
+                    <th scope="row">@i</th>
+                    <td>@Html.DisplayFor(model => c.Name)</td>
+                    <td>@Html.DisplayFor(model => c.Type)</td>
+                    <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
+                    <td>@Html.DisplayFor(model => c.Phone)</td>
+                    <td>@Html.DisplayFor(model => c.Email)</td>
+                    <th scope="col">&nbsp;</th>
+                    <td><a class="btn btn-primary" href="@Url.Action("Edit", new {id = c.UserId})" role="button">ViewMore</a></td>
+                    <td>
+                        <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.UserId })">Delete Account</a>
+                    </td>
+                </tr>
                     i++;
                 }
 

@@ -2,17 +2,21 @@
 using ASM.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using static ASM.Models.UserInfor;
 
 namespace ASM.Controllers
 {
     public class TrainerController : Controller
     {
+        
+
         // GET: Trainer
         public ActionResult Index()
         {
@@ -20,12 +24,6 @@ namespace ASM.Controllers
                 return View();
         }
 
-        //[HttpGet]
-        //public ActionResult EditTrainer()
-        //{
-        //    ViewBag.Message = TempData["acb"];
-        //    return View();
-        //}
 
 
 
@@ -49,10 +47,10 @@ namespace ASM.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> EditStaff(string id, UserInfor trainer)
+        public async Task<ActionResult> EditTrainer(string id, UserInfor trainer)
         {
 
-            CustomValidationTrainer(trainer);
+            //CustomValidationTrainer(trainer);
 
             if (!ModelState.IsValid)
             {
@@ -68,27 +66,33 @@ namespace ASM.Controllers
 
                 if (user != null)
                 {
-
-
                     user.UserName = trainer.Email.Split('@')[0];
-                    user.Email = trainer.Email;
-                    user.PasswordHash = "123qwe123";
+                    user.Email = trainer.Email;                  
                     user.Name = trainer.Name;
                     user.Type = trainer.Type;
                     user.Education = trainer.Education;
                     user.WorkingPlace = trainer.WorkingPlace;
                     await manager.UpdateAsync(user);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Trainer");
             }
         }
 
-        private void CustomValidationTrainer(UserInfor trainer)
+        public ActionResult ChangePassword()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
+        
+        
       
+
+        //private void CustomValidationTrainer(UserInfor trainer)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
 
         public ActionResult ChangePass()
         {

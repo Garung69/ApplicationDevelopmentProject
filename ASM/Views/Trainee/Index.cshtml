@@ -1,0 +1,13 @@
+﻿@model ASM.Models.UserInfor
+@{
+    ViewBag.Title = "Index";
+    var a = ViewBag.Message;
+    Layout = "~/Views/Trainee/_LayoutTrainee.cshtml";
+}
+
+
+<a class="btn btn-primary" href="@Url.Action("EditTrainee", new { id = a})" role="button">Edit Profile</a>
+
+<a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteTrainee", new {id = TempData["StaffId"]})">Delete Account</a>
+
+

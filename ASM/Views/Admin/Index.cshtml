@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASM.Models.UserInfor>
+﻿@model IEnumerable<ASM.Models.UserInRole>
 @{
     Layout = "~/Views/Admin/_LayoutForAdmin.cshtml";
 }
@@ -11,7 +11,9 @@
         <table class="table">
             <thead>
                 <tr style="border: 1px solid #8b46be;">
-                    <th scope="col">@Html.DisplayNameFor(m => m.UserName)</th>
+                    <th scope="col">@Html.DisplayNameFor(m => m.Username)</th>
+                    <th scope="col">@Html.DisplayNameFor(m => m.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(m => m.Email)</th>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
                 </tr>
@@ -19,14 +21,16 @@
             <tbody>
                 @foreach (var c in Model)
                 {
-                    <tr style="border: 1px solid #8b46be;">
-                        <td>@Html.DisplayFor(m => c.UserName)</td>
-                        <th scope="col">&nbsp;</th>
-                        <td><a class="btn btn-primary" href="@Url.Action("DStaff", new {id = c.Id})" role="button">ViewMore</a></td>
-                        <td>
-                            <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.Id })">Delete Account</a>
-                        </td>
-                    </tr>
+                <tr style="border: 1px solid #8b46be;">
+                    <td>@Html.DisplayFor(m => c.Username)</td>
+                    <td>@Html.DisplayFor(m => c.Name)</td>
+                    <td>@Html.DisplayFor(m => c.Email)</td>
+                    <th scope="col">&nbsp;</th>
+                    <td><a class="btn btn-primary" href="@Url.Action("DStaff", new {id = c.UserId})" role="button">ViewMore</a></td>
+                    <td>
+                        <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = c.UserId })">Delete Account</a>
+                    </td>
+                </tr>
                 }
                 @ViewBag.username
             </tbody>
