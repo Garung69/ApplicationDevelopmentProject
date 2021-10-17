@@ -179,6 +179,10 @@
     <Compile Include="EF\Migrations\202110161454588_InitialCreate.designer.cs">
       <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="EF\Migrations\202110170653493_AddRole.cs" />
+    <Compile Include="EF\Migrations\202110170653493_AddRole.designer.cs">
+      <DependentUpon>202110170653493_AddRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +192,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SecurityRoles.cs" />
     <Compile Include="Models\UserInfor.cs" />
+    <Compile Include="Models\UserInRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -375,6 +380,9 @@
     <Content Include="Views\Staff\ShowTrainer.cshtml" />
     <Content Include="Views\Staff\EditTrainer.cshtml" />
     <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\Staff\ShowTrainee.cshtml" />
+    <Content Include="Views\Staff\Edit.cshtml" />
+    <Content Include="Views\Staff\CreateTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +401,9 @@
   <ItemGroup>
     <EmbeddedResource Include="EF\Migrations\202110161454588_InitialCreate.resx">
       <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110170653493_AddRole.resx">
+      <DependentUpon>202110170653493_AddRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

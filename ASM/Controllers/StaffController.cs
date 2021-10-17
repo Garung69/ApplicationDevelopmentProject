@@ -196,10 +196,37 @@ namespace ASM.Controllers
 
         public ActionResult ShowTrainer()
         {
-            using (var ASMCtx = new EF.CMSContext())
+            using (CMSContext context = new CMSContext())
             {
-                var Staff = ASMCtx.Users.Where(s => s.Role == "trainer").ToList();
-                return View(Staff);
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          WorkingPlace = user.WorkingPlace,
+                                          Type = user.Type,
+                                          PhoneNumber = user.PhoneNumber,
+                                          Name = user.Name,
+                                          //More Propety
+
+                                          RoleNames = (from userRole in user.Roles
+                                                       join role in context.Roles on userRole.RoleId
+                                                       equals role.Id
+                                                       select role.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainer").Select(p => new UserInRole()
+
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Name = p.Name,
+                                          Email = p.Email,
+                                          Role = string.Join(",", p.RoleNames),
+                                          WorkingPlace = p.WorkingPlace,
+                                          Type = p.Type,
+                                          Phone = p.PhoneNumber
+                                      });
+                return View(usersWithRoles);
             }
         }
 
@@ -440,10 +467,35 @@ namespace ASM.Controllers
 
         public ActionResult ShowTrainee()
         {
-            using (var ASMCtx = new EF.CMSContext())
+            using (CMSContext context = new CMSContext())
             {
-                var Staff = ASMCtx.Users.Where(s => s.Role == "trainee").ToList();
-                return View(Staff);
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          WorkingPlace = user.WorkingPlace,
+                                          Type = user.Type,
+                                          PhoneNumber = user.PhoneNumber,
+                                          //More Propety
+
+                                          RoleNames = (from userRole in user.Roles
+                                                       join role in context.Roles on userRole.RoleId
+                                                       equals role.Id
+                                                       select role.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainee").Select(p => new UserInRole()
+
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Email = p.Email,
+                                          Role = string.Join(",", p.RoleNames),
+                                          WorkingPlace = p.WorkingPlace,
+                                          Type = p.Type,
+                                          Phone = p.PhoneNumber
+                                      });
+                return View(usersWithRoles);
             }
         }
     }
