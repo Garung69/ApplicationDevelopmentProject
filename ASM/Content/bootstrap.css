@@ -10,12 +10,12 @@
 
 .info {
     margin: 50px 20px;
+    padding: 5% 20%;
 }
 
 .show-info {
     border: 1px solid #4a4b42;
-    border-radius: 15px;
-    background-color: lightcyan;
+    background-color: ivory;
     float: right;
     width: 55%;
     height: 700px;
@@ -25,7 +25,7 @@
     width: 30%;
     height: 500px;
     float: left;
-    justify-content: center;
+    text-align: center;
     padding: 3%;
 }
 
@@ -58,9 +58,7 @@
     font-size: 30px;
     color: #6057f6;
     margin-top: 5px;
-    width: 20%;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: 20%;   
 }
 
 .grid-view {

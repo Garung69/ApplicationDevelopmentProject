@@ -37,8 +37,7 @@ namespace ASM.Models
         {
             return $"{this.Id}{separator}" +
                 $"{this.Name}{separator}"+
-                $"{this.Education}{separator}" +
-                $"{this.Role}";
+                $"{this.Education}{separator}";
         }
     }
 }

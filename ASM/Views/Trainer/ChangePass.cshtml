@@ -1,0 +1,32 @@
+﻿@model ASM.Models.UserInfor
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
+}
+
+
+<div class="mt-2 ml-6 mr-6">
+    <p>Set a new password</p>
+
+    <form action="#!">
+
+        <div class="md-form md-outline">
+            <input type="password" id="newPass" class="form-control">
+            <label data-error="wrong" data-success="right" for="newPass">New password</label>
+        </div>
+
+        <div class="md-form md-outline">
+            <input type="password" id="newPassConfirm" class="form-control">
+            <label data-error="wrong" data-success="right" for="newPassConfirm">Confirm password</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-4">Change password</button>
+
+
+
+
+
+    </form>
+</div>
+
+

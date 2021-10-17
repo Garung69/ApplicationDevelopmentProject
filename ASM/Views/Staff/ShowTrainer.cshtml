@@ -1,13 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "ShowCourse";
+    ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
     TempData["user"] = TempData["user"];
 }
-
-@model IEnumerable<ASM.Models.CourseEntity>
+@model IEnumerable<ASM.Models.UserInRole>
 <div class="container">
-    <h1 class="display-4">ClassRoom OverView</h1>
+    <h1 class="display-4">All Trainer</h1>
     @if (TempData["message"] != null)
     {
         ViewBag.Message = TempData["message"];
@@ -16,10 +15,11 @@
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
-                <th scope="col">&nbsp;</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Type)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.WorkingPlace)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Phone)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
@@ -29,17 +29,15 @@
             @foreach (var c in Model)
             {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(model => c.Id)</th>
                     <td>@Html.DisplayFor(model => c.Name)</td>
-                    <td>@Html.DisplayFor(model => c.Description)</td>
+                    <td>@Html.DisplayFor(model => c.Type)</td>
+                    <td>@Html.DisplayFor(model => c.WorkingPlace)</td>
+                    <td>@Html.DisplayFor(model => c.Phone)</td>
+                    <td>@Html.DisplayFor(model => c.Email)</td>
 
                     <td>
                         <a type="button" class="btn btn-success btn-sm"
-                           href="@Url.Action("EditCategory", new {id = c.Id})">Edit</a>
-                    </td>
-                    <td>
-                        <a type="button" class="btn btn-danger btn-sm"
-                           href="@Url.Action("DeleteCategory", new {id = c.Id })">Delete</a>
+                           href="@Url.Action("EditTrainer", new {id = c.UserId})">Edit</a>
                     </td>
                 </tr>
             }
