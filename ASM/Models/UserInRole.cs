@@ -17,4 +17,6 @@ namespace ASM.Models
         public string WorkingPlace { get; set; }
         public string Type { get; set; }
     }
+
+
 }

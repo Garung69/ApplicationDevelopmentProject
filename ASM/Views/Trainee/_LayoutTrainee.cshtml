@@ -5,16 +5,28 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Site.css" />
-   
+    <link rel="stylesheet" href="~/Content/SiteTR.css" />
 </head>
 <body>
     <header>
-        @*  @Html.Partial("_Nav1")*@
+        @Html.Partial("_Nav1")
     </header>
+
     <main>
         @RenderBody()
     </main>
+
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-lg-5" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:GREENWICH VIET NAM
+
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+
     <div role="alertdialog">
         @RenderSection("alertdialog", required: false)
     </div>
@@ -29,6 +41,5 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

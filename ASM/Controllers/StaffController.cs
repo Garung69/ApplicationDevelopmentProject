@@ -339,7 +339,7 @@ namespace ASM.Controllers
                         PasswordHash = "123qwe123"
 
                     };
-                    await manager.CreateAsync(user, a.PasswordHash);
+                    await manager.CreateAsync(user,user.PasswordHash);
                     await CreateRole(a.Email, "trainee");
                 }
                 return RedirectToAction("ShowTrainee");

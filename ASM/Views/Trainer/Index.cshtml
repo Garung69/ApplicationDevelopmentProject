@@ -2,8 +2,11 @@
 @{
     ViewBag.Title = "Index";
     var a = ViewBag.Message;
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
 }
 
 <a class="btn btn-primary" href="@Url.Action("EditTrainer", new { id = a})" role="button">Edit Profile</a>
 
 <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteTrainer", new {id = TempData["StaffId"]})">Delete Account</a>
+
+<a href="@Url.Action("Change")"

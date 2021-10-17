@@ -273,10 +273,7 @@ namespace ASM.Controllers
 
         }
 
-        /// <summary>
-        ///  //////////////////////////////////////////////////Trainer///////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
+      
 
         [Authorize(Roles = SecurityRoles.Admin)]
         public ActionResult AMTrainer()

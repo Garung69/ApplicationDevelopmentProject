@@ -39,5 +39,8 @@ namespace ASM.Models
                 $"{this.Name}{separator}"+
                 $"{this.Education}{separator}";
         }
+
+        
+
     }
 }
