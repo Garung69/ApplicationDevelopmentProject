@@ -174,9 +174,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110160256282_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110160256282_InitialCreate.Designer.cs">
-      <DependentUpon>202110160256282_InitialCreate.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110161454588_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110161454588_InitialCreate.designer.cs">
+      <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -371,6 +371,8 @@
     <Content Include="Views\Admin\DTrainer.cshtml" />
     <Content Include="Views\Admin\EditTrainer.cshtml" />
     <Content Include="Views\Admin\DeleteTrainer.cshtml" />
+    <Content Include="Views\Staff\ShowTrainer.cshtml" />
+    <Content Include="Views\Staff\EditTrainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,8 +389,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110160256282_InitialCreate.resx">
-      <DependentUpon>202110160256282_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="EF\Migrations\202110161454588_InitialCreate.resx">
+      <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
