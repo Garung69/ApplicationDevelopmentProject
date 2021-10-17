@@ -19,5 +19,10 @@ namespace ASM.Controllers
         {
             return View();
         }
+
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
     }
 }
