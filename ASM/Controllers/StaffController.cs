@@ -38,11 +38,23 @@ namespace ASM.Controllers
 
             TempData["message"] = $"Successfully add class {a.Name} to system!";
 
-            return RedirectToAction("ShowCategory");
+            return RedirectToAction("SearchCategory");
+        }
+
+        CMSContext db = new CMSContext();
+        public ActionResult SearchCategory(string search)
+        {
+            return View(db.courseCategoryEntities.Where(x => x.Name.Contains(search) || search == null).ToList());
+        }
+
+        public ActionResult SearchCourse(string search)
+        {
+            return View(db.Courses.Where(y => y.Name.Contains(search) || search == null).ToList());
         }
 
         public ActionResult ShowCategory()
-        {
+        {                   
+            
             using (var classes = new EF.CMSContext())
             {
                 var Classroom = classes.courseCategoryEntities.OrderBy(a => a.Id).ToList();
@@ -71,7 +83,7 @@ namespace ASM.Controllers
                 abc.SaveChanges();
             }
 
-            return RedirectToAction("ShowCategory");
+            return RedirectToAction("SearchCategory");
         }
 
         [HttpGet]
@@ -95,8 +107,8 @@ namespace ASM.Controllers
                     abc.courseCategoryEntities.Remove(xxx);
                     abc.SaveChanges();
                 }
-                
-                return RedirectToAction("ShowCategory");
+                TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
+                return RedirectToAction("SearchCategory");
             }
         }
         //-------------------------------------------------------------------------------------------------//
@@ -172,6 +184,9 @@ namespace ASM.Controllers
             return RedirectToAction("ShowCategory");
         }
 
+        
+       
+
         public ActionResult ShowCourse()
         {
             using (var classes = new EF.CMSContext())
@@ -208,6 +223,9 @@ namespace ASM.Controllers
         }
 
 
+       
+        
+        
         public ActionResult ShowTrainer()
         {
             using (CMSContext context = new CMSContext())
@@ -464,6 +482,20 @@ namespace ASM.Controllers
                 return RedirectToAction("Index"); //redirect to action in the same controller
             }
         }
+
+
+
+        public ActionResult SearchTrainee(string option , string search)
+        {
+            if(option == "Name")
+            {
+                return View (db.Users.Where(x => x.UserName))
+            }
+        }
+
+
+
+
 
 
         public ActionResult ShowTrainee()
