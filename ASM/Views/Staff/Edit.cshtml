@@ -34,8 +34,6 @@
 
             @Html.HiddenFor(m => m.Id)
 
-
-
             <div class="form-group">
                 @Html.LabelFor(m => m.Name,
                   htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
@@ -46,10 +44,91 @@
                      htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
                  })
             </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Email,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Education,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Education,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Experience,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Experience,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Department,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Department,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DoB,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.DoB,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.PasswordHash, new { @class = "font-weight-bold", @style = "margin-left:20px" })
-                @Html.EditorFor(m => m.PasswordHash,
+                @Html.LabelFor(m => m.Location,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Location,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.ProgrammingLanguage,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.ProgrammingLanguage,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Toeic,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
+
+                @Html.EditorFor(m => m.Toeic,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+                @Html.EditorFor(m => m.Age,
                 new
                 {
                   htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
@@ -64,7 +143,7 @@
                   htmlAttributes = new { @class = "form-control", min = "0", @style = "width:250px; margin-left:20px; margin-right:20px" }
                 })
             </div>
-
+            
             <div class="form-group">
                 <label class="font-weight-bold mr-3">Formats</label>
                 @foreach (var f in ViewBag.Formats)
@@ -78,7 +157,8 @@
                         </label>
                     </div>
                 }
-
+                <br />
+                <br />
 
                 <button type="submit" class="btn btn-dark">Submit</button>
             </div>

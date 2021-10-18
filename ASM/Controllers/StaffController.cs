@@ -9,6 +9,7 @@ using ASM.EF;
 using ASM.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace ASM.Controllers
 {
@@ -362,30 +363,10 @@ namespace ASM.Controllers
                     await manager.CreateAsync(user,user.PasswordHash);
                     await CreateRole(a.Email, "trainee");
                 }
-                return RedirectToAction("ShowTrainee");
+                
             }
-            else
-            {
-                var context = new CMSContext();
-                var store = new UserStore<UserInfor>(context);
-                var manager = new UserManager<UserInfor>(store);
-                var user = await manager.FindByEmailAsync(a.Email);
-                if (user == null)
-                {
-                    user = new UserInfor
-                    {
-                        UserName = a.Email.Split('@')[0],
-                        Email = a.Email,
-                        Name = a.Email.Split('@')[0],
-                        Role = "trainee",
 
-                    };
-                    user.listCourse = Convert(context, f["formatIds[]"]);
-                    await manager.CreateAsync(user, a.PasswordHash);
-                    await CreateRole(a.Email, "trainee");
-                }
-                return View();
-            }
+            return RedirectToAction("ShowTrainee");
 
         }
 
@@ -470,7 +451,7 @@ namespace ASM.Controllers
             var manager = new UserManager<UserInfor>(store);
 
 
-            var a = manager.Users.FirstOrDefault(b => b.Id == id);
+            var a = manager.Users.Include(x=>x.listCourse).FirstOrDefault(b => b.Id == id);
 
             if (a != null) // if a book is found, show edit view
             {
@@ -577,6 +558,35 @@ namespace ASM.Controllers
 
             return RedirectToAction("ShowTrainee");
 
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(string id,FormCollection f,UserInfor a)
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+            var user = await manager.FindByEmailAsync(a.Email);
+            if (!ModelState.IsValid)
+            {
+                TempData["abc"] = f["classId[]"];
+                SetViewBag();
+                return View(a);
+            }
+
+            if (user != null)
+            {
+                using (var FAPCtx = new EF.CMSContext())
+                {
+                    user.UserName = a.Email.Split('@')[0];
+                    user.Email = a.Email;
+                    user.Name = a.Name;
+                   // FAPCtx.Users.Attach(a).Load(); 
+                    user.listCourse = Convert(FAPCtx, f["classId[]"]);
+                    await manager.UpdateAsync(user);
+                }
+            }
+            return RedirectToAction("ShowTrainee");
         }
 
     }
