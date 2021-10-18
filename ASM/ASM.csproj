@@ -18,7 +18,7 @@
     <AssemblyName>ASM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44377</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TraineeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
     <Compile Include="EF\Migrations\202110161454588_InitialCreate.cs" />
@@ -381,6 +382,19 @@
     <Content Include="Views\Staff\CreateTrainee.cshtml" />
     <Content Include="Views\Staff\Edit.cshtml" />
     <Content Include="Views\Staff\ShowTrainee.cshtml" />
+    <Content Include="Views\Staff\SearchCategory.cshtml" />
+    <Content Include="Views\Trainer\ChangePass.cshtml" />
+    <Content Include="Views\Trainer\EditTrainer.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\Trainer\_LayoutTrainer.cshtml" />
+    <Content Include="Views\Trainer\_Nav1.cshtml" />
+    <Content Include="Views\Trainee\EditTrainee.cshtml" />
+    <Content Include="Views\Trainee\Index.cshtml" />
+    <Content Include="Views\Trainee\_LayoutTrainee.cshtml" />
+    <Content Include="Views\Trainee\_Nav1.cshtml" />
+    <Content Include="Views\Staff\ShowTrainer.cshtml" />
+    <Content Include="Views\Staff\EditTrainer.cshtml" />
+    <Content Include="Views\Staff\SearchCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -423,7 +437,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60988</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ASM</IISUrl>
+          <IISUrl>http://localhost:60988/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
