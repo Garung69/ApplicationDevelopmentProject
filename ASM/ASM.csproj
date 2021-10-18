@@ -173,15 +173,12 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TraineeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110161454588_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110161454588_InitialCreate.designer.cs">
-      <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110170653493_AddRole.cs" />
-    <Compile Include="EF\Migrations\202110170653493_AddRole.designer.cs">
-      <DependentUpon>202110170653493_AddRole.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110181530407_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110181530407_InitialCreate.designer.cs">
+      <DependentUpon>202110181530407_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -381,6 +378,19 @@
     <Content Include="Views\Staff\CreateTrainee.cshtml" />
     <Content Include="Views\Staff\Edit.cshtml" />
     <Content Include="Views\Staff\ShowTrainee.cshtml" />
+    <Content Include="Views\Trainee\EditTrainee.cshtml" />
+    <Content Include="Views\Trainee\Index.cshtml" />
+    <Content Include="Views\Trainee\_LayoutTrainee.cshtml" />
+    <Content Include="Views\Trainee\_Nav1.cshtml" />
+    <Content Include="Views\Trainer\ChangePass.cshtml" />
+    <Content Include="Views\Trainer\EditTrainer.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\Trainer\_LayoutTrainer.cshtml" />
+    <Content Include="Views\Trainer\_Nav1.cshtml" />
+    <Content Include="Views\Staff\ShowTrainer.cshtml" />
+    <Content Include="Views\Staff\EditTrainer.cshtml" />
+    <Content Include="Views\Staff\Details.cshtml" />
+    <Content Include="Views\Staff\DeleteTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -397,11 +407,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110161454588_InitialCreate.resx">
-      <DependentUpon>202110161454588_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110170653493_AddRole.resx">
-      <DependentUpon>202110170653493_AddRole.cs</DependentUpon>
+    <EmbeddedResource Include="EF\Migrations\202110181530407_InitialCreate.resx">
+      <DependentUpon>202110181530407_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

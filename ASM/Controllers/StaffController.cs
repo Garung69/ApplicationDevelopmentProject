@@ -94,12 +94,15 @@ namespace ASM.Controllers
                     abc.courseCategoryEntities.Remove(xxx);
                     abc.SaveChanges();
                 }
-                TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
+                
                 return RedirectToAction("ShowCategory");
             }
         }
         //-------------------------------------------------------------------------------------------------//
+       public void CustomValidationfCourses()
+        {
 
+        }
         private List<SelectListItem> getList()
         {
             using (var abc = new EF.CMSContext())
@@ -135,11 +138,12 @@ namespace ASM.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditCourse(int id, CourseEntity a)
+        public ActionResult EditCourse(int id)
         {
-            ViewBag.Class = getList();
+            
             using (var classes = new EF.CMSContext())
             {
+                ViewBag.Class = getList();
                 var Class = classes.Courses.FirstOrDefault(c => c.Id == id);
                 return View(Class);
             }
@@ -148,13 +152,22 @@ namespace ASM.Controllers
         [HttpPost]
         public ActionResult EditCourse(CourseEntity a)
         {
-            using (var abc = new EF.CMSContext())
+            CustomValidationfCourses();
+
+            if (!ModelState.IsValid)
             {
-                abc.Entry<CourseEntity>(a).State = System.Data.Entity.EntityState.Modified;
-
-                abc.SaveChanges();
+                ViewBag.Class = getList();
+                return View(a);
             }
+            else
+            {
+                using (var abc = new EF.CMSContext())
+                {
+                    abc.Entry<CourseEntity>(a).State = System.Data.Entity.EntityState.Modified;
 
+                    abc.SaveChanges();
+                }
+            }
             return RedirectToAction("ShowCategory");
         }
 
@@ -168,11 +181,11 @@ namespace ASM.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCourse(int id, CourseCategoryEntity a)
+        public ActionResult DeleteCourse(int id,CourseEntity a)
         {
             using (var classes = new EF.CMSContext())
             {
-                var Class = classes.courseCategoryEntities.FirstOrDefault(c => c.Id == id);
+                var Class = classes.Courses.FirstOrDefault(c => c.Id == id);
                 return View(Class);
             }
         }
@@ -189,7 +202,7 @@ namespace ASM.Controllers
                     abc.SaveChanges();
                 }
                 TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
-                return RedirectToAction("ShowCategory");
+                return RedirectToAction("ShowCourse");
             }
         }
 
@@ -334,11 +347,18 @@ namespace ASM.Controllers
                     {
                         UserName = a.Email.Split('@')[0],
                         Email = a.Email,
-                        Name = a.Email.Split('@')[0],
+                        Name = a.Name,
                         Role = "trainee",
-                        PasswordHash = "123qwe123"
-
+                        PasswordHash = "123qwe123",
+                        Education=a.Education,
+                        Toeic=a.Toeic,
+                        Department=a.Department,
+                        Location=a.Location,
+                        DoB=a.DoB,
+                        Age=a.Age,
+                        ProgrammingLanguage=a.ProgrammingLanguage
                     };
+                    user.listCourse = Convert(context, f["formatIds[]"]);
                     await manager.CreateAsync(user,user.PasswordHash);
                     await CreateRole(a.Email, "trainee");
                 }
@@ -498,5 +518,66 @@ namespace ASM.Controllers
                 return View(usersWithRoles);
             }
         }
+
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            using (var FAPCtx = new EF.CMSContext())
+            {
+                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
+
+                if (staff != null)
+                {
+                    TempData["StaffId"] = id;
+                    TempData["StaffUN"] = staff.UserName;
+                    return View(staff);
+                }
+                else
+                {
+                    return RedirectToAction("MStaff");
+                }
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteTrainee(string id)
+        {
+            using (var FAPCtx = new EF.CMSContext())
+            {
+                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
+
+                if (staff != null)
+                {
+                    TempData["StaffId"] = id;
+                    TempData["StaffUN"] = staff.UserName;
+                    return View(staff);
+                }
+                else
+                {
+                    return RedirectToAction("ShowTrainee");
+                }
+
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteTrainee(string id, UserInfor staff)
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var user = await manager.FindByIdAsync(id);
+
+            if (user != null)
+            {
+                await manager.DeleteAsync(user);
+            }
+
+            return RedirectToAction("ShowTrainee");
+
+        }
+
     }
 }
