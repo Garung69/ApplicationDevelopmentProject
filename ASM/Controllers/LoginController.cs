@@ -96,7 +96,7 @@ namespace ASM.Controllers
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
                     {
                         TempData["UN"] = fuser.UserName;
-                        return RedirectToAction("ShowCategory", "Staff");
+                        return RedirectToAction("SearchCategory", "Staff");
                     }
                     
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
