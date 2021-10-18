@@ -23,56 +23,66 @@
                            .ToList();
     }
 }
-@using (Html.BeginForm(FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.Id)
+
+<div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
+    @using (Html.BeginForm(FormMethod.Post))
+
+    {
+        <br />
+        <br />
+        <center>
+
+            @Html.HiddenFor(m => m.Id)
 
 
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name,
-          htmlAttributes: new { @class = "font-weight-bold" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name,
+                  htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
 
-        @Html.EditorFor(m => m.Name,
-         new
-         {
-           htmlAttributes = new { @class = "form-control" }
-         })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.PasswordHash, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.PasswordHash,
-        new
-        {
-          htmlAttributes = new { @class = "form-control" }
-        })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.UserName,
-        new
-        {
-          htmlAttributes = new { @class = "form-control", min = "0" }
-        })
-    </div>
-
-    <div class="form-group">
-        <label class="font-weight-bold mr-3">Formats</label>
-        @foreach (var f in ViewBag.Formats)
-        {
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox"
-                       value="@f.Id" id="@f.Name" name="formatIds[]"
-                       @(abc.Contains(f.Id) ? "checked" : string.Empty)>
-                <label class="form-check-label" for="@f.Name">
-                    @f.Name
-                </label>
+                @Html.EditorFor(m => m.Name,
+                 new
+                 {
+                     htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                 })
             </div>
-        }
-    </div>
 
-    <button type="submit" class="btn btn-dark">Submit</button>
-}>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PasswordHash, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+                @Html.EditorFor(m => m.PasswordHash,
+                new
+                {
+                  htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+                @Html.EditorFor(m => m.UserName,
+                new
+                {
+                  htmlAttributes = new { @class = "form-control", min = "0", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                })
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold mr-3">Formats</label>
+                @foreach (var f in ViewBag.Formats)
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"
+                               value="@f.Id" id="@f.Name" name="formatIds[]"
+                               @(abc.Contains(f.Id) ? "checked" : string.Empty)>
+                        <label class="form-check-label" for="@f.Name">
+                            @f.Name
+                        </label>
+                    </div>
+                }
+
+
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+        </center>
+    }
+</div>
 
