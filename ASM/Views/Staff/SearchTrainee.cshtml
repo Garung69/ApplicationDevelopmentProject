@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
-
+   
 }
 <br />
 <br />
@@ -10,6 +10,15 @@
 <div class="row-cols-sm-1">
     <div class="title">
         <span class="title font-weight-bold">All Trainee</span>
+    </div>
+    <div class="mb-5">
+        @using (Html.BeginForm("SearchTrainee", "Staff", FormMethod.Get))
+        {
+            //the following are search options
+           
+           
+            @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
+        }
     </div>
 
     <div class="row-cols-md-1">
@@ -32,18 +41,18 @@
             <tbody>
                 @foreach (var c in Model)
                 {
-                    <tr style="border: 1px solid #8b46be;">
-                        <td>@Html.DisplayFor(model => c.Name)</td>
-                        <td>@Html.DisplayFor(model => c.Email)</td>
-                        <td>@Html.DisplayFor(model => c.Toeic)</td>
-                        <td>@Html.DisplayFor(model => c.ProgrammingLanguage)</td>
-                        <td>@Html.DisplayFor(model => c.Age)</td>
-                        <td>@Html.DisplayFor(model => c.DoB)</td>
-                        <td>@Html.DisplayFor(model => c.Experience)</td>
-                        <th scope="col">&nbsp;</th>
+                <tr style="border: 1px solid #8b46be;">
+                    <td>@Html.DisplayFor(model => c.Name)</td>
+                    <td>@Html.DisplayFor(model => c.Email)</td>
+                    <td>@Html.DisplayFor(model => c.Toeic)</td>
+                    <td>@Html.DisplayFor(model => c.ProgrammingLanguage)</td>
+                    <td>@Html.DisplayFor(model => c.Age)</td>
+                    <td>@Html.DisplayFor(model => c.DoB)</td>
+                    <td>@Html.DisplayFor(model => c.Experience)</td>
+                    <th scope="col">&nbsp;</th>
 
 
-                    </tr>
+                </tr>
                 }
 
             </tbody>
