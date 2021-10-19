@@ -1,19 +1,24 @@
 ﻿
 @{
-    ViewBag.Title = "ShowCategory";
+    ViewBag.Title = "SearchCategory";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
 }
+
 @model IEnumerable<ASM.Models.CourseCategoryEntity>
 <div class="container">
-    <h1 class="display-4">ClassRoom OverView</h1>
+
+
+    <h1 class="display-4">Category</h1>
     @if (TempData["message"] != null)
     {
         ViewBag.Message = TempData["message"];
-        
+
     }
-     @{ 
-         ViewBag.UN = TempData["UN"];
-     }
+    @{
+        ViewBag.UN = TempData["UN"];
+    }
+
+
 
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -34,20 +39,19 @@
                     <th scope="row">@Html.DisplayFor(model => c.Id)</th>
                     <td>@Html.DisplayFor(model => c.Name)</td>
                     <td>@Html.DisplayFor(model => c.Description)</td>
-                    
+
                     <td>
                         <a type="button" class="btn btn-success btn-sm"
                            href="@Url.Action("EditCategory", new {id = c.Id})">Edit</a>
                     </td>
-                   <td>
+                    <td>
                         <a type="button" class="btn btn-danger btn-sm"
-                           
-                           href="@Url.Action("DeleteCategory", new {id = c.Id })" 
-                           >Delete</a>
+                           href="@Url.Action("DeleteCategory", new {id = c.Id })">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    </div>
-   
+</div>
+
+

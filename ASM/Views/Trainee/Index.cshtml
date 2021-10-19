@@ -1,13 +1,100 @@
 ﻿@model ASM.Models.UserInfor
 @{
-    ViewBag.Title = "Index";
-    var a = ViewBag.Message;
-    Layout = "~/Views/Trainee/_LayoutTrainee.cshtml";
+    ViewBag.Message = TempData["acb"];
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
+
 }
 
+<div class="text-center" style="padding: 2%;">
+    <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150" />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name,
+       htmlAttributes: new { @class = "font-weight-bold" })
 
-<a class="btn btn-primary" href="@Url.Action("EditTrainee", new { id = a})" role="button">Edit Profile</a>
+        @Html.DisplayFor(m => m.Name,
+      new
+      {
+          htmlAttributes = new { @class = "font-weight-bold" }
+      })
 
-<a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteTrainee", new {id = TempData["StaffId"]})">Delete Account</a>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email,
+       htmlAttributes: new { @class = "font-weight-bold" })
 
+        @Html.DisplayFor(m => m.Email,
+      new
+      {
+          htmlAttributes = new { @class = "font-weight-bold" }
+      })
 
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Age,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Education,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DoB, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.DoB,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.ProgrammingLanguage,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Toeic, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Toeic,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Experience,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Department, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Department,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.Location,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["acb"] })">ChangePassword</a>
+</div>

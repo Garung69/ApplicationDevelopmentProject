@@ -23,29 +23,16 @@ namespace ASM.Controllers
 
 
         [HttpGet]
-        public ActionResult EditTrainee(string id)
+        public ActionResult ChangePass(string id)
         {
-            using (var FAPCtx = new EF.CMSContext())
-            {
-                var trainee = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
-
-                if (trainee != null)
-                {
-                    TempData["xyz"] = id;
-                    return View(trainee);
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-
-            }
+            TempData["user"] = id;
+            return View();
         }
         [HttpPost]
-        public async Task<ActionResult> EditTrainee(string id, UserInfor trainee)
+        public async Task<ActionResult> ChangePass(FormCollection fc, UserInfor userInfor)
         {
 
-            //CustomValidationTrainer(trainer);
+            CustomValidationTrainer(userInfor);
 
             if (!ModelState.IsValid)
             {
@@ -57,20 +44,48 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByEmailAsync(trainee.Email);
+                var user = await manager.FindByEmailAsync(TempData["user"].ToString() + "@gmail.com");
 
                 if (user != null)
                 {
-                    user.UserName = trainee.Email.Split('@')[0];
-                    user.Email = trainee.Email;
-                    user.Name = trainee.Name;                  
-                    user.Education = trainee.Education;
-                    user.Age = trainee.Age;
-                    user.Department = trainee.Department;
-                    user.Location = trainee.Location;
-                    await manager.UpdateAsync(user);
+                    if (userInfor.PasswordHash != null)
+                    {
+                        if (userInfor.PassTemp == userInfor.PasswordHash)
+                        {
+                            String newPassword = userInfor.PasswordHash;
+                            String hashedNewPassword = manager.PasswordHasher.HashPassword(newPassword);
+                            await store.SetPasswordHashAsync(user, hashedNewPassword);
+                            await store.UpdateAsync(user);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("PasswordHash", "Password and confirm Password incorrect!");
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("PasswordHash", "Please input password");
+                        return View();
+                    }
                 }
-                return RedirectToAction("Index", "Trainee");
+                TempData["acb"] = TempData["user"];
+                return RedirectToAction("Index", "Trainer");
+            }
+        }
+        public void CustomValidationTrainer(UserInfor staff)
+        {
+            if (string.IsNullOrEmpty(staff.PassTemp))
+            {
+                ModelState.AddModelError("PassTemp", "Please input Password");
+            }
+            if (string.IsNullOrEmpty(staff.PasswordHash))
+            {
+                ModelState.AddModelError("PasswordHash", "Please confirm Password");
+            }
+            if (!string.IsNullOrEmpty(staff.PasswordHash) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
+            {
+                ModelState.AddModelError("PasswordHash", "Password must longer than 7 charactors");
             }
         }
     }

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ASM.Models.UserInfor>
+@{
+    ViewBag.Title = "ShowTrainee";
+    Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
+   
+}
+<br />
+<br />
+
+<div class="row-cols-sm-1">
+    <div class="title">
+        <span class="title font-weight-bold">All Trainee</span>
+    </div>
+    <div class="mb-5">
+        @using (Html.BeginForm("SearchTrainee", "Staff", FormMethod.Get))
+        {
+            //the following are search options
+           
+           
+            @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
+        }
+    </div>
+
+    <div class="row-cols-md-1">
+        <table class="table">
+            <thead>
+                <tr style="border: 1px solid #8b46be;">
+                    <th scope="col">NO</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Toeic)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.ProgrammingLanguage)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Age)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.DoB)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Experience)</th>
+
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                <tr style="border: 1px solid #8b46be;">
+                    <td>@Html.DisplayFor(model => c.Name)</td>
+                    <td>@Html.DisplayFor(model => c.Email)</td>
+                    <td>@Html.DisplayFor(model => c.Toeic)</td>
+                    <td>@Html.DisplayFor(model => c.ProgrammingLanguage)</td>
+                    <td>@Html.DisplayFor(model => c.Age)</td>
+                    <td>@Html.DisplayFor(model => c.DoB)</td>
+                    <td>@Html.DisplayFor(model => c.Experience)</td>
+                    <th scope="col">&nbsp;</th>
+
+
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<ASM.Models.UserInRole>
+﻿ @model IEnumerable<ASM.Models.UserInfor>
 @{
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
@@ -29,7 +29,7 @@
                         <td>@Html.DisplayFor(model => c.Name)</td>
                         <td>@Html.DisplayFor(model => c.Email)</td>
                         <th scope="col">&nbsp;</th>
-                        <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
+                        <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.Id})" role="button">ViewMore</a></td>
                        
                     </tr>
                 }

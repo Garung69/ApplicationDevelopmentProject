@@ -382,7 +382,6 @@
     <Content Include="Views\Staff\CreateTrainee.cshtml" />
     <Content Include="Views\Staff\Edit.cshtml" />
     <Content Include="Views\Staff\ShowTrainee.cshtml" />
-    <Content Include="Views\Trainee\EditTrainee.cshtml" />
     <Content Include="Views\Trainee\Index.cshtml" />
     <Content Include="Views\Trainee\_LayoutTrainee.cshtml" />
     <Content Include="Views\Trainee\_Nav1.cshtml" />
@@ -397,6 +396,8 @@
     <Content Include="Views\Staff\Details.cshtml" />
     <Content Include="Views\Staff\SearchCourse.cshtml" />
     <Content Include="Views\Staff\SearchCategory.cshtml" />
+    <Content Include="Views\Trainee\ChangePass.cshtml" />
+    <Content Include="Views\Staff\SearchTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

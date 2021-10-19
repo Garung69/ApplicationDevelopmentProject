@@ -1,0 +1,43 @@
+﻿@model ASM.Models.UserInfor
+@{
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
+    TempData["user"] = TempData["user"];
+    var a = TempData["user"];
+}
+
+
+<div class="mt-2 ml-6 mr-6 float-left">
+    <span class="title">Set a new password</span>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        // @Html.HiddenFor(m => m.Id)
+
+        <div class="form-group">
+
+            <label class="font-weight-bold">New Password</label><br />
+            @Html.PasswordFor(m => m.PassTemp,
+              new
+              {
+                  htmlAttributes = new { @class = "form-control" }
+              })
+        </div>
+        <div class="form-group">
+
+            <label class="font-weight-bold">Confirm Password</label><br />
+            @Html.PasswordFor(m => m.PasswordHash,
+              new
+              {
+                  htmlAttributes = new { @class = "form-control" }
+              })
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    }
+</div>
+<div class="message float-right" style="margin-right: 50%; margin-top:20px;">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" });
+    }
+</div>
+<div style="height: 250px;">
+</div>

@@ -147,7 +147,7 @@ namespace ASM.Controllers
 
             TempData["message"] = $"Successfully add class {a.Name} to system!";
 
-            return RedirectToAction("ShowCourse");
+            return RedirectToAction("SearchCourse");
         }
 
         [HttpGet]
@@ -181,7 +181,7 @@ namespace ASM.Controllers
                     abc.SaveChanges();
                 }
             }
-            return RedirectToAction("ShowCategory");
+            return RedirectToAction("SearchCourse");
         }
 
         
@@ -218,7 +218,7 @@ namespace ASM.Controllers
                     abc.SaveChanges();
                 }
                 TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
-                return RedirectToAction("ShowCourse");
+                return RedirectToAction("SearchCourse");
             }
         }
 
@@ -310,7 +310,7 @@ namespace ASM.Controllers
                     user.Type = trainer.Type;
                     await manager.UpdateAsync(user);
                 }
-                return RedirectToAction("ShowTrainer");
+                return RedirectToAction("SearchTrainee");
             }
         }
         //================================================================================================//
@@ -399,7 +399,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("Email", "Please input Name");
             }
-            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Split('@')[1] != "gmail.com"))
+            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Split('@')[0] == null) && (staff.Email.Split('@')[1] == null) && (staff.Email.Split('@')[1] != "gmail.com"))
             {
                 ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
             }
@@ -484,14 +484,13 @@ namespace ASM.Controllers
         }
 
 
-
-/*        public ActionResult SearchTrainee(string option, string search)
+        
+        public ActionResult SearchTrainee(string search)
         {
-            if (option == "Name")
-            {
-                return View(db.Users.Where(x => x.UserName));
-            }
-        }*/
+           
+                return View(db.Users.Where(x => x.UserName.Contains(search) || search == null).ToList());
+                    
+        }
 
 
 

@@ -1,5 +1,20 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     @*// <h1 class="m-2 navbar-brand pl-45" href=""></h1>*@
+    @{
+        var a = "ab";
+        if (TempData["user"] != null)
+        {
+            a = TempData["user"].ToString();
+        }
+        else
+        {
+            a = ViewBag.Message;
+        }
+
+        TempData["user"] = a;
+        ViewBag.Message = a;
+
+    }
     <a href=""><img src="https://scontent.fhan4-2.fna.fbcdn.net/v/t1.6435-9/137642199_3456444204454631_7760562503268940717_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ZCu4jF-hJXEAX8pcd9y&_nc_ht=scontent.fhan4-2.fna&oh=bf77ca0c62f5b512066fcc1f4ff14d1e&oe=6191BF2D" width="60" height="60" alt="" id="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,20 +24,11 @@
 
 
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Trainer")">Home <span class="sr-only">(current)</span></a>
-            </li>
-
-
-            <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("ChangePass", "Trainer")">ChangePassword <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="@Url.Action("Index", "Trainee")">Home <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("EditTrainer", "Trainer")">EditProfile <span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Trainer")">ViewCourse <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="@Url.Action("Index", "Trainee")">ViewCourse <span class="sr-only">(current)</span></a>
             </li>
 
         </ul>
