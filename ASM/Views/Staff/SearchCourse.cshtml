@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ShowCourse";
+    ViewBag.Title = "SearchCourse";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
     TempData["user"] = TempData["user"];
 }
@@ -12,6 +12,17 @@
     {
         ViewBag.Message = TempData["message"];
     }
+
+<div class="mb-5">
+    @using (Html.BeginForm("SearchCourse", "Staff", FormMethod.Get))
+    {
+        //the following are search options
+       
+       
+        @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
+    }
+</div>
+
 
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -35,15 +46,17 @@
 
                     <td>
                         <a type="button" class="btn btn-success btn-sm"
-                           href="@Url.Action("EditCourse", new {id = c.Id})">Edit</a>
+                           href="@Url.Action("EditCategory", new {id = c.Id})">Edit</a>
                     </td>
                     <td>
                         <a type="button" class="btn btn-danger btn-sm"
-                           href="@Url.Action("DeleteCourse", new {id = c.Id })">Delete</a>
+                           href="@Url.Action("DeleteCategory", new {id = c.Id })">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+
 

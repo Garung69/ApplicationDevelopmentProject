@@ -74,7 +74,7 @@ namespace ASM.Controllers
                     user.UserName = trainer.Email.Split('@')[0];
                     user.Email = trainer.Email;                  
                     user.Name = trainer.Name;
-                    user.Type = trainer.Type;
+                    user.Type = trainer.Type;               
                     user.Education = trainer.Education;
                     user.WorkingPlace = trainer.WorkingPlace;
                     await manager.UpdateAsync(user);
@@ -84,9 +84,12 @@ namespace ASM.Controllers
         }
 
 
+
+
+
         //private void CustomValidationTrainer(UserInfor trainer)
         //{
-        //    throw new NotImplementedException();
+        //    
         //}
 
 
