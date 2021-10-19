@@ -35,6 +35,8 @@
                     <th scope="col">@Html.DisplayNameFor(model => model.Age)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.DoB)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Experience)</th>
+                    <th scope="col"></th>
+                    <th scope="col">Action</th>
 
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
@@ -51,7 +53,8 @@
                     <td>@Html.DisplayFor(model => c.Age)</td>
                     <td>@Html.DisplayFor(model => c.DoB)</td>
                     <td>@Html.DisplayFor(model => c.Experience)</td>
-                    <th scope="col">&nbsp;</th>
+                    <td>@Html.HiddenFor(model => c.Id)</td>
+                    <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.Id})" role="button">ViewMore</a></td>
 
 
                 </tr>

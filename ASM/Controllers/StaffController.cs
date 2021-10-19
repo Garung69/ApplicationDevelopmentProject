@@ -487,19 +487,50 @@ namespace ASM.Controllers
         
         public ActionResult SearchTrainee(string option,string search)
         {
-           if(option == "Name")
+            using (CMSContext context = new CMSContext())
             {
-                return View(db.Users.Where(x => x.UserName.Contains(search) || search == null).ToList());
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          WorkingPlace = user.WorkingPlace,
+                                          Type = user.Type,
+                                          PhoneNumber = user.PhoneNumber,
+                                          //More Propety
+
+                                          RoleNames = (from userRole in user.Roles
+                                                       join role in context.Roles on userRole.RoleId
+                                                       equals role.Id
+                                                       select role.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainee").Select(p => new UserInRole()
+
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Email = p.Email,
+                                          Role = string.Join(",", p.RoleNames),
+                                          WorkingPlace = p.WorkingPlace,
+                                          Type = p.Type,
+                                          Phone = p.PhoneNumber
+                                      });
+                if (option == "Name")
+                {
+                    return View(db.Users.Where(x => x.UserName.Contains(search) || search == null).ToList());
+                }
+
+                else if (option == "ProgrammingLanguage")
+                {
+                    return View(db.Users.Where(x => x.ProgrammingLanguage.Contains(search) || search == null).ToList());
+                }
+                else
+                {
+                    return View(db.Users.Where(x => x.Toeic.Contains(search) || search == null).ToList());
+                }
+
             }
-                
-            else if(option == "ProgrammingLanguage")
-            {
-                return View(db.Users.Where(x => x.ProgrammingLanguage.Contains(search) || search == null).ToList());
-            }
-            else  
-            {
-                return View(db.Users.Where(x => x.Toeic.Contains(search) || search == null).ToList());
-            }
+           
         }
 
 
@@ -507,7 +538,7 @@ namespace ASM.Controllers
 
 
 
-        public ActionResult ShowTrainee()
+        public ActionResult ShowTrainee(string option, string search)
         {
             using (CMSContext context = new CMSContext())
             {
@@ -577,7 +608,7 @@ namespace ASM.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ShowTrainee");
+                    return RedirectToAction("SHowTrainee");
                 }
 
             }
@@ -622,7 +653,7 @@ namespace ASM.Controllers
                     user.UserName = a.Email.Split('@')[0];
                     user.Email = a.Email;
                     user.Name = a.Name;
-                   // FAPCtx.Users.Attach(a).Load(); 
+                    FAPCtx.Entry<UserInfor>(a).Collection(b => b.listCourse).Load();
                     user.listCourse = Convert(FAPCtx, f["classId[]"]);
                     await manager.UpdateAsync(user);
                 }
