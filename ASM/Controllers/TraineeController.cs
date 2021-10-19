@@ -15,10 +15,15 @@ namespace ASM.Controllers
     {
         // GET: Trainee
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            ViewBag.Message = TempData["xyz"];
-            return View();
+            ViewBag.Message = TempData["acb"];
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var user = await manager.FindByEmailAsync(ViewBag.Message.ToString() + "@gmail.com");
+            return View(user);
         }
 
 
@@ -88,5 +93,33 @@ namespace ASM.Controllers
                 ModelState.AddModelError("PasswordHash", "Password must longer than 7 charactors");
             }
         }
+
+       /* public async Task<ActionResult> ShowCourse()
+        {
+            using (CMSContext context = new CMSContext())
+            {
+                var usersWithRoles = (from user in context.Users
+                                      select new
+                                      {
+                                          UserId = user.Id,
+                                          Username = user.UserName,
+                                          Email = user.Email,
+                                          //More Propety
+
+                                          CourseAssign = (from course in user.listCourse
+                                                       join courses in context.Courses on course.Id
+                                                       equals courses.Id
+                                                       select courses.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.UserId) == TempData["user"]).Select(p => new UserInRole()
+
+                                      {
+                                          UserId = p.UserId,
+                                          Username = p.Username,
+                                          Email = p.Email
+                                       
+                                      });
+                return View(usersWithRoles);
+            }
+        }*/
     }
 }

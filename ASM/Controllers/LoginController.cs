@@ -106,7 +106,7 @@ namespace ASM.Controllers
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
                     {
-                        TempData["xyz"] = fuser.Id;
+                        TempData["acb"] = fuser.UserName;
                         return RedirectToAction("Index", "Trainee");
                     }
                     else return Content($"Comming Soon!!!");

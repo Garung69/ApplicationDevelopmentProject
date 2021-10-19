@@ -546,7 +546,7 @@ namespace ASM.Controllers
                                       select new
                                       {
                                           UserId = user.Id,
-                                          Username = user.UserName,
+                                          Name = user.Name,
                                           Email = user.Email,
                                           WorkingPlace = user.WorkingPlace,
                                           Type = user.Type,
@@ -561,7 +561,7 @@ namespace ASM.Controllers
 
                                       {
                                           UserId = p.UserId,
-                                          Username = p.Username,
+                                          Name = p.Name,
                                           Email = p.Email,
                                           Role = string.Join(",", p.RoleNames),
                                           WorkingPlace = p.WorkingPlace,

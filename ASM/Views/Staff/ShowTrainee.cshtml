@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<ASM.Models.UserInRole>
+﻿@model IEnumerable<ASM.Models.UserInRole>
 @{
     ViewBag.Title = "ShowTrainee";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
@@ -6,37 +6,51 @@
 }
 <br />
 <br />
+<script>
+    $('#myInputT').on('keyup', function (event) {
+        event.preventDefault();
+        /* Act on the event */
+        console.log(1);
+        var input = $(this).val().toLowerCase();
+        $('#myTable tr').filter(function () {
 
-<div class="row-cols-sm-1">
-    <div class="title">
-        <span class="title font-weight-bold">All Trainee</span>
-    </div>
-    <div class="row-cols-md-1">
-        <table class="table">
-            <thead>
-                <tr style="border: 1px solid #8b46be;">
-                    <th scope="col">NO</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var c in Model)
-                {
+            $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1);
+
+        });
+    });
+</script>
+<div class="container">
+    <div class="row-cols-sm-1">
+        <div class="title">
+            <span class="title font-weight-bold">All Trainee</span>
+        </div>
+        <div class="row-cols-md-1">
+            <input type="text" id="myInputT" placeholder="Search by names.." class="form-control mb-3">
+            <table class="table">
+                <thead>
                     <tr style="border: 1px solid #8b46be;">
-                        <td>@Html.DisplayFor(model => c.Name)</td>
-                        <td>@Html.HiddenFor(model=>c.UserId)</td>
-                        <td>@Html.DisplayFor(model => c.Email)</td>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
                         <th scope="col">&nbsp;</th>
-                       <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
-                       
+                        <th scope="col">&nbsp;</th>
                     </tr>
-                }
+                </thead>
+                <tbody id="myTable">
+                    @foreach (var c in Model)
+                    {
+                        <tr style="border: 1px solid #8b46be;">
+                            <td>@Html.DisplayFor(model => c.Name)</td>
+                            <td>@Html.DisplayFor(model => c.Email)</td>
+                            <th scope="col">&nbsp;</th>
+                            <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
 
-            </tbody>
-        </table>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
 
