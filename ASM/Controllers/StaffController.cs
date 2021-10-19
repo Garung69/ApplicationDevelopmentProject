@@ -320,10 +320,17 @@ namespace ASM.Controllers
              EF.CMSContext bwCtx,
              string formatIds)
         {
-            var abc = formatIds.Split(',')
-                                        .Select(id => Int32.Parse(id))
-                                        .ToArray();
-            return bwCtx.Courses.Where(f => abc.Contains(f.Id)).ToList();
+            if(formatIds != null)
+            {
+                var abc = formatIds.Split(',')
+                                       .Select(id => Int32.Parse(id))
+                                       .ToArray();
+                return bwCtx.Courses.Where(f => abc.Contains(f.Id)).ToList();
+            }
+            else
+            {
+                return bwCtx.Courses.Where(c => c.Id == 0).ToList();
+            }
 
         }
         private void SetViewBag()
@@ -641,7 +648,7 @@ namespace ASM.Controllers
             var user = await manager.FindByEmailAsync(a.Email);
             if (!ModelState.IsValid)
             {
-                TempData["abc"] = f["classId[]"];
+                TempData["abc"] = f["formatIds[]"];
                 SetViewBag();
                 return View(a);
             }
@@ -650,12 +657,12 @@ namespace ASM.Controllers
             {
                 using (var FAPCtx = new EF.CMSContext())
                 {
-                    user.UserName = a.Email.Split('@')[0];
-                    user.Email = a.Email;
-                    user.Name = a.Name;
-                    FAPCtx.Entry<UserInfor>(a).Collection(b => b.listCourse).Load();
-                    user.listCourse = Convert(FAPCtx, f["classId[]"]);
-                    await manager.UpdateAsync(user);
+                    FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;
+
+                    FAPCtx.Entry<UserInfor>(a).Collection(x => x.listCourse).Load();
+                    a.listCourse = Convert(FAPCtx, f["formatIds[]"]);
+
+                    FAPCtx.SaveChanges();
                 }
             }
             return RedirectToAction("ShowTrainee");
