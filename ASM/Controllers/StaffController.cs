@@ -485,12 +485,21 @@ namespace ASM.Controllers
 
 
         
-        public ActionResult SearchTrainee(string search)
+        public ActionResult SearchTrainee(string option,string search)
         {
-           
+           if(option == "Name")
+            {
                 return View(db.Users.Where(x => x.UserName.Contains(search) || search == null).ToList());
-            
-           
+            }
+                
+            else if(option == "ProgrammingLanguage")
+            {
+                return View(db.Users.Where(x => x.ProgrammingLanguage.Contains(search) || search == null).ToList());
+            }
+            else  
+            {
+                return View(db.Users.Where(x => x.Toeic.Contains(search) || search == null).ToList());
+            }
         }
 
 

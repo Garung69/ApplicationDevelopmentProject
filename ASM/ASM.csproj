@@ -391,6 +391,9 @@
     <Content Include="Views\Staff\EditTrainer.cshtml" />
     <Content Include="Views\Staff\Details.cshtml" />
     <Content Include="Views\Staff\DeleteTrainee.cshtml" />
+    <Content Include="Views\Staff\SearchCategory.cshtml" />
+    <Content Include="Views\Staff\SearchCourse.cshtml" />
+    <Content Include="Views\Staff\SearchTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

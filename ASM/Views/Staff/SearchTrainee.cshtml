@@ -15,8 +15,10 @@
         @using (Html.BeginForm("SearchTrainee", "Staff", FormMethod.Get))
         {
             //the following are search options
-           
-           
+            @Html.RadioButton("option", "Name") <b class="mr-4">Name</b>
+            @Html.RadioButton("option", "ProgrammingLanguage")<b class="mr-4"> Programming Language</b>
+            @Html.RadioButton("option", "TOEIC")<b class="mr-4"> TOEIC Score</b>
+
             @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
         }
     </div>
