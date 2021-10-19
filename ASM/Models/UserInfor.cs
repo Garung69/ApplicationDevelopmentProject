@@ -27,7 +27,7 @@ namespace ASM.Models
         public string ProgrammingLanguage { get; set; }
 
         public string Experience { get; set; }
-
+        public string PassTemp { get; set; }
         public UserInfor()
         {
             listCourse = new List<CourseEntity>();
