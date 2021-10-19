@@ -393,6 +393,10 @@
     <Content Include="Views\Trainer\_Nav1.cshtml" />
     <Content Include="Views\Staff\ShowTrainer.cshtml" />
     <Content Include="Views\Staff\EditTrainer.cshtml" />
+    <Content Include="Views\Staff\DeleteTrainee.cshtml" />
+    <Content Include="Views\Staff\Details.cshtml" />
+    <Content Include="Views\Staff\SearchCourse.cshtml" />
+    <Content Include="Views\Staff\SearchCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
