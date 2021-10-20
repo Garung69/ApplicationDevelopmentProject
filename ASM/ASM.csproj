@@ -176,21 +176,9 @@
     <Compile Include="Controllers\TraineeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110181517129_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110181517129_InitialCreate.designer.cs">
-      <DependentUpon>202110181517129_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110190055158_AddPassTemp.cs" />
-    <Compile Include="EF\Migrations\202110190055158_AddPassTemp.designer.cs">
-      <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110200250145_AddUserInCourse.cs" />
-    <Compile Include="EF\Migrations\202110200250145_AddUserInCourse.designer.cs">
-      <DependentUpon>202110200250145_AddUserInCourse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110200254038_AddUserInCourse2.cs" />
-    <Compile Include="EF\Migrations\202110200254038_AddUserInCourse2.designer.cs">
-      <DependentUpon>202110200254038_AddUserInCourse2.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110201356432_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110201356432_InitialCreate.designer.cs">
+      <DependentUpon>202110201356432_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -423,17 +411,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110181517129_InitialCreate.resx">
-      <DependentUpon>202110181517129_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110190055158_AddPassTemp.resx">
-      <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110200250145_AddUserInCourse.resx">
-      <DependentUpon>202110200250145_AddUserInCourse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110200254038_AddUserInCourse2.resx">
-      <DependentUpon>202110200254038_AddUserInCourse2.cs</DependentUpon>
+    <EmbeddedResource Include="EF\Migrations\202110201356432_InitialCreate.resx">
+      <DependentUpon>202110201356432_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

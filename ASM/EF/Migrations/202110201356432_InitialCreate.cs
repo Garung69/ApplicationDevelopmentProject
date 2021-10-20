@@ -48,6 +48,7 @@
                         DoB = c.String(),
                         ProgrammingLanguage = c.String(),
                         Experience = c.String(),
+                        PassTemp = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -115,8 +116,8 @@
                 "dbo.UserInforCourseEntities",
                 c => new
                     {
-                        UserInfor_Id = c.String(nullable: false, maxLength: 128),
-                        CourseEntity_Id = c.Int(nullable: false),
+                        UserInfor_Id = c.String(nullable: true, maxLength: 128),
+                        CourseEntity_Id = c.Int(nullable: true),
                     })
                 .PrimaryKey(t => new { t.UserInfor_Id, t.CourseEntity_Id })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserInfor_Id, cascadeDelete: true)

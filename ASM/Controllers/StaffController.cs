@@ -53,8 +53,8 @@ namespace ASM.Controllers
         }
 
         public ActionResult ShowCategory()
-        {                   
-            
+        {
+
             using (var classes = new EF.CMSContext())
             {
                 var Classroom = classes.courseCategoryEntities.OrderBy(a => a.Id).ToList();
@@ -112,7 +112,7 @@ namespace ASM.Controllers
             }
         }
         //-------------------------------------------------------------------------------------------------//
-       public void CustomValidationfCourses()
+        public void CustomValidationfCourses()
         {
 
         }
@@ -128,24 +128,11 @@ namespace ASM.Controllers
                 return stx;
             }
         }
-        private List<SelectListItem> gettrainer()
-        {
-            using (var abc = new EF.CMSContext())
-            {
-                var trainer = abc.Users.Select(p => new SelectListItem
-                {
-                    Text = p.Name,
-                    Value = p.Id.ToString()
-                }).ToList();
-                return trainer;
-            }
-        }
 
         [HttpGet]
         public ActionResult AddCourse()
         {
             ViewBag.Class = getList();
-            ViewBag.trainer = gettrainer();
             return View();
         }
 
@@ -160,17 +147,16 @@ namespace ASM.Controllers
 
             TempData["message"] = $"Successfully add class {a.Name} to system!";
 
-            return RedirectToAction("SearchCourse");
+            return RedirectToAction("ShowCourse");
         }
 
         [HttpGet]
         public ActionResult EditCourse(int id)
         {
-            
+
             using (var classes = new EF.CMSContext())
             {
                 ViewBag.Class = getList();
-                ViewBag.trainer = gettrainer();
                 var Class = classes.Courses.FirstOrDefault(c => c.Id == id);
                 return View(Class);
             }
@@ -184,7 +170,6 @@ namespace ASM.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Class = getList();
-                ViewBag.trainer = gettrainer();
                 return View(a);
             }
             else
@@ -199,8 +184,8 @@ namespace ASM.Controllers
             return RedirectToAction("SearchCourse");
         }
 
-        
-       
+
+
 
         public ActionResult ShowCourse()
         {
@@ -212,7 +197,7 @@ namespace ASM.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCourse(int id,CourseEntity a)
+        public ActionResult DeleteCourse(int id, CourseEntity a)
         {
             using (var classes = new EF.CMSContext())
             {
@@ -238,9 +223,9 @@ namespace ASM.Controllers
         }
 
 
-       
-        
-        
+
+
+
         public ActionResult ShowTrainer()
         {
             using (CMSContext context = new CMSContext())
@@ -335,7 +320,7 @@ namespace ASM.Controllers
              EF.CMSContext bwCtx,
              string formatIds)
         {
-            if(formatIds != null)
+            if (formatIds != null)
             {
                 var abc = formatIds.Split(',')
                                        .Select(id => Int32.Parse(id))
@@ -391,19 +376,19 @@ namespace ASM.Controllers
                         Name = a.Name,
                         Role = "trainee",
                         PasswordHash = "123qwe123",
-                        Education=a.Education,
-                        Toeic=a.Toeic,
-                        Department=a.Department,
-                        Location=a.Location,
-                        DoB=a.DoB,
-                        Age=a.Age,
-                        ProgrammingLanguage=a.ProgrammingLanguage
+                        Education = a.Education,
+                        Toeic = a.Toeic,
+                        Department = a.Department,
+                        Location = a.Location,
+                        DoB = a.DoB,
+                        Age = a.Age,
+                        ProgrammingLanguage = a.ProgrammingLanguage
                     };
                     user.listCourse = Convert(context, f["formatIds[]"]);
-                    await manager.CreateAsync(user,user.PasswordHash);
+                    await manager.CreateAsync(user, user.PasswordHash);
                     await CreateRole(a.Email, "trainee");
                 }
-                
+
             }
 
             return RedirectToAction("ShowTrainee");
@@ -491,7 +476,7 @@ namespace ASM.Controllers
             var manager = new UserManager<UserInfor>(store);
 
 
-            var a = manager.Users.Include(x=>x.listCourse).FirstOrDefault(b => b.Id == id);
+            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == id);
 
             if (a != null) // if a book is found, show edit view
             {
@@ -506,8 +491,8 @@ namespace ASM.Controllers
         }
 
 
-        
-        public ActionResult SearchTrainee(string option,string search)
+
+        public ActionResult SearchTrainee(string option, string search)
         {
             using (CMSContext context = new CMSContext())
             {
@@ -552,7 +537,7 @@ namespace ASM.Controllers
                 }
 
             }
-           
+
         }
 
 
@@ -655,7 +640,7 @@ namespace ASM.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(string id,FormCollection f,UserInfor a)
+        public async Task<ActionResult> Edit(string id, FormCollection f, UserInfor a)
         {
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);

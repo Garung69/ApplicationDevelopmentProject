@@ -1,62 +1,45 @@
-﻿
+﻿@model ASM.Models.CourseEntity
 @{
-    ViewBag.Title = "SearchCourse";
+    ViewBag.Title = "EditCourse";
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
     TempData["user"] = TempData["user"];
 }
 
-@model IEnumerable<ASM.Models.CourseEntity>
-<div class="container">
-    <h1 class="display-4">Course </h1>
-    @if (TempData["message"] != null)
-    {
-        ViewBag.Message = TempData["message"];
-    }
-
-<div class="mb-5">
-    @using (Html.BeginForm("SearchCourse", "Staff", FormMethod.Get))
-    {
-        //the following are search options
-       
-       
-        @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
-    }
-</div>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Id, htmlAttributes: new { @class = "form-weight-bold" })
+        @Html.DropDownListFor(m => m.Id, (IEnumerable<SelectListItem>)ViewBag.Class, htmlAttributes
+       : new { @class = "form-control" }
+       )
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name,
+          htmlAttributes: new { @class = "font-weight-bold" })
 
 
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
-        </thead>
+        @Html.EditorFor(m => m.Name,
+         new
+         {
+           htmlAttributes = new { @class = "form-control" }
+         })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.Description,
+        new
+        {
+          htmlAttributes = new { @class = "form-control" }
+        })
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-dark">Submit</button>
+}
 
 
-        <tbody>
-            @foreach (var c in Model)
-            {
-                <tr>
-                    <th scope="row">@Html.DisplayFor(model => c.Id)</th>
-                    <td>@Html.DisplayFor(model => c.Name)</td>
-                    <td>@Html.DisplayFor(model => c.Description)</td>
-
-                    <td>
-                        <a type="button" class="btn btn-success btn-sm"
-                           href="@Url.Action("EditCourse", new {id = c.Id})">Edit</a>
-                    </td>
-                    <td>
-                        <a type="button" class="btn btn-danger btn-sm"
-                           href="@Url.Action("DeleteCourse", new {id = c.Id })">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
 
 
 
