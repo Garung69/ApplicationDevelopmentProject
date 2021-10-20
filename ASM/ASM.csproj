@@ -184,6 +184,10 @@
     <Compile Include="EF\Migrations\202110190055158_AddPassTemp.designer.cs">
       <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
     </Compile>
+    <Compile Include="EF\Migrations\202110200350000_AddTrainer.cs" />
+    <Compile Include="EF\Migrations\202110200350000_AddTrainer.designer.cs">
+      <DependentUpon>202110200350000_AddTrainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -418,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EF\Migrations\202110190055158_AddPassTemp.resx">
       <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110200350000_AddTrainer.resx">
+      <DependentUpon>202110200350000_AddTrainer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
