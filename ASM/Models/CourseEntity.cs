@@ -17,10 +17,17 @@ namespace ASM.Models
         public virtual int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual CourseCategoryEntity abc { get; set; }
+               
         public List<UserInfor> listTrainer { get; set; }
-
+        
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Trainer")]
+        public virtual string TrainerId { get; set; }
+        [ForeignKey("TrainerId")]
+        public virtual UserInfor Trainer { get; set; }
+
         [Required(ErrorMessage = "Need to input name")]
         public string Name { get; set; }
 

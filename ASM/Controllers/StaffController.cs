@@ -128,11 +128,24 @@ namespace ASM.Controllers
                 return stx;
             }
         }
+        private List<SelectListItem> gettrainer()
+        {
+            using (var abc = new EF.CMSContext())
+            {
+                var trainer = abc.Users.Select(p => new SelectListItem
+                {
+                    Text = p.Name,
+                    Value = p.Id.ToString()
+                }).ToList();
+                return trainer;
+            }
+        }
 
         [HttpGet]
         public ActionResult AddCourse()
         {
             ViewBag.Class = getList();
+            ViewBag.trainer = gettrainer();
             return View();
         }
 
@@ -157,6 +170,7 @@ namespace ASM.Controllers
             using (var classes = new EF.CMSContext())
             {
                 ViewBag.Class = getList();
+                ViewBag.trainer = gettrainer();
                 var Class = classes.Courses.FirstOrDefault(c => c.Id == id);
                 return View(Class);
             }
@@ -170,6 +184,7 @@ namespace ASM.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Class = getList();
+                ViewBag.trainer = gettrainer();
                 return View(a);
             }
             else
