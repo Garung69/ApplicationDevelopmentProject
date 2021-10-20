@@ -20,12 +20,12 @@ namespace ASM.Controllers
         // GET: Trainer
         public async Task<ActionResult>  Index()
         {
-            ViewBag.Message = TempData["acb"];
+            TempData["username"] = TempData["username"];
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
 
-            var user = await manager.FindByEmailAsync(ViewBag.Message.ToString()+"@gmail.com");
+            var user = await manager.FindByEmailAsync(TempData["username"].ToString()+"@gmail.com");
             return View(user);
         }
 
@@ -41,7 +41,7 @@ namespace ASM.Controllers
 
                 if (student != null)
                 {
-                    TempData["acb"] = id;
+                    TempData["username"] = id;
                     return View(student);
                 }
                 else
@@ -79,6 +79,7 @@ namespace ASM.Controllers
                     user.WorkingPlace = trainer.WorkingPlace;
                     await manager.UpdateAsync(user);
                 }
+                TempData["username"] = TempData["username"];
                 return RedirectToAction("Index", "Trainer");
             }
         }
@@ -96,7 +97,7 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult ChangePass(string id)
         {
-            TempData["user"] = id;
+            TempData["username"] = id;
             return View();
         }
         [HttpPost]
@@ -115,7 +116,7 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByEmailAsync(TempData["user"].ToString()+"@gmail.com");
+                var user = await manager.FindByEmailAsync(TempData["username"].ToString()+"@gmail.com");
 
                 if (user != null)
                 {
@@ -131,16 +132,18 @@ namespace ASM.Controllers
                         else
                         {
                             ModelState.AddModelError("PasswordHash", "Password and confirm Password incorrect!");
+                            TempData["username"] = TempData["username"];
                             return View();
                         }
                     }
                     else
                     {
                         ModelState.AddModelError("PasswordHash", "Please input password");
+                        TempData["username"] = TempData["username"];
                         return View();
                     }        
                 }
-                TempData["acb"] = TempData["user"];
+                TempData["username"] = TempData["username"];
                 return RedirectToAction("Index", "Trainer");
             }
         }

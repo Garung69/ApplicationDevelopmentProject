@@ -184,6 +184,14 @@
     <Compile Include="EF\Migrations\202110190055158_AddPassTemp.designer.cs">
       <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
     </Compile>
+    <Compile Include="EF\Migrations\202110200250145_AddUserInCourse.cs" />
+    <Compile Include="EF\Migrations\202110200250145_AddUserInCourse.designer.cs">
+      <DependentUpon>202110200250145_AddUserInCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Migrations\202110200254038_AddUserInCourse2.cs" />
+    <Compile Include="EF\Migrations\202110200254038_AddUserInCourse2.designer.cs">
+      <DependentUpon>202110200254038_AddUserInCourse2.cs</DependentUpon>
+    </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +200,7 @@
     <Compile Include="Models\CourseEntity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SecurityRoles.cs" />
+    <Compile Include="Models\UserInCourse.cs" />
     <Compile Include="Models\UserInfor.cs" />
     <Compile Include="Models\UserInRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -397,6 +406,7 @@
     <Content Include="Views\Staff\SearchCategory.cshtml" />
     <Content Include="Views\Staff\SearchCourse.cshtml" />
     <Content Include="Views\Staff\DeleteTrainee.cshtml" />
+    <Content Include="Views\Login\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -418,6 +428,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EF\Migrations\202110190055158_AddPassTemp.resx">
       <DependentUpon>202110190055158_AddPassTemp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110200250145_AddUserInCourse.resx">
+      <DependentUpon>202110200250145_AddUserInCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110200254038_AddUserInCourse2.resx">
+      <DependentUpon>202110200254038_AddUserInCourse2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

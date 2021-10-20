@@ -17,12 +17,12 @@ namespace ASM.Controllers
 
         public async Task<ActionResult> Index()
         {
-            ViewBag.Message = TempData["acb"];
+            TempData["username"] = TempData["username"];
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
 
-            var user = await manager.FindByEmailAsync(ViewBag.Message.ToString() + "@gmail.com");
+            var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com");
             return View(user);
         }
 
@@ -30,7 +30,7 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult ChangePass(string id)
         {
-            TempData["user"] = id;
+            TempData["username"] = id;
             return View();
         }
         [HttpPost]
@@ -49,7 +49,7 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByEmailAsync(TempData["user"].ToString() + "@gmail.com");
+                var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com");
 
                 if (user != null)
                 {
@@ -65,17 +65,19 @@ namespace ASM.Controllers
                         else
                         {
                             ModelState.AddModelError("PasswordHash", "Password and confirm Password incorrect!");
+                            TempData["username"] = TempData["username"];
                             return View();
                         }
                     }
                     else
                     {
                         ModelState.AddModelError("PasswordHash", "Please input password");
+                        TempData["username"] = TempData["username"];
                         return View();
                     }
                 }
-                TempData["acb"] = TempData["user"];
-                return RedirectToAction("Index", "Trainer");
+                TempData["username"] = TempData["username"];
+                return RedirectToAction("Index", "Trainee");
             }
         }
         public void CustomValidationTrainer(UserInfor staff)
@@ -88,7 +90,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("PasswordHash", "Please confirm Password");
             }
-            if (!string.IsNullOrEmpty(staff.PasswordHash) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
+            if (!string.IsNullOrEmpty(staff.PasswordHash) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
             {
                 ModelState.AddModelError("PasswordHash", "Password must longer than 7 charactors");
             }
@@ -96,6 +98,7 @@ namespace ASM.Controllers
 
        /* public async Task<ActionResult> ShowCourse()
         {
+            TempData["username"] = TempData["username"];
             using (CMSContext context = new CMSContext())
             {
                 var usersWithRoles = (from user in context.Users
@@ -107,16 +110,14 @@ namespace ASM.Controllers
                                           //More Propety
 
                                           CourseAssign = (from course in user.listCourse
-                                                       join courses in context.Courses on course.Id
-                                                       equals courses.Id
-                                                       select courses.Name).ToList()
-                                      }).ToList().Where(p => string.Join(",", p.UserId) == TempData["user"]).Select(p => new UserInRole()
+                                                          join courses in context.Courses on course.Id
+                                                          equals courses.Id
+                                                          select courses.Name).ToList()
+                                      }).ToList().Where(p => string.Join(",", p.UserId) == TempData["username"].ToString()).Select(p => new UserInCourse()
 
                                       {
-                                          UserId = p.UserId,
-                                          Username = p.Username,
-                                          Email = p.Email
-                                       
+                                          listCourseAssign = p.CourseAssign,
+                                          Description = p.Username,
                                       });
                 return View(usersWithRoles);
             }

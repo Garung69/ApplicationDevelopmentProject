@@ -1,6 +1,6 @@
 ﻿@model ASM.Models.UserInfor
 @{
-    ViewBag.Message = TempData["acb"];
+    TempData["username"] = TempData["username"];
     Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
 
 }
@@ -69,6 +69,6 @@
          htmlAttributes = new { @class = "font-weight-bold" }
      })
     </div>
-    <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["acb"] })">EditProfile</a>
-    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["acb"] })">ChangePassword</a>
+    <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["username"]})">EditProfile</a>
+    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["username"] })">ChangePassword</a>
 </div>

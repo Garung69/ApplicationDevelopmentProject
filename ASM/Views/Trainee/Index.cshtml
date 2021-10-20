@@ -1,11 +1,11 @@
 ﻿@model ASM.Models.UserInfor
 @{
-    ViewBag.Message = TempData["acb"];
+    TempData["username"] = TempData["username"];
     Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
 
 }
 
-<div class="" style="padding: 2%; border: 1px solid #e5deda">
+<div class="" style="padding-top: 2%;padding-left: 9% ;border: 1px solid #e5deda; width: 30%; margin-left: 35%;">
     <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150" />
     <div class="form-group">
         @Html.LabelFor(m => m.Name,
@@ -96,5 +96,5 @@
          htmlAttributes = new { @class = "font-weight-bold" }
      })
     </div>
-    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["acb"] })">ChangePassword</a>
+    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainee", new { id = TempData["username"] })">ChangePassword</a>
 </div>

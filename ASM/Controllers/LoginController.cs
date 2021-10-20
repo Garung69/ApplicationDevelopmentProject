@@ -101,12 +101,12 @@ namespace ASM.Controllers
                     
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
                     {
-                        TempData["acb"] = fuser.UserName;                  
+                        TempData["username"] = fuser.UserName;                  
                         return RedirectToAction( "Index", "Trainer");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
                     {
-                        TempData["acb"] = fuser.UserName;
+                        TempData["username"] = fuser.UserName;
                         return RedirectToAction("Index", "Trainee");
                     }
                     else return Content($"Comming Soon!!!");
@@ -213,5 +213,10 @@ namespace ASM.Controllers
             return Content("done!");
         }
 
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }
