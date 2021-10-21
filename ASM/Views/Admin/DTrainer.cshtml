@@ -14,10 +14,11 @@
     <a class="btn btn-success" href="@Url.Action("AMTrainer","Admin")" role="button">Go back</a> <br />
 </div>
 <div class="show-info">
-    <span class="title" style="margin: 5px 30%;">Staff Infomation</span>
+    <span class="title" style="margin: 5px 30%;">Trainer Infomation</span>
     <div class="info" style="float: none">
-        @Html.DisplayNameFor(m => m.UserName) :     @Html.DisplayFor(m => m.UserName) <br />
-
+        @Html.LabelFor(m => m.UserName, htmlAttributes: new { @class = "font-weight-bold" }) :  @Html.DisplayFor(m => m.UserName) <br />
+        @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "font-weight-bold" }) :  @Html.DisplayFor(m => m.Email) <br />
+        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "font-weight-bold" }) :  @Html.DisplayFor(m => m.Name) <br />
     </div>
 </div>
 

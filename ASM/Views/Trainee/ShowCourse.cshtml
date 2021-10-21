@@ -1,0 +1,43 @@
+﻿@model ASM.Models.UserInCourse
+@{
+    TempData["username"] = TempData["username"];
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
+
+}
+
+<div class="text-center" style="padding: 2%;">
+    <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150" />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username,
+       htmlAttributes: new { @class = "font-weight-bold" })
+
+        @Html.DisplayFor(m => m.Username,
+      new
+      {
+          htmlAttributes = new { @class = "font-weight-bold" }
+      })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email,
+       htmlAttributes: new { @class = "font-weight-bold" })
+
+        @Html.DisplayFor(m => m.Email,
+      new
+      {
+          htmlAttributes = new { @class = "font-weight-bold" }
+      })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.listCourseAssign, new { @class = "font-weight-bold" })
+        @Html.DisplayFor(m => m.listCourseAssign,
+     new
+     {
+         htmlAttributes = new { @class = "font-weight-bold" }
+     })
+    </div>
+    <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["username"]})">EditProfile</a>
+    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["username"] })">ChangePassword</a>
+</div>

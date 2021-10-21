@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,36 @@ namespace ASM.Controllers
 {
     public class LoginController : Controller
     {
+
+
+
+
+
+        /// <summary>
+        ///                        // CREATE SEED 
+        /// </summary>
+        /// <returns></returns>
+
+        //  update-database -ConfigurationTypeName ASM.EF.Migrations.Configuration -TargetMigration:InitialCreate -Verbose
+        public async Task<ActionResult> NewSeed()
+        {
+            await CreateAdmin();
+            await CreateTrainer();
+            await CreateTrainee();
+            await CreateStaff();
+            CreateCourseCategory();
+            CreateCourse();
+
+            return RedirectToAction("login");
+        }
+
+
+
+
+
+
+
+
         private void CustomValidation(UserInfor user)
         {
             if (string.IsNullOrEmpty(user.Email))
@@ -120,17 +151,7 @@ namespace ASM.Controllers
 
         }
 
-/*        private void SessionLogin(string username)
-        {
-            if (HttpContext.Session["login"] == null)
-            {
-                HttpContext.Session["login"] = username;
-            }
-        }
-        public string GetLoginSession()
-        {
-            return HttpContext.Session["login"] as string;
-        }*/
+
 
         public async Task<ActionResult> CreateAdmin()
         {
@@ -139,7 +160,7 @@ namespace ASM.Controllers
             var manager = new UserManager<UserInfor>(store);
 
             var email = "thien@gmail.com";
-            var password = "Tavip123";
+            var password = "123qwe123";
             var phone = "0961119526";
             var role = "admin";
 
@@ -156,10 +177,166 @@ namespace ASM.Controllers
                     Role = role,
                 };
                 await manager.CreateAsync(user, password);
-                await CreateRole(user.Email, "admin");
-                return Content($"Create Admin account Succsess");
+                await CreateRole(user.Email, "admin");             
             }
-            return RedirectToAction("LogIn");
+            return Content($"On Processing 20%");
+        }
+
+        public async Task<ActionResult> CreateTrainer()
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var email = "trainer";
+            var password = "123qwe123";
+            var phone = "0961119526";
+            for(int i =1; i<= 20; i++)
+            {
+                var user = await manager.FindByEmailAsync(email+ i.ToString() + "@gmail.com");
+
+                if (user == null)
+                {
+                    user = new UserInfor
+                    {
+                        UserName = email + i.ToString(),
+                        Email = email + i.ToString() + "@gmail.com",
+                        PhoneNumber = phone,
+                        Age = 18,
+                        Name = "Le Minh Thien",
+                        WorkingPlace = "Ha Noi",
+                        Type = "Introvert"
+                    };
+                    var res =  await manager.CreateAsync(user, password);
+                    if (res.Succeeded)
+                    {
+                        await CreateRole(user.Email, "trainer");
+                    }
+                                    
+                }
+            }
+
+            return Content($"On Processing 40%");
+        }
+
+        public async Task<ActionResult> CreateTrainee()
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var email = "trainee";
+            var password = "123qwe123";
+            var phone = "0961119526";
+            for (int i = 1; i <= 100; i++)
+            {
+                var user = await manager.FindByEmailAsync(email + i.ToString() + "@gmail.com");
+
+                if (user == null)
+                {
+                    user = new UserInfor
+                    {
+                        UserName = email + i.ToString(),
+                        Email = email + i.ToString() + "@gmail.com",
+                        PhoneNumber = phone,
+                        Age = 18,
+                        Name = "Le Minh Thien",
+                        Education = "High School",
+                        ProgrammingLanguage = "C#",
+                        Toeic = "9",
+                        Experience = "None!",
+                        Department = "GCH0803",
+                        Location = "Lao Cai"
+                    };
+                    var res = await manager.CreateAsync(user, password);
+                    if (res.Succeeded)
+                    {
+                        await CreateRole(user.Email, "trainee");
+                    }
+
+                }
+            }
+
+            return Content($"On Processing 60%");
+        }
+
+        public async Task<ActionResult> CreateStaff()
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var email = "staff";
+            var password = "123qwe123";
+            for (int i = 1; i <= 2; i++)
+            {
+                var user = await manager.FindByEmailAsync(email + i.ToString() + "@gmail.com");
+
+                if (user == null)
+                {
+                    user = new UserInfor
+                    {
+                        UserName = email + i.ToString(),
+                        Email = email + i.ToString() + "@gmail.com",
+                        Age = 18,
+                        Name = "Le Minh Thien",
+                    };
+                    var res = await manager.CreateAsync(user, password);
+                    if (res.Succeeded)
+                    {
+                        await CreateRole(user.Email, "staff");
+                    }
+
+                }
+            }
+
+            return Content($"On Processing 80%");
+        }
+
+        public ActionResult CreateCourseCategory()
+        {
+            using (var abc = new EF.CMSContext())
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    CourseCategoryEntity course = new CourseCategoryEntity();
+                    if (i % 2 == 0)
+                    {
+                        course.Name = "IT";
+                    }
+                    else course.Name = "DESIGN";
+                    course.Description = "None!";
+                    abc.courseCategoryEntities.Add(course);
+                    abc.SaveChanges();
+                }
+
+            }
+
+            return Content($"On Processing 99$");
+        }
+
+        public ActionResult CreateCourse()
+        {
+            var name = "CourseNo";
+            using (var abc = new EF.CMSContext())
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    CourseEntity course = new CourseEntity();
+                    course.Name = name + i.ToString();
+                    course.Description = "None!";
+                    if(i % 2 == 0)
+                    {
+                        course.CategoryId = 1;
+                    }
+                    else course.CategoryId = 2;
+                    abc.Courses.Add(course);
+                    abc.SaveChanges();
+                }
+
+            }
+
+            return  Content($"Done!");
         }
 
         public async Task<ActionResult> CreateRole(string email, string role)

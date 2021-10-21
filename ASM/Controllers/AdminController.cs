@@ -45,6 +45,7 @@ namespace ASM.Controllers
                                           UserId = user.Id,
                                           Username = user.UserName,
                                           Email = user.Email,
+                                          Name = user.Name,
                                           //More Propety
 
                                           RoleNames = (from userRole in user.Roles
@@ -56,6 +57,7 @@ namespace ASM.Controllers
                                       {
                                           UserId = p.UserId,
                                           Username = p.Username,
+                                          Name = p.Name,
                                           Email = p.Email,
                                           Role = string.Join(",", p.RoleNames)
                                       });
@@ -285,6 +287,7 @@ namespace ASM.Controllers
                                       {
                                           UserId = user.Id,
                                           Username = user.UserName,
+                                          Name = user.Name,
                                           Email = user.Email,
                                           //More Propety
 
@@ -297,6 +300,7 @@ namespace ASM.Controllers
                                       {
                                           UserId = p.UserId,
                                           Username = p.Username,
+                                          Name = p.Name,
                                           Email = p.Email,
                                           Role = string.Join(",", p.RoleNames)
                                       });

@@ -96,30 +96,31 @@ namespace ASM.Controllers
             }
         }
 
-       /* public async Task<ActionResult> ShowCourse()
+  /*      public async Task<ActionResult> ShowCourse()
         {
             TempData["username"] = TempData["username"];
             using (CMSContext context = new CMSContext())
             {
-                var usersWithRoles = (from user in context.Users
+                var usersWithCourse = (from cousre in context.Courses
                                       select new
                                       {
-                                          UserId = user.Id,
-                                          Username = user.UserName,
-                                          Email = user.Email,
+                                          Name = cousre.Id,
+                                          Username = cousre.Name,
+                                          Email = cousre.Description,
                                           //More Propety
 
-                                          CourseAssign = (from course in user.listCourse
-                                                          join courses in context.Courses on course.Id
-                                                          equals courses.Id
-                                                          select courses.Name).ToList()
-                                      }).ToList().Where(p => string.Join(",", p.UserId) == TempData["username"].ToString()).Select(p => new UserInCourse()
+                                          TraineeAssigned = (from course in cousre.listTrainer
+                                                          join trainees in context.Users on course.Id
+                                                          equals trainees.Id
+                                                          select trainees.Name).ToList()
+                                      }).ToList().Where(p => p.Username == TempData["username"].ToString()).Select(p => new UserInCourse()
 
                                       {
                                           listCourseAssign = p.CourseAssign,
-                                          Description = p.Username,
+                                          Username = p.Username,
+                                          Email = p.Email
                                       });
-                return View(usersWithRoles);
+                return View(usersWithCourse);
             }
         }*/
     }
