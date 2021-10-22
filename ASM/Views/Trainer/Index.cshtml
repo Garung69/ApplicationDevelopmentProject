@@ -4,71 +4,75 @@
     Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
 
 }
+<div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
+    <div class="" style="padding-top: 2%; padding-left: 9%; border: 1px solid #e5deda; width: 30%; margin-left: 35%; background-color: lemonchiffon">
+        <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150" />
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name,
+           htmlAttributes: new { @class = "font-weight-bold" })
 
-<div class="text-center" style="padding: 2%;">
-    <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150"/>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name,
-       htmlAttributes: new { @class = "font-weight-bold" })
+            @Html.DisplayFor(m => m.Name,
+          new
+          {
+              htmlAttributes = new { @class = "font-weight-bold" }
+          })
 
-        @Html.DisplayFor(m => m.Name,
-      new
-      {
-          htmlAttributes = new { @class = "font-weight-bold" }
-      })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email,
+           htmlAttributes: new { @class = "font-weight-bold" })
 
+            @Html.DisplayFor(m => m.Email,
+          new
+          {
+              htmlAttributes = new { @class = "font-weight-bold" }
+          })
+
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(m => m.PasswordHash,
+                  htmlAttributes: new { @class = "font-weight-bold" })
+
+                @Html.EditorFor(m => m.PasswordHash,
+                 new
+                 {
+                   htmlAttributes = new { @class = "form-control" }
+                 })
+
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
+            @Html.DisplayFor(m => m.Type,
+         new
+         {
+             htmlAttributes = new { @class = "font-weight-bold" }
+         })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
+            @Html.DisplayFor(m => m.Education,
+         new
+         {
+             htmlAttributes = new { @class = "font-weight-bold" }
+         })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
+            @Html.DisplayFor(m => m.WorkingPlace,
+         new
+         {
+             htmlAttributes = new { @class = "font-weight-bold" }
+         })
+        </div>
+        <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["username"]})">EditProfile</a>
+        <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["username"] })">ChangePassword</a>
+        <div style="height: 50px;">
+
+        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email,
-       htmlAttributes: new { @class = "font-weight-bold" })
-
-        @Html.DisplayFor(m => m.Email,
-      new
-      {
-          htmlAttributes = new { @class = "font-weight-bold" }
-      })
-
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(m => m.PasswordHash,
-              htmlAttributes: new { @class = "font-weight-bold" })
-
-            @Html.EditorFor(m => m.PasswordHash,
-             new
-             {
-               htmlAttributes = new { @class = "form-control" }
-             })
-
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
-        @Html.DisplayFor(m => m.Type,
-     new
-     {
-         htmlAttributes = new { @class = "font-weight-bold" }
-     })
-
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
-        @Html.DisplayFor(m => m.Education,
-     new
-     {
-         htmlAttributes = new { @class = "font-weight-bold" }
-     })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
-        @Html.DisplayFor(m => m.WorkingPlace,
-     new
-     {
-         htmlAttributes = new { @class = "font-weight-bold" }
-     })
-    </div>
-    <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["username"]})">EditProfile</a>
-    <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["username"] })">ChangePassword</a>
 </div>

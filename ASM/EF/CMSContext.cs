@@ -16,5 +16,7 @@ namespace ASM.EF
         }
         public DbSet<CourseCategoryEntity> courseCategoryEntities { get; set; }
         public DbSet<CourseEntity> Courses { get; set; }
+
+        
     }
 }

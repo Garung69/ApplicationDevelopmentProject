@@ -396,6 +396,8 @@
     <Content Include="Views\Staff\DeleteTrainee.cshtml" />
     <Content Include="Views\Login\Test.cshtml" />
     <Content Include="Views\Trainee\ShowCourse.cshtml" />
+    <Content Include="Views\Trainee\ShowCourseAssign.cshtml" />
+    <Content Include="Views\Trainer\ShowCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

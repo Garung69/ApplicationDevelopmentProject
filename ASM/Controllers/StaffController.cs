@@ -657,6 +657,8 @@ namespace ASM.Controllers
             {
                 using (var FAPCtx = new EF.CMSContext())
                 {
+                    a.PasswordHash = user.PasswordHash;
+                    a.SecurityStamp = user.SecurityStamp;
                     FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;
 
                     FAPCtx.Entry<UserInfor>(a).Collection(x => x.listCourse).Load();

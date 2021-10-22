@@ -5,91 +5,96 @@
     TempData["username"] = TempData["username"];
 }
 
+<div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
+    <center>
+        <div class="mt-2 ml-6 mr-6">
+            <h1 style="font-size: 55px; text-align: center; font-weight: 300;">Update Profile</h1>
 
-<div class="mt-2 ml-6 mr-6">
-    <h1 style="font-size: 55px; text-align: center; font-weight: 300;">Update Profile</h1>
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-        @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-    }
-
-    @using (Html.BeginForm(FormMethod.Post))
-    {
-        // @Html.HiddenFor(m => m.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name,
-              htmlAttributes: new { @class = "font-weight-bold" })
-
-            @Html.EditorFor(m => m.Name,
-             new
-             {
-               htmlAttributes = new { @class = "form-control" }
-             })
-
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email,
-              htmlAttributes: new { @class = "font-weight-bold" })
-
-            @Html.EditorFor(m => m.Email,
-             new
-             {
-               htmlAttributes = new { @class = "form-control" }
-             })
-
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(m => m.PasswordHash,
-              htmlAttributes: new { @class = "font-weight-bold" })
-
-            @Html.EditorFor(m => m.PasswordHash,
-             new
-             {
-               htmlAttributes = new { @class = "form-control" }
-             })
-
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Type,
-            new
+            @if (!ViewData.ModelState.IsValid)
             {
-              htmlAttributes = new { @class = "form-control" }
-            })
+                @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+            }
 
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Education,
-            new
+            @using (Html.BeginForm(FormMethod.Post))
             {
-              htmlAttributes = new { @class = "form-control" }
-            })
+                // @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name,
+                      htmlAttributes: new { @class = "font-weight-bold" })
+
+                    @Html.EditorFor(m => m.Name,
+                     new
+                     {
+                       htmlAttributes = new { @class = "form-control" }
+                     })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email,
+                      htmlAttributes: new { @class = "font-weight-bold" })
+
+                    @Html.EditorFor(m => m.Email,
+                     new
+                     {
+                       htmlAttributes = new { @class = "form-control" }
+                     })
+
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(m => m.PasswordHash,
+                      htmlAttributes: new { @class = "font-weight-bold" })
+
+                    @Html.EditorFor(m => m.PasswordHash,
+                     new
+                     {
+                       htmlAttributes = new { @class = "form-control" }
+                     })
+
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
+                    @Html.EditorFor(m => m.Type,
+                    new
+                    {
+                      htmlAttributes = new { @class = "form-control" }
+                    })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
+                    @Html.EditorFor(m => m.Education,
+                    new
+                    {
+                      htmlAttributes = new { @class = "form-control" }
+                    })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
+                    @Html.EditorFor(m => m.WorkingPlace,
+                    new
+                    {
+                      htmlAttributes = new { @class = "form-control" }
+                    })
+                </div>
+
+
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            }
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.WorkingPlace,
-            new
-            {
-              htmlAttributes = new { @class = "form-control" }
-            })
-        </div>
-
-
-
-        <button type="submit" class="btn btn-dark">Submit</button>
-    }
+        </center>
 </div>
 
 
 
-
-
-
+<style>
+    input{
+        max-width: 300px;
+    }
+</style>
 

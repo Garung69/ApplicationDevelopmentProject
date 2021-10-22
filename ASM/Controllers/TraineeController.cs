@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -96,32 +97,53 @@ namespace ASM.Controllers
             }
         }
 
-  /*      public async Task<ActionResult> ShowCourse()
+        public ActionResult ShowCourse()
+        {
+            using (var classes = new EF.CMSContext())
+            {
+                var Course = classes.Courses.OrderBy(a => a.Id).ToList();
+                return View(Course);
+            }
+        }
+
+
+        private void SetViewBag()
+        {
+            using (var bwCtx = new EF.CMSContext())
+            {
+                ViewBag.Publishers = bwCtx.Courses
+                                  .Select(p => new SelectListItem
+                                  {
+                                      Text = p.Name,
+                                      Value = p.Id.ToString()
+                                  })
+                                  .ToList();
+
+                ViewBag.Formats = bwCtx.Courses.ToList(); //select *
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ShowCourseAssign()
         {
             TempData["username"] = TempData["username"];
-            using (CMSContext context = new CMSContext())
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var user = await manager.FindByEmailAsync(TempData["username"].ToString()+"@gmail.com");
+
+            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == user.Id);
+
+            if (a != null) 
             {
-                var usersWithCourse = (from cousre in context.Courses
-                                      select new
-                                      {
-                                          Name = cousre.Id,
-                                          Username = cousre.Name,
-                                          Email = cousre.Description,
-                                          //More Propety
-
-                                          TraineeAssigned = (from course in cousre.listTrainer
-                                                          join trainees in context.Users on course.Id
-                                                          equals trainees.Id
-                                                          select trainees.Name).ToList()
-                                      }).ToList().Where(p => p.Username == TempData["username"].ToString()).Select(p => new UserInCourse()
-
-                                      {
-                                          listCourseAssign = p.CourseAssign,
-                                          Username = p.Username,
-                                          Email = p.Email
-                                      });
-                return View(usersWithCourse);
+                SetViewBag();
+                return View(a);
             }
-        }*/
+            else 
+            {
+                return RedirectToAction("Index"); 
+            }
+        }
     }
 }

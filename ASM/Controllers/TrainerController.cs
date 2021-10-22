@@ -162,5 +162,14 @@ namespace ASM.Controllers
                 ModelState.AddModelError("PasswordHash", "Password must longer than 7 charactors");
             }
         }
+
+        public ActionResult ShowCourse()
+        {
+            using (var classes = new EF.CMSContext())
+            {
+                var Course = classes.Courses.OrderBy(a => a.Id).ToList();
+                return View(Course);
+            }
+        }
     }
 }
