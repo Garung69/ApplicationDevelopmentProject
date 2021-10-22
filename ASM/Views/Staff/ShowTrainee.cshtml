@@ -7,15 +7,12 @@
 <br />
 <br />
 <script>
-    $('#myInputT').on('keyup', function (event) {
-        event.preventDefault();
-        /* Act on the event */
-        console.log(1);
-        var input = $(this).val().toLowerCase();
-        $('#myTable tr').filter(function () {
-
-            $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1);
-
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
     });
 </script>
@@ -25,7 +22,7 @@
             <span class="title font-weight-bold">All Trainee</span>
         </div>
         <div class="row-cols-md-1">
-            <input type="text" id="myInputT" placeholder="Search by names.." class="form-control mb-3">
+            <input id="myInput" type="text" placeholder="Search..">
             <table class="table">
                 <thead>
                     <tr style="border: 1px solid #8b46be;">
