@@ -10,7 +10,14 @@
 </div>
 <div class="show-info">
     <span class="title" style="margin: 5px 20%;">Change Staff Infomation</span>
-    <div class="info">
+    <div class="message" style="float: none; padding: 0 15%; width: 100%;">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @Html.ValidationSummary(false, "Oops! something went wrong 😣", new { @class = "text-danger" });
+        }
+    </div>
+    <div class="info" style="margin-top: 5px;">
+
         @using (Html.BeginForm(FormMethod.Post))
         {
             <div class="form-group">
@@ -36,10 +43,5 @@
             <button type="submit" class="btn btn-success">Save</button>
         }
     </div>
-    <div class="message" style="float: none; padding: 0 15%; width: 100%;">
-        @if (!ViewData.ModelState.IsValid)
-        {
-            @Html.ValidationSummary(false, "Oops! something went wrong 😣", new { @class = "text-danger" });
-        }
-    </div>
+
 </div>

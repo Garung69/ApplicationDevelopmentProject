@@ -57,9 +57,12 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("PasswordHash", "Please input PassWord");
             }
-            if (!string.IsNullOrEmpty(user.Email) && (user.Email.Split('@')[0] == null) && (user.Email.Split('@')[1] == null)  && (user.Email.Split('@')[1] != "gmail.com"))
+            if (!string.IsNullOrEmpty(user.Email))
             {
-                ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
+                if (!user.Email.Contains("@") || (user.Email.Split('@')[0] == "") || (user.Email.Split('@')[1] == "") || user.Email.Split('@')[1] != "@gmail.com")
+                {
+                    ModelState.AddModelError("Email", "Please input a valid Email (abc@gmail.com)");
+                }
             }
             if (!string.IsNullOrEmpty(user.Email) && (user.Email.Length >= 21))
             {

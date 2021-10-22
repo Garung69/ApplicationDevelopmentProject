@@ -23,9 +23,12 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("Email", "Please input Name");
             }
-            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Split('@')[1] != "gmail.com"))
+            if (!string.IsNullOrEmpty(staff.Email))
             {
-                ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
+                if(!staff.Email.Contains("@") || (staff.Email.Split('@')[0] == "") || (staff.Email.Split('@')[1] == "") || staff.Email.Split('@')[1] != "@gmail.com")
+                {
+                    ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
+                }
             }
             if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
             {
@@ -218,7 +221,7 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByEmailAsync(staff.Email);
+                var user = await manager.FindByIdAsync(staff.Id);
 
                 if (user != null)
                 {
@@ -226,7 +229,6 @@ namespace ASM.Controllers
 
                     user.UserName = staff.Email.Split('@')[0];
                     user.Email = staff.Email;
-                    user.PasswordHash = "123qwe123";
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
                 }             
@@ -412,13 +414,12 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByEmailAsync(staff.Email);
+                var user = await manager.FindByIdAsync(staff.Id);
 
                 if (user != null)
                 {
                     user.UserName = staff.Email.Split('@')[0];
                     user.Email = staff.Email;
-                    user.PasswordHash = "123qwe123";
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
                 }
