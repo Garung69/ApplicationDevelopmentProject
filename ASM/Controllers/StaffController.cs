@@ -265,21 +265,22 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult EditTrainer(string id)
         {
-            using (var FAPCtx = new EF.CMSContext())
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+
+            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == id);
+
+            if (a != null) // if a book is found, show edit view
             {
-                var student = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
-
-                if (student != null)
-                {
-                    SetViewBag();
-                    TempData["StaffId"] = id;
-                    return View(student);
-                }
-                else
-                {
-                    return RedirectToAction("AMTrainer");
-                }
-
+                //ViewBag.Publishers = GetPublishersDropDown();
+                SetViewBag();
+                return View(a);
+            }
+            else 
+            {
+                return RedirectToAction("ShowTrainer"); //redirect to action in the same controller
             }
         }
 
@@ -290,7 +291,7 @@ namespace ASM.Controllers
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
-            var user = await manager.FindByEmailAsync(a.Email);
+            var user = await manager.FindByIdAsync(a.Id);
             if (!ModelState.IsValid)
             {
                 TempData["abc"] = f["formatIds[]"];
@@ -302,6 +303,7 @@ namespace ASM.Controllers
             {
                 using (var FAPCtx = new EF.CMSContext())
                 {
+                    a.UserName = a.Email.Split('@')[0];
                     a.PasswordHash = user.PasswordHash;
                     a.SecurityStamp = user.SecurityStamp;
                     FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;

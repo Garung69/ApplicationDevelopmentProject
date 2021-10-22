@@ -61,37 +61,40 @@
         @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
     }
 
-    @using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm(FormMethod.Post) )
     {
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name,
-              htmlAttributes: new { @class = "font-weight-bold" })
+<div style="display: none;">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name,
+          htmlAttributes: new { @class = "font-weight-bold" })
 
 
-            @Html.EditorFor(m => m.Name,
-             new
-             {
-               htmlAttributes = new { @class = "form-control" }
-             })
-        </div>
+        @Html.EditorFor(m => m.Name,
+         new
+         {
+           htmlAttributes = new { @class = "form-control" }
+         })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Type, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.Type, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.WorkingPlace, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.WorkingPlace, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+</div>
+        
         <br />
         <div class="form-group">
             <label>Course</label>
