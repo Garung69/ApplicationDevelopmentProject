@@ -16,7 +16,41 @@
         abc = Model.listCourse.Select(f => f.Id).ToList();
     }
 }
+<style>
+    .multiselect {
+        width: 200px;
+    }
 
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+        #checkboxes label {
+            display: block;
+        }
+
+            #checkboxes label:hover {
+                background-color: #1e90ff;
+            }
+</style>
 <div class="container">
     <h1 class="display-4">New Trainee</h1>
 
@@ -29,10 +63,67 @@
     {
         <div class="form-group">
             @Html.LabelFor(m => m.Name,
-                htmlAttributes: new { @class = "font-weight-bold" })
+                 htmlAttributes: new { @class = "font-weight-bold" })
 
 
             @Html.EditorFor(m => m.Name,
+                new
+                {
+                    htmlAttributes = new { @class = "form-control" }
+                })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Email,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Toeic, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Toeic,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Age,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DoB, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.DoB,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Experience,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Location,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.ProgrammingLanguage,
                new
                {
                    htmlAttributes = new { @class = "form-control" }
@@ -40,87 +131,52 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Email,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Toeic, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Toeic,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Age,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.DoB, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.DoB,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Experience,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Location,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.ProgrammingLanguage,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
+            @Html.LabelFor(m => m.Department, new { @class = "font-weight-bold" })
+            @Html.EditorFor(m => m.Department,
+               new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Department, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Department,
-              new
-              {
-                  htmlAttributes = new { @class = "form-control" }
-              })
-        </div>
-        
-        <div class="form-group">
             <label>Course</label>
-            <div class="form-check form-check-inline">
-                @foreach (var f in ViewBag.Formats)
-                {
-                    <div class="form-check form-check-inline">
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                        <option>Select an option</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                    @foreach (var f in ViewBag.Formats)
+                    {
                         <input class="form-check-input" type="checkbox"
                                value="@f.Id" id="@f.Name" name="formatIds[]"
                                @(abc.Contains(f.Id) ? "checked" : string.Empty)>
                         <label class="form-check-label" for="@f.Name">
                             @f.Name
                         </label>
-                    </div>
-                }
+                    }
+                </div>
             </div>
+            <button type="submit" class="btn btn-dark">OK</button>
+
         </div>
-        <button type="submit" class="btn btn-dark">OK</button>
+
     }
 </div>
+<script>
+        var expanded = false;
+
+        function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+        }
+</script>

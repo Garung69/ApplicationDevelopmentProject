@@ -262,6 +262,7 @@ namespace ASM.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult EditTrainer(string id)
         {
             using (var FAPCtx = new EF.CMSContext())
@@ -270,6 +271,7 @@ namespace ASM.Controllers
 
                 if (student != null)
                 {
+                    SetViewBag();
                     TempData["StaffId"] = id;
                     return View(student);
                 }
@@ -281,37 +283,36 @@ namespace ASM.Controllers
             }
         }
 
-        [Authorize(Roles = SecurityRoles.Staff)]
+
         [HttpPost]
-        public async Task<ActionResult> EditTrainer(string id, UserInfor trainer)
+        public async Task<ActionResult> EditTrainer(string id, FormCollection f, UserInfor a)
         {
-
-            CustomValidationfTrainer(trainer);
-
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+            var user = await manager.FindByEmailAsync(a.Email);
             if (!ModelState.IsValid)
             {
-                return View(trainer);
+                TempData["abc"] = f["formatIds[]"];
+                SetViewBag();
+                return View(a);
             }
-            else
+
+            if (user != null)
             {
-                var context = new CMSContext();
-                var store = new UserStore<UserInfor>(context);
-                var manager = new UserManager<UserInfor>(store);
-
-                var user = await manager.FindByEmailAsync(trainer.Email);
-
-                if (user != null)
+                using (var FAPCtx = new EF.CMSContext())
                 {
-                    user.UserName = trainer.Email.Split('@')[0];
-                    user.Email = trainer.Email;
-                    user.Name = trainer.Name;
-                    user.PhoneNumber = trainer.PhoneNumber;
-                    user.WorkingPlace = trainer.WorkingPlace;
-                    user.Type = trainer.Type;
-                    await manager.UpdateAsync(user);
+                    a.PasswordHash = user.PasswordHash;
+                    a.SecurityStamp = user.SecurityStamp;
+                    FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;
+
+                    FAPCtx.Entry<UserInfor>(a).Collection(x => x.listCourse).Load();
+                    a.listCourse = Convert(FAPCtx, f["formatIds[]"]);
+
+                    FAPCtx.SaveChanges();
                 }
-                return RedirectToAction("SearchTrainee");
             }
+            return RedirectToAction("ShowTrainer");
         }
         //================================================================================================//
 

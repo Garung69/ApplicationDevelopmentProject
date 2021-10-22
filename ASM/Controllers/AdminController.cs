@@ -23,13 +23,13 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("Email", "Please input Name");
             }
-            if (!string.IsNullOrEmpty(staff.Email))
+            /*if (!string.IsNullOrEmpty(staff.Email))
             {
                 if(!staff.Email.Contains("@") || (staff.Email.Split('@')[0] == "") || (staff.Email.Split('@')[1] == "") || staff.Email.Split('@')[1] != "@gmail.com")
                 {
                     ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
                 }
-            }
+            }*/
             if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
             {
                 ModelState.AddModelError("Email", "This email is not valid!");

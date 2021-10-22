@@ -23,7 +23,41 @@
                            .ToList();
     }
 }
+<style>
+    .multiselect {
+        width: 200px;
+    }
 
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+        #checkboxes label {
+            display: block;
+        }
+
+            #checkboxes label:hover {
+                background-color: #1e90ff;
+            }
+</style>
 <div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
     @using (Html.BeginForm(FormMethod.Post))
 
@@ -105,7 +139,7 @@
                      htmlAttributes = new { @class = "form-control", @style = "width:250px; margin-left:20px; margin-right:20px" }
                  })
             </div>
-            
+
             <div class="form-group">
                 @Html.LabelFor(m => m.ProgrammingLanguage,
                   htmlAttributes: new { @class = "font-weight-bold", @style = "margin-left:20px" })
@@ -143,26 +177,47 @@
                   htmlAttributes = new { @class = "form-control", min = "0", @style = "width:250px; margin-left:20px; margin-right:20px" }
                 })
             </div>
-            
-            <div class="form-group">
-                <label class="font-weight-bold mr-3">Formats</label>
-                @foreach (var f in ViewBag.Formats)
-                {
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox"
-                               value="@f.Id" id="@f.Name" name="formatIds[]"
-                               @(abc.Contains(f.Id) ? "checked" : string.Empty)>
-                        <label class="form-check-label" for="@f.Name">
-                            @f.Name
-                        </label>
-                    </div>
-                }
-                <br />
-                <br />
 
-                <button type="submit" class="btn btn-dark">Submit</button>
+            <div class="form-group">
+                <label>Course</label>
+                <div class="multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                        @foreach (var f in ViewBag.Formats)
+                        {
+                            <input class="form-check-input" type="checkbox"
+                                   value="@f.Id" id="@f.Name" name="formatIds[]"
+                                   @(abc.Contains(f.Id) ? "checked" : string.Empty)>
+                            <label class="form-check-label" for="@f.Name">
+                                @f.Name
+                            </label>
+                        }
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark">OK</button>
+
             </div>
         </center>
     }
 </div>
+
+<script>
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+</script>
 
