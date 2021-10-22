@@ -59,7 +59,7 @@ namespace ASM.Controllers
             }
             if (!string.IsNullOrEmpty(user.Email))
             {
-                if (!user.Email.Contains("@") || (user.Email.Split('@')[0] == "") || (user.Email.Split('@')[1] == "") || user.Email.Split('@')[1] != "@gmail.com")
+                if (!user.Email.Contains("@") || (user.Email.Split('@')[0] == "") || (user.Email.Split('@')[1] == "") || user.Email.Split('@')[1] != "gmail.com")
                 {
                     ModelState.AddModelError("Email", "Please input a valid Email (abc@gmail.com)");
                 }

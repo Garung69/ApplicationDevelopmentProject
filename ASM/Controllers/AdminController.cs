@@ -25,7 +25,7 @@ namespace ASM.Controllers
             }
             if (!string.IsNullOrEmpty(staff.Email))
             {
-                if(!staff.Email.Contains("@") || (staff.Email.Split('@')[0] == "") || (staff.Email.Split('@')[1] == "") || staff.Email.Split('@')[1] != "@gmail.com")
+                if(!staff.Email.Contains("@") || (staff.Email.Split('@')[0] == "") || (staff.Email.Split('@')[1] == "") || staff.Email.Split('@')[1] != "gmail.com")
                 {
                     ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
                 }
