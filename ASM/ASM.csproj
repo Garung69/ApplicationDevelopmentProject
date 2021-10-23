@@ -398,6 +398,7 @@
     <Content Include="Views\Trainee\ShowCourse.cshtml" />
     <Content Include="Views\Trainee\ShowCourseAssign.cshtml" />
     <Content Include="Views\Trainer\ShowCourse.cshtml" />
+    <Content Include="Views\Login\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

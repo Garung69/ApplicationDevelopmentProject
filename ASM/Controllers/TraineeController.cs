@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ASM.Controllers
 {
+    [Authorize(Roles = SecurityRoles.Trainee)]
     public class TraineeController : Controller
     {
         // GET: Trainee

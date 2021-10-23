@@ -310,14 +310,14 @@ namespace ASM.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpGet]
         public ActionResult CreateTrainer()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> CreateTrainer(UserInfor staff, FormCollection fc)
         {

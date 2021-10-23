@@ -89,6 +89,7 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+
             return View();
         }
    
@@ -124,7 +125,7 @@ namespace ASM.Controllers
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
                     {
                         /*SessionLogin(fuser.UserName);*/
-                        TempData["acb"] = fuser.UserName;
+                        TempData["UN"]  = fuser.UserName;
                         return RedirectToAction( "Index", "Admin");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
@@ -392,7 +393,10 @@ namespace ASM.Controllers
             }
             return Content("done!");
         }
-
+        public ActionResult NotFound()
+        {
+            return View();
+        }
 
         public ActionResult Test()
         {

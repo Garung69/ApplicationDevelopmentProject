@@ -13,6 +13,7 @@ using static ASM.Models.UserInfor;
 
 namespace ASM.Controllers
 {
+    [Authorize(Roles = SecurityRoles.Trainer)]
     public class TrainerController : Controller
     {
         

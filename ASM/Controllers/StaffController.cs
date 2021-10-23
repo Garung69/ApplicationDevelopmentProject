@@ -13,14 +13,15 @@ using System.Data.Entity;
 
 namespace ASM.Controllers
 {
+    [Authorize(Roles = SecurityRoles.Staff)]
     public class StaffController : Controller
     {
-
+        [Authorize(Roles = SecurityRoles.Staff)]
         public ActionResult Index()
         {
             return View();
         }
-
+        
         [HttpGet]
         public ActionResult CreateCategory()
         {

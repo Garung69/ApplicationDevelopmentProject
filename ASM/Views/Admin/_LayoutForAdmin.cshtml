@@ -7,16 +7,12 @@
     @Styles.Render("~/Content/css")
     @{        
         var a = "ab";
-        if (TempData["user"] != null)
+        if (TempData["UN"] != null)
         {
-            a = TempData["user"].ToString();
-        }
-        else
-        {
-            a = ViewBag.Message;
+            a = TempData["UN"].ToString();
         }
 
-        TempData["user"] = a;
+        TempData["UN"] = a;
 
     }
 </head>
