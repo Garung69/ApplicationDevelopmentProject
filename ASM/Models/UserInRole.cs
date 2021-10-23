@@ -16,6 +16,9 @@ namespace ASM.Models
         public string Phone { get; set; }
         public string WorkingPlace { get; set; }
         public string Type { get; set; }
+        public string Language { get; set; }
+        public string Toeic { get; set; }
+
     }
 
 

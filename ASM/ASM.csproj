@@ -180,6 +180,10 @@
     <Compile Include="EF\Migrations\202110210842283_InitialCreate.designer.cs">
       <DependentUpon>202110210842283_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="EF\Migrations\202110230538346_Addp.cs" />
+    <Compile Include="EF\Migrations\202110230538346_Addp.designer.cs">
+      <DependentUpon>202110230538346_Addp.cs</DependentUpon>
+    </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -417,6 +421,9 @@
   <ItemGroup>
     <EmbeddedResource Include="EF\Migrations\202110210842283_InitialCreate.resx">
       <DependentUpon>202110210842283_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110230538346_Addp.resx">
+      <DependentUpon>202110230538346_Addp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

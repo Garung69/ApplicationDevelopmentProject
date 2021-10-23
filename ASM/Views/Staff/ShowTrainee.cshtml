@@ -31,6 +31,8 @@
                     <tr style="border: 1px solid #8b46be;">
                         <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
                         <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Toeic)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Language)</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -38,13 +40,15 @@
                 <tbody id="myTable">
                     @foreach (var c in Model)
                     {
-                        <tr style="border: 1px solid #8b46be;">
-                            <td>@Html.DisplayFor(model => c.Name)</td>
-                            <td>@Html.DisplayFor(model => c.Email)</td>
-                            <th scope="col">&nbsp;</th>
-                            <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
+                    <tr style="border: 1px solid #8b46be;">
+                        <td>@Html.DisplayFor(model => c.Name)</td>
+                        <td>@Html.DisplayFor(model => c.Email)</td>
+                        <td>@Html.DisplayFor(model => c.Toeic)</td>
+                        <td>@Html.DisplayFor(model => c.Language)</td>
+                        <th scope="col">&nbsp;</th>
+                        <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
 
-                        </tr>
+                    </tr>
                     }
 
                 </tbody>

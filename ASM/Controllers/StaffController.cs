@@ -562,6 +562,8 @@ namespace ASM.Controllers
                                           WorkingPlace = user.WorkingPlace,
                                           Type = user.Type,
                                           PhoneNumber = user.PhoneNumber,
+                                          Toeic = user.Toeic,
+                                          language = user.ProgrammingLanguage,
                                           //More Propety
 
                                           RoleNames = (from userRole in user.Roles
@@ -577,7 +579,9 @@ namespace ASM.Controllers
                                           Role = string.Join(",", p.RoleNames),
                                           WorkingPlace = p.WorkingPlace,
                                           Type = p.Type,
-                                          Phone = p.PhoneNumber
+                                          Phone = p.PhoneNumber,
+                                          Toeic = p.Toeic,
+                                          Language = p.language
                                       });
                 return View(usersWithRoles);
             }
