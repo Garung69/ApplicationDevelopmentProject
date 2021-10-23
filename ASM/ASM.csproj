@@ -176,17 +176,9 @@
     <Compile Include="Controllers\TraineeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110210842283_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110210842283_InitialCreate.designer.cs">
-      <DependentUpon>202110210842283_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110230538346_Addp.cs" />
-    <Compile Include="EF\Migrations\202110230538346_Addp.designer.cs">
-      <DependentUpon>202110230538346_Addp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EF\Migrations\202110230835212_AddPassConfirm.cs" />
-    <Compile Include="EF\Migrations\202110230835212_AddPassConfirm.designer.cs">
-      <DependentUpon>202110230835212_AddPassConfirm.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110231616394_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110231616394_InitialCreate.designer.cs">
+      <DependentUpon>202110231616394_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -354,12 +346,10 @@
     <Content Include="Views\Login\LogIn.cshtml" />
     <Content Include="Views\Staff\_LayoutFor Staff.cshtml" />
     <Content Include="Views\Staff\CreateCategory.cshtml" />
-    <Content Include="Views\Staff\ShowCategory.cshtml" />
     <Content Include="Views\Staff\EditCategory.cshtml" />
     <Content Include="Views\Staff\DeleteCategory.cshtml" />
     <Content Include="Views\Staff\DeleteCourse.cshtml" />
     <Content Include="Views\Staff\EditCourse.cshtml" />
-    <Content Include="Views\Staff\ShowCourse.cshtml" />
     <Content Include="Views\Staff\AddCourse.cshtml" />
     <Content Include="Views\Login\AdminCreateStaff.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -423,14 +413,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110210842283_InitialCreate.resx">
-      <DependentUpon>202110210842283_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110230538346_Addp.resx">
-      <DependentUpon>202110230538346_Addp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EF\Migrations\202110230835212_AddPassConfirm.resx">
-      <DependentUpon>202110230835212_AddPassConfirm.cs</DependentUpon>
+    <EmbeddedResource Include="EF\Migrations\202110231616394_InitialCreate.resx">
+      <DependentUpon>202110231616394_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
