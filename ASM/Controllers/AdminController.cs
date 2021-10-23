@@ -155,7 +155,11 @@ namespace ASM.Controllers
                     };
                     await manager.CreateAsync(user, user.PasswordHash);
                     await CreateRole(staff.Email, "staff");
+                    @TempData["alert"] = "Successfully added new staff";
+                    return RedirectToAction("Index");
+
                 }
+                @TempData["alert"] = "Add Staff false, Staff already exist";
                 return RedirectToAction("Index");
             }
 
@@ -231,7 +235,8 @@ namespace ASM.Controllers
                     user.Email = staff.Email;
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
-                }             
+                }
+                @TempData["alert"] = "You have successful Update a Staff";
                 return RedirectToAction("Index");
             }
         }
@@ -252,7 +257,7 @@ namespace ASM.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("MStaff");
+                    return RedirectToAction("Index");
                 }
 
             }
@@ -272,7 +277,7 @@ namespace ASM.Controllers
             {
                 await manager.DeleteAsync(user);
             }
-
+            @TempData["alert"] = "You have successful delete a Staff";
             return RedirectToAction("Index");
 
         }
@@ -349,6 +354,7 @@ namespace ASM.Controllers
                     await manager.CreateAsync(user, user.PasswordHash);
                     await CreateRole(staff.Email, "trainer");
                 }
+                @TempData["alert"] = "You have successful add new Trainer";
                 return RedirectToAction("AMTrainer");
             }
 
@@ -391,6 +397,7 @@ namespace ASM.Controllers
                 }
                 else
                 {
+
                     return RedirectToAction("AMTrainer");
                 }
 
@@ -423,6 +430,7 @@ namespace ASM.Controllers
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
                 }
+                @TempData["alert"] = "You have successful update a Trainer";
                 return RedirectToAction("AMTrainer");
             }
         }
@@ -463,8 +471,8 @@ namespace ASM.Controllers
             {
                 await manager.DeleteAsync(user);
             }
-
-            return RedirectToAction("Index");
+            @TempData["alert"] = "You have successful delete a Trainer";
+            return RedirectToAction("AMTrainer");
 
         }
 

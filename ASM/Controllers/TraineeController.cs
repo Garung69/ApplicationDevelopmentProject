@@ -52,49 +52,52 @@ namespace ASM.Controllers
                 var manager = new UserManager<UserInfor>(store);
 
                 var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com");
+                var result = manager.PasswordHasher.VerifyHashedPassword(user.PasswordHash, userInfor.PasswordHash);
 
                 if (user != null)
                 {
-                    if (userInfor.PasswordHash != null)
-                    {
-                        if (userInfor.PassTemp == userInfor.PasswordHash)
+                        if (result == PasswordVerificationResult.Success)
                         {
-                            String newPassword = userInfor.PasswordHash;
+                            String newPassword = userInfor.PassTemp;
                             String hashedNewPassword = manager.PasswordHasher.HashPassword(newPassword);
-                            await store.SetPasswordHashAsync(user, hashedNewPassword);
+                            user.PasswordHash = hashedNewPassword;
                             await store.UpdateAsync(user);
-                        }
+                            @TempData["alert"] = "Change PassWord successful";
+                    }
                         else
                         {
                             ModelState.AddModelError("PasswordHash", "Password and confirm Password incorrect!");
                             TempData["username"] = TempData["username"];
                             return View();
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("PasswordHash", "Please input password");
-                        TempData["username"] = TempData["username"];
-                        return View();
-                    }
+                    
                 }
                 TempData["username"] = TempData["username"];
+                
                 return RedirectToAction("Index", "Trainee");
             }
         }
         public void CustomValidationTrainer(UserInfor staff)
         {
-            if (string.IsNullOrEmpty(staff.PassTemp))
-            {
-                ModelState.AddModelError("PassTemp", "Please input Password");
-            }
             if (string.IsNullOrEmpty(staff.PasswordHash))
             {
-                ModelState.AddModelError("PasswordHash", "Please confirm Password");
+                ModelState.AddModelError("PasswordHash", "Please input old Password");
             }
-            if (!string.IsNullOrEmpty(staff.PasswordHash) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
+            if (string.IsNullOrEmpty(staff.PassTemp))
             {
-                ModelState.AddModelError("PasswordHash", "Password must longer than 7 charactors");
+                ModelState.AddModelError("PassTemp", "Please input new Password");
+            }
+            if (!string.IsNullOrEmpty(staff.PassTemp) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
+            {
+                ModelState.AddModelError("PassTemp", "Password must longer than 7 charactors");
+            }
+            if (string.IsNullOrEmpty(staff.PassTempConfirm))
+            {
+                ModelState.AddModelError("PassTempConfirm", "Please input Confirm Password");
+            }
+            if (!string.IsNullOrEmpty(staff.PassTempConfirm) && !string.IsNullOrEmpty(staff.PassTemp)  && (staff.PassTemp != staff.PassTempConfirm))
+            {
+                ModelState.AddModelError("PassTempConfirm", "New password and Confirm password not match");
             }
         }
 

@@ -85,10 +85,22 @@
                 &nbsp; &nbsp;
             </p>
             <p class="nav-item" style="padding-top: 2% ; padding-right: 1%;">Staff: @a</p>
-            <a class="btn btn-danger float-right" href="@Url.Action("Logout", "Login")" role="button">Logout</a>
+            <a class="btn btn-danger float-right navbar-right" href="@Url.Action("Logout", "Login")" role="button">Logout</a>
         </div>
     </nav>
 
+    <div class="container">
+        @{ if (TempData["alert"] != null)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention:</strong> @TempData["alert"]!
+                    <button style="float: right; border-radius: 90px;" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        }
+    </div>
 
     <div>
         @RenderBody()

@@ -28,6 +28,7 @@ namespace ASM.Models
 
         public string Experience { get; set; }
         public string PassTemp { get; set; }
+        public string PassTempConfirm { get; set; }
         public UserInfor()
         {
             listCourse = new List<CourseEntity>();

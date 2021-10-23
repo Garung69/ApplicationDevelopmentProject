@@ -36,9 +36,7 @@ namespace ASM.Controllers
                 abc.courseCategoryEntities.Add(a);
                 abc.SaveChanges();
             }
-
-            TempData["message"] = $"Successfully add class {a.Name} to system!";
-
+            @TempData["alert"] = "You have successful add new Category";
             return RedirectToAction("SearchCategory");
         }
 
@@ -83,7 +81,7 @@ namespace ASM.Controllers
 
                 abc.SaveChanges();
             }
-
+            @TempData["alert"] = "You have successful update a Category";
             return RedirectToAction("SearchCategory");
         }
 
@@ -108,7 +106,7 @@ namespace ASM.Controllers
                     abc.courseCategoryEntities.Remove(xxx);
                     abc.SaveChanges();
                 }
-                TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
+                @TempData["alert"] = "You have successful delete a Category";
                 return RedirectToAction("SearchCategory");
             }
         }
@@ -146,9 +144,9 @@ namespace ASM.Controllers
                 abc.SaveChanges();
             }
 
-            TempData["message"] = $"Successfully add class {a.Name} to system!";
+            @TempData["alert"] = "You have successful add new Course";
 
-            return RedirectToAction("ShowCourse");
+            return RedirectToAction("SearchCourse");
         }
 
         [HttpGet]
@@ -182,6 +180,7 @@ namespace ASM.Controllers
                     abc.SaveChanges();
                 }
             }
+            @TempData["alert"] = "You have successful update new Course";
             return RedirectToAction("SearchCourse");
         }
 
@@ -218,7 +217,7 @@ namespace ASM.Controllers
                     abc.Courses.Remove(xxx);
                     abc.SaveChanges();
                 }
-                TempData["message"] = $"Successfully delete book with Id: {xxx.Id}";
+                @TempData["alert"] = "You have successful delete a Course";
                 return RedirectToAction("SearchCourse");
             }
         }
@@ -315,6 +314,7 @@ namespace ASM.Controllers
                     FAPCtx.SaveChanges();
                 }
             }
+            @TempData["alert"] = "You have successful add a Trainer";
             return RedirectToAction("ShowTrainer");
         }
         //================================================================================================//
@@ -394,7 +394,7 @@ namespace ASM.Controllers
                 }
 
             }
-
+            @TempData["alert"] = "You have successful add a Trainee";
             return RedirectToAction("ShowTrainee");
 
         }
@@ -642,7 +642,7 @@ namespace ASM.Controllers
             {
                 await manager.DeleteAsync(user);
             }
-
+            @TempData["alert"] = "You have successful delete a Trainee";
             return RedirectToAction("ShowTrainee");
 
         }
@@ -675,6 +675,7 @@ namespace ASM.Controllers
                     FAPCtx.SaveChanges();
                 }
             }
+            @TempData["alert"] = "You have successful update a Trainee";
             return RedirectToAction("ShowTrainee");
         }
 

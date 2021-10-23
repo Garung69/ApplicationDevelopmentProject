@@ -28,7 +28,6 @@
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
                 <th scope="col">&nbsp;</th>
@@ -41,7 +40,6 @@
             @foreach (var c in Model)
             {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(model => c.Id)</th>
                     <td>@Html.DisplayFor(model => c.Name)</td>
                     <td>@Html.DisplayFor(model => c.Description)</td>
 

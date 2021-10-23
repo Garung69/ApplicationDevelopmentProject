@@ -184,6 +184,10 @@
     <Compile Include="EF\Migrations\202110230538346_Addp.designer.cs">
       <DependentUpon>202110230538346_Addp.cs</DependentUpon>
     </Compile>
+    <Compile Include="EF\Migrations\202110230835212_AddPassConfirm.cs" />
+    <Compile Include="EF\Migrations\202110230835212_AddPassConfirm.designer.cs">
+      <DependentUpon>202110230835212_AddPassConfirm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -424,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EF\Migrations\202110230538346_Addp.resx">
       <DependentUpon>202110230538346_Addp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EF\Migrations\202110230835212_AddPassConfirm.resx">
+      <DependentUpon>202110230835212_AddPassConfirm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
