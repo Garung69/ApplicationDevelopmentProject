@@ -50,133 +50,193 @@
             #checkboxes label:hover {
                 background-color: #1e90ff;
             }
+
+    body {
+        background: #135ab1;
+    }
+
+    .forget-pwd > a {
+        color: #5934a4;
+        font-weight: 500;
+    }
+
+    .forget-password .panel-default {
+        padding: 31%;
+        margin-top: -27%;
+    }
+
+    .forget-password .panel-body {
+        padding: 5%;
+        margin-bottom: -50%;
+        background: #fff;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    img {
+        width: 40%;
+        margin-bottom: 10%;
+    }
+
+    .btnForget {
+        background: #c0392b;
+        border: none;
+    }
+
+
 </style>
-<div class="container">
-    <h1 class="display-4">New Trainee</h1>
+<div class="container forget-password">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <img src="http://fpt.edu.vn/Content/images/assets/Logo-Greenwich.png" alt="car-key" border="0">
+                        <h2 class="text-center">Create New Trainer</h2>
 
-    @if (!ViewData.ModelState.IsValid)
-    {
-        @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-    }
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+                        }
 
-    @using (Html.BeginForm(FormMethod.Post))
-    {
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name,
-                 htmlAttributes: new { @class = "font-weight-bold" })
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.Name,
+                                         htmlAttributes: new { @class = "font-weight-bold" })
 
 
-            @Html.EditorFor(m => m.Name,
-                new
-                {
-                    htmlAttributes = new { @class = "form-control" }
-                })
-        </div>
+                                    @Html.EditorFor(m => m.Name,
+                                        new
+                                        {
+                                            htmlAttributes = new { @class = "form-control" }
+                                        })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Course</label>
+                                    <div class="multiselect" style="margin-right:20px">
+                                        <div class="selectBox" onclick="showCheckboxes()">
+                                            <select>
+                                                <option>Select an option</option>
+                                            </select>
+                                            <div class="overSelect"></div>
+                                        </div>
+                                        <div id="checkboxes">
+                                            @foreach (var f in ViewBag.Formats)
+                                            {
+                                                <input class="form-check-input" type="checkbox"
+                                                       value="@f.Id" id="@f.Name" name="formatIds[]"
+                                                       @(abc.Contains(f.Id) ? "checked" : string.Empty)>
+                                                <label class="form-check-label" for="@f.Name">
+                                                    @f.Name
+                                                </label>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Email,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Toeic, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Toeic,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Age,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.DoB, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.DoB,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Experience,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Location,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.ProgrammingLanguage,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Department, new { @class = "font-weight-bold" })
-            @Html.EditorFor(m => m.Department,
-               new
-               {
-                   htmlAttributes = new { @class = "form-control" }
-               })
-        </div>
 
-        <div class="form-group">
-            <label>Course</label>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckboxes()">
-                    <select>
-                        <option>Select an option</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkboxes">
-                    @foreach (var f in ViewBag.Formats)
-                    {
-                        <input class="form-check-input" type="checkbox"
-                               value="@f.Id" id="@f.Name" name="formatIds[]"
-                               @(abc.Contains(f.Id) ? "checked" : string.Empty)>
-                        <label class="form-check-label" for="@f.Name">
-                            @f.Name
-                        </label>
-                    }
-                </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Email,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Toeic, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Toeic,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Age, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Age,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.DoB, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.DoB,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Experience,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Education, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Education,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Location,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.ProgrammingLanguage,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Department, new { @class = "font-weight-bold" })
+                                @Html.EditorFor(m => m.Department,
+                                   new
+                                   {
+                                       htmlAttributes = new { @class = "form-control" }
+                                   })
+                            </div>
+                            <br />
+                            <div class="form-group">
+
+                                <button type="submit" class="btn btn-dark">OK</button>
+
+                            </div>
+
+                        }
+                    </div>
+                        </div>
             </div>
-            <button type="submit" class="btn btn-dark">OK</button>
-
         </div>
-
-    }
+    </div>
 </div>
 <script>
-        var expanded = false;
+    var expanded = false;
 
-        function showCheckboxes() {
-            var checkboxes = document.getElementById("checkboxes");
-            if (!expanded) {
-                checkboxes.style.display = "block";
-                expanded = true;
-            } else {
-                checkboxes.style.display = "none";
-                expanded = false;
-            }
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
         }
+    }
 </script>

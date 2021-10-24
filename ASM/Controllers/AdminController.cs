@@ -225,7 +225,7 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByIdAsync(staff.Id);
+                var user = await manager.FindByIdAsync(staff.Email);
 
                 if (user != null)
                 {
@@ -235,8 +235,10 @@ namespace ASM.Controllers
                     user.Email = staff.Email;
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
+                    @TempData["alert"] = "You have successful Update a Staff";
+                    return RedirectToAction("Index");
                 }
-                @TempData["alert"] = "You have successful Update a Staff";
+                @TempData["alert"] = "E-mail is being used";
                 return RedirectToAction("Index");
             }
         }
@@ -353,9 +355,11 @@ namespace ASM.Controllers
                     };
                     await manager.CreateAsync(user, user.PasswordHash);
                     await CreateRole(staff.Email, "trainer");
-                }
-                @TempData["alert"] = "You have successful add new Trainer";
-                return RedirectToAction("AMTrainer");
+                    @TempData["alert"] = "You have successful add new Trainer";
+                    return RedirectToAction("AMTrainer");
+                }              
+                @TempData["alert"] = "E-mail is being used";
+                return RedirectToAction("Index");
             }
 
         }
@@ -429,9 +433,11 @@ namespace ASM.Controllers
                     user.Email = staff.Email;
                     user.Name = staff.Name;
                     await manager.UpdateAsync(user);
+                    @TempData["alert"] = "You have successful update a Trainer";
+                    return RedirectToAction("AMTrainer");
                 }
-                @TempData["alert"] = "You have successful update a Trainer";
-                return RedirectToAction("AMTrainer");
+                @TempData["alert"] = "E-mail is being used";
+                return RedirectToAction("Index");
             }
         }
 

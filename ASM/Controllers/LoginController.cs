@@ -19,9 +19,6 @@ namespace ASM.Controllers
     {
 
 
-
-
-
         /// <summary>
         ///                        // CREATE SEED 
         /// </summary>
@@ -73,7 +70,7 @@ namespace ASM.Controllers
                 ModelState.AddModelError("PasswordHash", "PassWord need more than 7 characters");
             }
         }
-        public  ActionResult Logout()
+        public ActionResult Logout()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -92,7 +89,7 @@ namespace ASM.Controllers
 
             return View();
         }
-   
+
 
         [HttpPost]
         public async Task<ActionResult> LogIn(UserInfor user)
@@ -120,24 +117,24 @@ namespace ASM.Controllers
                 {
                     var userStore = new UserStore<UserInfor>(context);
                     var userManager = new UserManager<UserInfor>(userStore);
-                    
+
 
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
                     {
                         /*SessionLogin(fuser.UserName);*/
-                        TempData["UN"]  = fuser.UserName;
-                        return RedirectToAction( "Index", "Admin");
+                        TempData["UN"] = fuser.UserName;
+                        return RedirectToAction("Index", "Admin");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
                     {
                         TempData["UN"] = fuser.UserName;
                         return RedirectToAction("SearchCategory", "Staff");
                     }
-                    
+
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
                     {
-                        TempData["username"] = fuser.UserName;                  
-                        return RedirectToAction( "Index", "Trainer");
+                        TempData["username"] = fuser.UserName;
+                        return RedirectToAction("Index", "Trainer");
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
                     {
@@ -181,10 +178,19 @@ namespace ASM.Controllers
                     Role = role,
                 };
                 await manager.CreateAsync(user, password);
-                await CreateRole(user.Email, "admin");             
+                await CreateRole(user.Email, "admin");
             }
             return Content($"On Processing 20%");
         }
+
+        private readonly Random _random = new Random();
+
+        // Generates a random number within a range.      
+        public int RandomNumber(int min, int max)
+        {
+            return _random.Next(min, max);
+        }
+
 
         public async Task<ActionResult> CreateTrainer()
         {
@@ -194,10 +200,10 @@ namespace ASM.Controllers
 
             var email = "trainer";
             var password = "123qwe123";
-            var phone = "0961119526";
-            for(int i =1; i<= 20; i++)
+            var phone = "09";
+            for (int i = 1; i <= 20; i++)
             {
-                var user = await manager.FindByEmailAsync(email+ i.ToString() + "@gmail.com");
+                var user = await manager.FindByEmailAsync(email + i.ToString() + "@gmail.com");
 
                 if (user == null)
                 {
@@ -205,18 +211,18 @@ namespace ASM.Controllers
                     {
                         UserName = email + i.ToString(),
                         Email = email + i.ToString() + "@gmail.com",
-                        PhoneNumber = phone,
-                        Age = 18,
-                        Name = "Le Minh Thien",
+                        PhoneNumber = phone + RandomNumber(100000000, 999999999).ToString(),
+                        Age = RandomNumber(10, 100),
+                        Name = email + i.ToString(),
                         WorkingPlace = "Ha Noi",
                         Type = "Introvert"
                     };
-                    var res =  await manager.CreateAsync(user, password);
+                    var res = await manager.CreateAsync(user, password);
                     if (res.Succeeded)
                     {
                         await CreateRole(user.Email, "trainer");
                     }
-                                    
+
                 }
             }
 
@@ -231,7 +237,7 @@ namespace ASM.Controllers
 
             var email = "trainee";
             var password = "123qwe123";
-            var phone = "0961119526";
+            var phone = "09";
             for (int i = 1; i <= 100; i++)
             {
                 var user = await manager.FindByEmailAsync(email + i.ToString() + "@gmail.com");
@@ -242,12 +248,12 @@ namespace ASM.Controllers
                     {
                         UserName = email + i.ToString(),
                         Email = email + i.ToString() + "@gmail.com",
-                        PhoneNumber = phone,
+                        PhoneNumber = phone + RandomNumber(100000000, 999999999).ToString(),
                         Age = 18,
-                        Name = "Le Minh Thien",
+                        Name = email + i.ToString(),
                         Education = "High School",
                         ProgrammingLanguage = "C#",
-                        Toeic = "9",
+                        Toeic = RandomNumber(100,500).ToString(),
                         Experience = "None!",
                         Department = "GCH0803",
                         Location = "Lao Cai"
@@ -282,8 +288,8 @@ namespace ASM.Controllers
                     {
                         UserName = email + i.ToString(),
                         Email = email + i.ToString() + "@gmail.com",
-                        Age = 18,
-                        Name = "Le Minh Thien",
+                        Age = RandomNumber(10, 100),
+                        Name = email + i.ToString(),
                     };
                     var res = await manager.CreateAsync(user, password);
                     if (res.Succeeded)
@@ -329,7 +335,7 @@ namespace ASM.Controllers
                     CourseEntity course = new CourseEntity();
                     course.Name = name + i.ToString();
                     course.Description = "None!";
-                    if(i % 2 == 0)
+                    if (i % 2 == 0)
                     {
                         course.CategoryId = 1;
                     }
@@ -340,7 +346,7 @@ namespace ASM.Controllers
 
             }
 
-            return  Content($"Done!");
+            return Content($"Done!");
         }
 
         public async Task<ActionResult> CreateRole(string email, string role)

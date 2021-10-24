@@ -1,0 +1,88 @@
+﻿
+@model ASM.Models.UserInfor
+@{
+    TempData["username"] = TempData["username"];
+    Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
+}
+@{
+    List<int> abc = new List<int>();
+
+
+    if (TempData["FormatIds"] != null)
+    {
+        //validation, load from previous request
+        abc = TempData["FormatIds"].ToString().Split(',')
+                .Select(id => Int32.Parse(id))
+                .ToList();
+    }
+    else if (Model != null) // this is in Edit
+    {
+        //edit, load from db
+        abc = Model.listCourse
+                           .Select(f => f.Id)
+                           .ToList();
+    }
+}
+
+<div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
+
+    <div class="" style="padding-top: 2%;padding-left: 9% ;border: 1px solid #e5deda; width: 30%; margin-left: 35%; background-color: lemonchiffon">
+        <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Alternate Text" width="150" height="150" />
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name,
+           htmlAttributes: new { @class = "font-weight-bold" }) :
+
+            @Html.DisplayFor(m => m.Name,
+          new
+          {
+              htmlAttributes = new { @class = "font-weight-bold" }
+          })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email,
+           htmlAttributes: new { @class = "font-weight-bold" }) :
+
+            @Html.DisplayFor(m => m.Email,
+          new
+          {
+              htmlAttributes = new { @class = "font-weight-bold" }
+          })
+
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold mr-3">Course Assigned</label>
+            @foreach (var f in ViewBag.Formats)
+            {
+                <div class="show-course">
+                    @{
+                        if (abc.Contains(f.Id))
+                        {
+                            <label class="form-check-label" for="@f.Name">
+                                @f.Name
+                            </label>
+                            <br/>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        <div style="height: 200px;">
+
+        </div>
+    </div>
+
+
+<style>
+    .show-course {
+        font-family: var(--font-sans-con);
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: .1rem;
+        text-transform: uppercase;
+        color: blueviolet;
+        min-width: 5%;
+        width: auto;
+        box-sizing: border-box;
+    }
+</style>

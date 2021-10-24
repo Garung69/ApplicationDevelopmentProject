@@ -6,7 +6,9 @@
 }
 @model IEnumerable<ASM.Models.UserInRole>
 <div class="container">
-    <h1 class="display-4">All Trainer</h1>
+    <div class="title">
+        <h1 class="display-4" style="margin-left:500px; padding-top:50px">All Trainer</h1>
+    </div>
     @if (TempData["message"] != null)
     {
         ViewBag.Message = TempData["message"];
@@ -37,7 +39,7 @@
 
                     <td>
                         <a type="button" class="btn btn-success btn-sm"
-                           href="@Url.Action("EditTrainer", new {id = c.UserId})">Edit</a>
+                           href="@Url.Action("EditTrainer", new {id = c.UserId})">ASSIGN</a>
                     </td>
                 </tr>
             }

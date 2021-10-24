@@ -21,7 +21,12 @@ namespace ASM.Controllers
         {
             return View();
         }
-        
+
+
+
+
+
+
         [HttpGet]
         public ActionResult CreateCategory()
         {
@@ -31,13 +36,33 @@ namespace ASM.Controllers
         [HttpPost]
         public ActionResult CreateCategory(CourseCategoryEntity a)
         {
-            using (var abc = new EF.CMSContext())
+
+            CustomValidationfCAtegory(a);
+            if (!ModelState.IsValid)
             {
-                abc.courseCategoryEntities.Add(a);
-                abc.SaveChanges();
+
+                return View(a);
             }
-            @TempData["alert"] = "You have successful add new Category";
+            else
+            {
+                using (var abc = new EF.CMSContext())
+                {
+                    abc.courseCategoryEntities.Add(a);
+                    abc.SaveChanges();
+                }
+                @TempData["alert"] = "You have successful add new Category";
+            }
+
+
             return RedirectToAction("SearchCategory");
+        }
+
+        private void CustomValidationfCAtegory(CourseCategoryEntity category)
+        {
+            if (string.IsNullOrEmpty(category.Description))
+            {
+                ModelState.AddModelError("Description", "Please input Description");
+            }
         }
 
         CMSContext db = new CMSContext();
@@ -65,23 +90,37 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult EditCategory(int id)
         {
+
             using (var classes = new EF.CMSContext())
             {
                 var Class = classes.courseCategoryEntities.FirstOrDefault(c => c.Id == id);
                 return View(Class);
             }
+
+
+
         }
 
         [HttpPost]
         public ActionResult EditCategory(int id, CourseCategoryEntity a)
         {
-            using (var abc = new EF.CMSContext())
+            CustomValidationfCAtegory(a);
+            if (!ModelState.IsValid)
             {
-                abc.Entry<CourseCategoryEntity>(a).State = System.Data.Entity.EntityState.Modified;
 
-                abc.SaveChanges();
+                return View(a);
             }
-            @TempData["alert"] = "You have successful update a Category";
+            else
+            {
+
+                using (var abc = new EF.CMSContext())
+                {
+                    abc.Entry<CourseCategoryEntity>(a).State = System.Data.Entity.EntityState.Modified;
+
+                    abc.SaveChanges();
+                }
+                @TempData["alert"] = "You have successful update a Category";
+            }
             return RedirectToAction("SearchCategory");
         }
 
@@ -111,9 +150,13 @@ namespace ASM.Controllers
             }
         }
         //-------------------------------------------------------------------------------------------------//
-        public void CustomValidationfCourses()
+        public void CustomValidationfCourses(CourseEntity course)
         {
 
+            if (string.IsNullOrEmpty(course.Description))
+            {
+                ModelState.AddModelError("Description", "Please input Description");
+            }
         }
         private List<SelectListItem> getList()
         {
@@ -138,13 +181,23 @@ namespace ASM.Controllers
         [HttpPost]
         public ActionResult AddCourse(CourseEntity a)
         {
-            using (var abc = new EF.CMSContext())
+            CustomValidationfCourses(a);
+            if (!ModelState.IsValid)
             {
-                abc.Courses.Add(a);
-                abc.SaveChanges();
+                ViewBag.Class = getList();
+                return View(a);
+            }
+            else
+            {
+                using (var abc = new EF.CMSContext())
+                {
+                    abc.Courses.Add(a);
+                    abc.SaveChanges();
+                }
+
+                @TempData["alert"] = "You have successful add new Course";
             }
 
-            @TempData["alert"] = "You have successful add new Course";
 
             return RedirectToAction("SearchCourse");
         }
@@ -164,7 +217,7 @@ namespace ASM.Controllers
         [HttpPost]
         public ActionResult EditCourse(CourseEntity a)
         {
-            CustomValidationfCourses();
+            CustomValidationfCourses(a);
 
             if (!ModelState.IsValid)
             {
@@ -278,7 +331,7 @@ namespace ASM.Controllers
                 SetViewBag();
                 return View(a);
             }
-            else 
+            else
             {
                 return RedirectToAction("ShowTrainer"); //redirect to action in the same controller
             }
@@ -288,6 +341,7 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> EditTrainer(string id, FormCollection f, UserInfor a)
         {
+            CustomValidationfTrainer(a);
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
@@ -312,10 +366,13 @@ namespace ASM.Controllers
                     a.listCourse = Convert(FAPCtx, f["formatIds[]"]);
 
                     FAPCtx.SaveChanges();
+                    @TempData["alert"] = "You have successful add a Trainer";
+                    return RedirectToAction("ShowTrainer");
                 }
             }
-            @TempData["alert"] = "You have successful add a Trainer";
-            return RedirectToAction("ShowTrainer");
+            @TempData["alert"] = "E-mail is being used";
+            return RedirectToAction("Index");
+
         }
         //================================================================================================//
 
@@ -363,7 +420,18 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateTrainee(UserInfor a, FormCollection f)
         {
-            if (f["classId[]"].IsEmpty())
+
+            CustomValidationfTrainee(a);
+
+            if (!ModelState.IsValid)
+            {
+                SetViewBag();
+                return View(a); // return lai Create.cshtml
+                                    //di kem voi data ma user da go vao
+            }
+            else
+            {
+                if (f["classId[]"].IsEmpty())
             {
                 var context = new CMSContext();
                 var store = new UserStore<UserInfor>(context);
@@ -384,6 +452,7 @@ namespace ASM.Controllers
                         Toeic = a.Toeic,
                         Department = a.Department,
                         Location = a.Location,
+                        Experience=a.Experience,
                         DoB = a.DoB,
                         Age = a.Age,
                         ProgrammingLanguage = a.ProgrammingLanguage
@@ -391,14 +460,34 @@ namespace ASM.Controllers
                     user.listCourse = Convert(context, f["formatIds[]"]);
                     await manager.CreateAsync(user, user.PasswordHash);
                     await CreateRole(a.Email, "trainee");
-                }
+                        @TempData["alert"] = "You have successful add a Trainee";
+                        return RedirectToAction("ShowTrainee");
+                    }
 
             }
-            @TempData["alert"] = "You have successful add a Trainee";
-            return RedirectToAction("ShowTrainee");
+            }
+
+            @TempData["alert"] = "E-mail is being used";
+            return RedirectToAction("Index");
 
         }
 
+        private void CustomValidationfTrainee(UserInfor a)
+        {
+            if (string.IsNullOrEmpty(a.Email))
+            {
+                ModelState.AddModelError("Email", "Please input Email");
+            }
+            if (string.IsNullOrEmpty(a.Name))
+            {
+                ModelState.AddModelError("Email", "Please input Name");
+            }
+           
+            if (!string.IsNullOrEmpty(a.Email) && (a.Email.Length >= 21))
+            {
+                ModelState.AddModelError("Email", "This email is not valid!");
+            }
+        }
 
         private void CustomValidationfTrainer(UserInfor staff)
         {
@@ -475,6 +564,11 @@ namespace ASM.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
+            
+
+            
+            
+            
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
@@ -496,53 +590,7 @@ namespace ASM.Controllers
 
 
 
-        public ActionResult SearchTrainee(string option, string search)
-        {
-            using (CMSContext context = new CMSContext())
-            {
-                var usersWithRoles = (from user in context.Users
-                                      select new
-                                      {
-                                          UserId = user.Id,
-                                          Username = user.UserName,
-                                          Email = user.Email,
-                                          WorkingPlace = user.WorkingPlace,
-                                          Type = user.Type,
-                                          PhoneNumber = user.PhoneNumber,
-                                          //More Propety
-
-                                          RoleNames = (from userRole in user.Roles
-                                                       join role in context.Roles on userRole.RoleId
-                                                       equals role.Id
-                                                       select role.Name).ToList()
-                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainee").Select(p => new UserInRole()
-
-                                      {
-                                          UserId = p.UserId,
-                                          Username = p.Username,
-                                          Email = p.Email,
-                                          Role = string.Join(",", p.RoleNames),
-                                          WorkingPlace = p.WorkingPlace,
-                                          Type = p.Type,
-                                          Phone = p.PhoneNumber
-                                      });
-                if (option == "Name")
-                {
-                    return View(db.Users.Where(x => x.UserName.Contains(search) || search == null).ToList());
-                }
-
-                else if (option == "ProgrammingLanguage")
-                {
-                    return View(db.Users.Where(x => x.ProgrammingLanguage.Contains(search) || search == null).ToList());
-                }
-                else
-                {
-                    return View(db.Users.Where(x => x.Toeic.Contains(search) || search == null).ToList());
-                }
-
-            }
-
-        }
+       
 
 
 
@@ -650,6 +698,16 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(string id, FormCollection f, UserInfor a)
         {
+            CustomValidationfTrainee(a);
+
+            if (!ModelState.IsValid)
+            {
+                SetViewBag();
+                return View(a); // return lai Create.cshtml
+                                //di kem voi data ma user da go vao
+            }
+            else
+            {
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
@@ -673,10 +731,15 @@ namespace ASM.Controllers
                     a.listCourse = Convert(FAPCtx, f["formatIds[]"]);
 
                     FAPCtx.SaveChanges();
-                }
+                        @TempData["alert"] = "You have successful update a Trainee";
+                        return RedirectToAction("ShowTrainee");
+                    }
             }
-            @TempData["alert"] = "You have successful update a Trainee";
-            return RedirectToAction("ShowTrainee");
+            }
+
+            @TempData["alert"] = "E-mail is being used";
+            return RedirectToAction("Index");
+
         }
 
     }
