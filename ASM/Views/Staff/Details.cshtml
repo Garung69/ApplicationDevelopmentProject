@@ -3,12 +3,93 @@
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
     TempData["user"] = TempData["user"];
 }
-<br />
-<br />
-<center><h1>Details</h1></center>
-@using (Html.BeginForm(FormMethod.Post))
-{
-     <div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg); float: left; margin-left: 200px;">
+
+<style>
+    body {
+        background-color: #2ecc71;
+        font-family: source-sans-pro, sans-serif;
+    }
+
+    h1 {
+        margin-left: auto;
+        margin-top: 50px;
+        text-align: center;
+        font-weight: 100;
+        font-size: 2.8em;
+        color: #ffffff;
+    }
+
+    div {
+        width: 500px;
+        margin: auto;
+    }
+
+    .formStyle {
+        background-color: #2ecc71;
+        padding: 20px;
+        width: 400px;
+        margin-bottom: 20px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #ecf0f1;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        font-size: 1em;
+        font-weight: 100;
+        color: #ffffff;
+    }
+
+    .formButton {
+        float: right;
+        background-color: #ffffff;
+        display: inline-block;
+        color: #2ecc71;
+        font-size: 28px;
+        font-weight: 500;
+        padding: 6px 24px;
+        margin-top: 15px;
+        margin-right: 60px;
+        text-decoration: none;
+    }
+
+        .formButton:hover {
+            background-color: #27ae60;
+            color: #ffffff;
+        }
+
+        .formButton:active {
+            position: relative;
+            top: 3px;
+        }
+
+
+    input:focus {
+        outline: none;
+    }
+
+ 
+    ::-webkit-input-placeholder {
+        color: #ecf0f1;
+    }
+
+    :-moz-placeholder { 
+        color: #ecf0f1;
+    }
+
+    ::-moz-placeholder { 
+        color: #ecf0f1;
+    }
+
+    :-ms-input-placeholder {
+        color: #ecf0f1;
+    }
+
+</style>
+<section class="get-in-touch">
+    <h1 class="title">Details</h1>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
 
 
         <div class="form-group">
@@ -19,7 +100,7 @@
             @Html.EditorFor(m => m.Name,
             new
             {
-                htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+                htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
             })
         </div>
 
@@ -28,7 +109,7 @@
             @Html.EditorFor(m => m.Email,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
            })
         </div>
         <div class="form-group">
@@ -36,7 +117,7 @@
             @Html.EditorFor(m => m.Toeic,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
            })
         </div>
         <div class="form-group">
@@ -44,7 +125,7 @@
             @Html.EditorFor(m => m.Age,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
            })
         </div>
         <div class="form-group">
@@ -52,31 +133,31 @@
             @Html.EditorFor(m => m.DoB,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
            })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+            @Html.LabelFor(m => m.Experience, new { @class = "font-weight-bold" })
             @Html.EditorFor(m => m.Experience,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:20px" }
            })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+            @Html.LabelFor(m => m.Location, new { @class = "font-weight-bold" })
             @Html.EditorFor(m => m.Location,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly", @style = "margin-right:100px" }
            })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold", @style = "margin-left:20px" })
+            @Html.LabelFor(m => m.ProgrammingLanguage, new { @class = "font-weight-bold" })
             @Html.EditorFor(m => m.ProgrammingLanguage,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly" }
            })
         </div>
 
@@ -85,24 +166,15 @@
             @Html.EditorFor(m => m.Department,
            new
            {
-               htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "width:250px; margin-left:20px; margin-right:20px" }
+               htmlAttributes = new { @class = "formStyle", @readonly = "readonly" }
            })
         </div>
+
+
+                <a class="formButton" href="@Url.Action("Edit", new {id =TempData["StaffId"]})" role="button">Edit</a>
+              
+                <a class="formButton" href="@Url.Action("DeleteTrainee", new {id =TempData["StaffId"]})" role="button">Delete</a>
+            
         
-    </div>
-
-
-    <div style="float:left; margin-left:100px;">
-        <br />
-        <br />
-        <br />
-        <center>
-            <a class="btn btn-danger"href="@Url.Action("Edit", new {id =TempData["StaffId"]})" role="button">Edit</a>
-            <br />
-            <br />
-            <br />
-            <a class="btn btn-primary"href="@Url.Action("DeleteTrainee", new {id =TempData["StaffId"]})" role="button">Delete</a>
-        </center>
-    </div>
-}
-
+    }
+</section>

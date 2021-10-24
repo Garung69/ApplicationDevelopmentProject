@@ -4,10 +4,7 @@
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
     TempData["user"] = TempData["user"];
 }
-@if (!ViewData.ModelState.IsValid)
-{
-    @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-}
+
 @using (Html.BeginForm(FormMethod.Post))
 {
 
@@ -83,6 +80,10 @@
             <div class="col-md-9">
                 <div class="contact-form">
                     <div class="form-group">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+                        }
                         @Html.LabelFor(m => m.CategoryId, htmlAttributes: new { @class = "form-weight-bold" })
                         @Html.DropDownListFor(m => m.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Class, htmlAttributes
                         : new { @class = "form-control" }

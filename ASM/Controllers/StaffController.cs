@@ -23,10 +23,6 @@ namespace ASM.Controllers
         }
 
 
-
-
-
-
         [HttpGet]
         public ActionResult CreateCategory()
         {
@@ -239,16 +235,6 @@ namespace ASM.Controllers
 
 
 
-
-        public ActionResult ShowCourse()
-        {
-            using (var classes = new EF.CMSContext())
-            {
-                var Classroom = classes.Courses.OrderBy(a => a.Id).ToList();
-                return View(Classroom);
-            }
-        }
-
         [HttpGet]
         public ActionResult DeleteCourse(int id, CourseEntity a)
         {
@@ -341,6 +327,9 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> EditTrainer(string id, FormCollection f, UserInfor a)
         {
+
+            CustomValidationfTrainer(a);
+            
             CustomValidationfTrainer(a);
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
@@ -465,6 +454,7 @@ namespace ASM.Controllers
                     }
 
             }
+
             }
 
             @TempData["alert"] = "E-mail is being used";
@@ -499,14 +489,17 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("Email", "Please input Name");
             }
-            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Split('@')[0] == null) && (staff.Email.Split('@')[1] == null) && (staff.Email.Split('@')[1] != "gmail.com"))
+            if (!string.IsNullOrEmpty(staff.Email))
             {
-                ModelState.AddModelError("Email", "Please a valid Email (abc@gmail.com)");
+                if (!staff.Email.Contains("@") || (staff.Email.Split('@')[0] == "") || (staff.Email.Split('@')[1] == "") || staff.Email.Split('@')[1] != "gmail.com")
+                {
+                    ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
+                }
             }
-            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
-            {
-                ModelState.AddModelError("Email", "This email is not valid!");
-            }
+            //if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
+            //{
+            //    ModelState.AddModelError("Email", "This email is not valid!");
+            //}
         }
 
 

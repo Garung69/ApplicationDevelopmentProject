@@ -11,7 +11,38 @@
     Layout = "~/Views/Staff/_LayoutFor Staff.cshtml";
 }
 
-@using (Html.BeginForm(FormMethod.Post))
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Are you Sure Delete This Category?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <form id="deleteForm" method="post">
+        <div class="modal-body">
+            <fieldset disabled>
+                <div class="form-group">
+                    <label for="Username">Category Name:</label>
+                    @Html.DisplayFor(m => m.Name)
+                </div>
+            </fieldset>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Delete">
+            <a class="btn btn-dark" href="@Url.Action("SearchCourse")">Cancel</a>
+
+
+        </div>
+    </form>
+
+</div>
+
+
+
+@*@using (Html.BeginForm(FormMethod.Post))
 {
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
@@ -37,7 +68,7 @@
     <br />
 
     <button type="submit" class="btn btn-dark">Submit</button>
-}
+}*@
 
 
 

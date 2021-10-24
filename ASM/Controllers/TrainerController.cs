@@ -174,7 +174,7 @@ namespace ASM.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("PasswordHash", "Password and confirm Password incorrect!");
+                        ModelState.AddModelError("PasswordHash", "Old Password incorrect!");
                         TempData["username"] = TempData["username"];
                         return View();
                     }

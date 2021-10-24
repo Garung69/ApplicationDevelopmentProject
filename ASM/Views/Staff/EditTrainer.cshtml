@@ -104,10 +104,7 @@
 }
 
 
-@if (!ViewData.ModelState.IsValid)
-{
-    @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-}
+
 
 @using (Html.BeginForm(FormMethod.Post))
 {
@@ -121,10 +118,15 @@
                 </div>
             </div>
             <div class="col-md-9">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+                }
                 <div class="contact-form">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
+
                                 @Html.LabelFor(m => m.Name,
                                      htmlAttributes: new { @class = "font-weight-bold" })
 
@@ -180,15 +182,15 @@
 
                         <br />
                         <div class="form-group">
-                            
+
 
                             <button type="submit" class="btn btn-dark">OK</button>
 
-                        
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
         </div>
 }

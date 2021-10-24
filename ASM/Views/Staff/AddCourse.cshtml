@@ -55,10 +55,7 @@
 </style>
 
 
-@if (!ViewData.ModelState.IsValid)
-{
-    @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-}
+
 <div class="container forget-password">
     <div class="row">
         <div class="col-md-12 col-md-offset-4">
@@ -67,6 +64,10 @@
                     <div class="text-center">
                         <img src="http://fpt.edu.vn/Content/images/assets/Logo-Greenwich.png" alt="car-key" border="0">
                         <h2 class="text-center">Create New Course</h2>
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+                        }
 
                         @using (Html.BeginForm(FormMethod.Post))
                         {
