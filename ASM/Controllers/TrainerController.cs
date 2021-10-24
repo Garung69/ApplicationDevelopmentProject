@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -87,7 +88,44 @@ namespace ASM.Controllers
         }
 
 
+        private void SetViewBag()
+        {
+            using (var bwCtx = new EF.CMSContext())
+            {
+                ViewBag.Publishers = bwCtx.Courses
+                                  .Select(p => new SelectListItem
+                                  {
+                                      Text = p.Name,
+                                      Value = p.Id.ToString()
+                                  })
+                                  .ToList();
 
+                ViewBag.Formats = bwCtx.Courses.ToList(); //select *
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ShowCourseAssign()
+        {
+            TempData["username"] = TempData["username"];
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+
+            var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com");
+
+            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == user.Id);
+
+            if (a != null)
+            {
+                SetViewBag();
+                return View(a);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
 
         //private void CustomValidationTrainer(UserInfor trainer)
