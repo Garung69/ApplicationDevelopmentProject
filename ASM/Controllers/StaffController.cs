@@ -448,6 +448,7 @@ namespace ASM.Controllers
                         Toeic = a.Toeic,
                         Department = a.Department,
                         Location = a.Location,
+                        Experience=a.Experience,
                         DoB = a.DoB,
                         Age = a.Age,
                         ProgrammingLanguage = a.ProgrammingLanguage
