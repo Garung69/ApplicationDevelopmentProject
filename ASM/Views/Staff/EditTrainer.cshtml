@@ -38,6 +38,56 @@
             #checkboxes label:hover {
                 background-color: #1e90ff;
             }
+
+    body {
+        background-color: #882754;
+    }
+
+    .contact {
+        padding: 4%;
+        height: 400px;
+    }
+
+    .col-md-3 {
+        background: #ff9b00;
+        padding: 4%;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    .contact-info {
+        margin-top: 10%;
+    }
+
+        .contact-info img {
+            margin-bottom: 15%;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 10%;
+        }
+
+    .col-md-9 {
+        background: #fff;
+        padding: 3%;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    .contact-form label {
+        font-weight: 600;
+    }
+
+    .contact-form button {
+        background: #921c1c;
+        color: #fff;
+        font-weight: 600;
+        width: 25%;
+    }
+
+        .contact-form button:focus {
+            box-shadow: none;
+        }
 </style>
 <br>
 @{ List<int> abc = new List<int>();
@@ -52,77 +102,98 @@
         abc = Model.listCourse.Select(f => f.Id).ToList();
     }
 }
-<div class="container">
-    <h1 class="display-4">Edit Trainer</h1>
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-        @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
-    }
-
-    @using (Html.BeginForm(FormMethod.Post) )
-    {
-<div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name,
-          htmlAttributes: new { @class = "font-weight-bold" })
 
 
-        @Html.EditorFor(m => m.Name,
-         new
-         {
-           htmlAttributes = new { @class = "form-control" }
-         })
-    </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+}
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.Type, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container contact">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-info">
+                    <img src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/512/setting-icon.png" style="width:80px" alt="image" />
+                    <h2>Update Trainer</h2>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.WorkingPlace, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-</div>
-        
-        <br />
-        <div class="form-group">
-            <label>Course</label>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckboxes()">
-                    <select>
-                        <option>Select an option</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkboxes">
-                    @foreach (var f in ViewBag.Formats)
-                    {
-                        <input class="form-check-input" type="checkbox"
-                               value="@f.Id" id="@f.Name" name="formatIds[]"
-                               @(abc.Contains(f.Id) ? "checked" : string.Empty)>
-                        <label class="form-check-label" for="@f.Name">
-                            @f.Name
-                        </label>
-                    }
                 </div>
             </div>
-            <button type="submit" class="btn btn-dark">OK</button>
+            <div class="col-md-9">
+                <div class="contact-form">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Name,
+                                     htmlAttributes: new { @class = "font-weight-bold" })
 
+
+                                @Html.EditorFor(m => m.Name,
+                                    new
+                                    {
+                                        htmlAttributes = new { @class = "form-control" }
+                                    })
+                            </div>
+                            <div class="col-md-6">
+                                <label>Course</label>
+                                <div class="multiselect" style="margin-right:20px">
+                                    <div class="selectBox" onclick="showCheckboxes()">
+                                        <select>
+                                            <option>Select an option</option>
+                                        </select>
+                                        <div class="overSelect"></div>
+                                    </div>
+                                    <div id="checkboxes">
+                                        @foreach (var f in ViewBag.Formats)
+                                        {
+                                            <input class="form-check-input" type="checkbox"
+                                                   value="@f.Id" id="@f.Name" name="formatIds[]"
+                                                   @(abc.Contains(f.Id) ? "checked" : string.Empty)>
+                                            <label class="form-check-label" for="@f.Name">
+                                                @f.Name
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Type, new { @class = "font-weight-bold" })
+                            @Html.EditorFor(m => m.Type, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.WorkingPlace, new { @class = "font-weight-bold" })
+                            @Html.EditorFor(m => m.WorkingPlace, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "font-weight-bold" })
+                            @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
+                            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+
+                        <br />
+                        <div class="form-group">
+                            
+
+                            <button type="submit" class="btn btn-dark">OK</button>
+
+                        
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+        </div>
+}
 
-    }
 
-</div>
 <script>
     var expanded = false;
 
