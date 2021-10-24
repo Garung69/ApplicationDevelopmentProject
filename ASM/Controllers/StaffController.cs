@@ -23,10 +23,6 @@ namespace ASM.Controllers
         }
 
 
-
-
-
-
         [HttpGet]
         public ActionResult CreateCategory()
         {
@@ -238,16 +234,6 @@ namespace ASM.Controllers
         }
 
 
-
-
-        public ActionResult ShowCourse()
-        {
-            using (var classes = new EF.CMSContext())
-            {
-                var Classroom = classes.Courses.OrderBy(a => a.Id).ToList();
-                return View(Classroom);
-            }
-        }
 
         [HttpGet]
         public ActionResult DeleteCourse(int id, CourseEntity a)
