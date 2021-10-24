@@ -18,76 +18,84 @@
         TempData["user"] = a;
     }
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">*@
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">*@
+
+    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="#"><img src="https://scontent.fhan4-2.fna.fbcdn.net/v/t1.6435-9/137642199_3456444204454631_7760562503268940717_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ZCu4jF-hJXEAX_Dgc0j&tn=yfUWPwujf0jOTasY&_nc_ht=scontent.fhan4-2.fna&oh=37d5be41de97950a7cb461de473a4595&oe=618DCAAD" alt="HTML tutorial" style="width:65px;height:65px;"></a>
+  
+
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       
+            <a class="nav-link" href="@Url.Action("SearchCourse", "Staff")">HOME</a>
+       
+        @*<a class="navbar-brand" href="@Url.Action("SearchCourse", "Staff")">Home</a>*@
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="@Url.Action("ShowCourse", "Staff")">Home</a>
-                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Trainee
+                        TRAINEE
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("CreateTrainee", "Staff")">New Trainee</a>
-                        <a class="dropdown-item" href="@Url.Action("ShowTrainee", "Staff")"> Manager Trainee</a>
-                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("CreateTrainee", "Staff")">ADD TRAINEE</a>
+                        <a class="dropdown-item" href="@Url.Action("ShowTrainee", "Staff")">ALL TRAINEE</a>
 
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Trainer
+                        COURSE
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("ShowTrainer", "Staff")"> Manager Trainer</a>
-                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("AddCourse", "Staff")">ADD COURSE</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchCourse", "Staff")">ALL COURSE</a>
 
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Course
+                        COURSE CATEGORY
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("AddCourse", "Staff")">New Course</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchCourse", "Staff")"> Manager Course</a>
+                        <a class="dropdown-item" href="@Url.Action("CreateCategory", "Staff")">ADD CATEGORY</a>
+                        <a class="dropdown-item" href="@Url.Action("SearchCategory", "Staff")">ALL CATEGORY</a>
                         <div class="dropdown-divider"></div>
-
+                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Course Category
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("CreateCategory", "Staff")">New Category</a>
-                        <a class="dropdown-item" href="@Url.Action("SearchCategory", "Staff")"> Manager Category</a>
-                        <div class="dropdown-divider"></div>
-
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ShowTrainer", "Staff")">TRAINER</a>
                 </li>
+
+                <li style="margin-left:600px">
+                    <a class="nav-link" href="#"> @a</a>
+                </li>
+
 
             </ul>
-
-            <p>
-                &nbsp; &nbsp;
-            </p>
-            <p class="nav-item" style="padding-top: 2% ; padding-right: 1%;">Staff: @a</p>
-            <a class="btn btn-danger float-right navbar-right" href="@Url.Action("Logout", "Login")" role="button">Logout</a>
+          
+            
+            
+            
+            <form class="d-flex">
+                <a class="btn btn-danger float-right" href="@Url.Action("Logout", "Login")" role="button">Logout</a>
+            </form>
+          
         </div>
     </nav>
+
+
 
     <div class="container">
         @{ if (TempData["alert"] != null)

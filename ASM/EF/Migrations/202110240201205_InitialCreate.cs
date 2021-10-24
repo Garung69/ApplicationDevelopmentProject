@@ -117,8 +117,8 @@
                 "dbo.UserInforCourseEntities",
                 c => new
                     {
-                        UserInfor_Id = c.String(nullable: true, maxLength: 128),
-                        CourseEntity_Id = c.Int(nullable: true),
+                        UserInfor_Id = c.String(nullable: false, maxLength: 128),
+                        CourseEntity_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserInfor_Id, t.CourseEntity_Id })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserInfor_Id, cascadeDelete: true)

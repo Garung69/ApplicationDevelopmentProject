@@ -59,9 +59,15 @@
             }
 </style>
 <div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary(false, "Error Summary", new { @class = "text-danger" })
+    }
     @using (Html.BeginForm(FormMethod.Post))
 
     {
+
+
         <br />
         <br />
         <center>

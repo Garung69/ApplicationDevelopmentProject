@@ -22,12 +22,12 @@
     <br />
     <div class="row-cols-sm-1">
         <div class="title">
-            <span class="title font-weight-bold">All Trainee</span>
+            <h1 class="display-4" style="margin-left:500px">All Trainee</h1>
         </div>
         <div class="row-cols-md-1">
 
-            <table class="table">
-                <thead>
+            <table class="table table-hover">
+                <thead class="thead-dark">
                     <tr style="border: 1px solid #8b46be;">
                         <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
                         <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
@@ -40,15 +40,15 @@
                 <tbody id="myTable">
                     @foreach (var c in Model)
                     {
-                    <tr style="border: 1px solid #8b46be;">
-                        <td>@Html.DisplayFor(model => c.Name)</td>
-                        <td>@Html.DisplayFor(model => c.Email)</td>
-                        <td>@Html.DisplayFor(model => c.Toeic)</td>
-                        <td>@Html.DisplayFor(model => c.Language)</td>
-                        <th scope="col">&nbsp;</th>
-                        <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
+                        <tr style="border: 1px solid #8b46be;">
+                            <td>@Html.DisplayFor(model => c.Name)</td>
+                            <td>@Html.DisplayFor(model => c.Email)</td>
+                            <td>@Html.DisplayFor(model => c.Toeic)</td>
+                            <td>@Html.DisplayFor(model => c.Language)</td>
+                            <th scope="col">&nbsp;</th>
+                            <td><a class="btn btn-primary" href="@Url.Action("Details", new {id = c.UserId})" role="button">ViewMore</a></td>
 
-                    </tr>
+                        </tr>
                     }
 
                 </tbody>
