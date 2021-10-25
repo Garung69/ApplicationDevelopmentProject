@@ -462,12 +462,19 @@ namespace ASM.Controllers
             }
             if (string.IsNullOrEmpty(a.Name))
             {
-                ModelState.AddModelError("Email", "Please input Name");
+                ModelState.AddModelError("Name", "Please input Name");
             }
-           
+            if (!string.IsNullOrEmpty(a.Email))
+            {
+                if (!a.Email.Contains("@") || (a.Email.Split('@')[0] == "") || (a.Email.Split('@')[1] == "") || a.Email.Split('@')[1] != "gmail.com")
+                {
+                    ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
+                }
+            }
+
             if (!string.IsNullOrEmpty(a.Email) && (a.Email.Length >= 21))
             {
-                ModelState.AddModelError("Email", "This email is not valid!");
+                ModelState.AddModelError("Email", "Email length must be more than 20 characters ");
             }
         }
 
@@ -479,7 +486,7 @@ namespace ASM.Controllers
             }
             if (string.IsNullOrEmpty(staff.Name))
             {
-                ModelState.AddModelError("Email", "Please input Name");
+                ModelState.AddModelError("Name", "Please input Name");
             }
             if (!string.IsNullOrEmpty(staff.Email))
             {
@@ -488,10 +495,10 @@ namespace ASM.Controllers
                     ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
                 }
             }
-            //if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
-            //{
-            //    ModelState.AddModelError("Email", "This email is not valid!");
-            //}
+            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 30))
+            {
+                ModelState.AddModelError("Email", "Email length must be less than 30 characters!");
+            }
         }
 
 

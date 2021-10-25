@@ -57,7 +57,7 @@ namespace ASM.Controllers
         public async Task<ActionResult> EditTrainer(string id, UserInfor trainer)
         {
 
-            //CustomValidationTrainer(trainer);
+            CustomValidationTrainer(trainer);
 
             if (!ModelState.IsValid)
             {
@@ -131,10 +131,29 @@ namespace ASM.Controllers
         }
 
 
-        //private void CustomValidationTrainer(UserInfor trainer)
-        //{
-        //    
-        //}
+        private void CustomValidationTrainer(UserInfor trainer)
+        {
+            if (string.IsNullOrEmpty(trainer.Email))
+            {
+                ModelState.AddModelError("Email", "Please input Email");
+            }
+            if (string.IsNullOrEmpty(trainer.Name))
+            {
+                ModelState.AddModelError("Name", "Please input Name");
+            }
+            if (!string.IsNullOrEmpty(trainer.Email))
+            {
+                if (!trainer.Email.Contains("@") || (trainer.Email.Split('@')[0] == "") || (trainer.Email.Split('@')[1] == "") || trainer.Email.Split('@')[1] != "gmail.com")
+                {
+                    ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
+                }
+            }
+            if (!string.IsNullOrEmpty(trainer.Email) && (trainer.Email.Length >= 30))
+            {
+                ModelState.AddModelError("Email", "Email length must be less than 30 characters!");
+            }
+
+        }
 
 
         [HttpGet]

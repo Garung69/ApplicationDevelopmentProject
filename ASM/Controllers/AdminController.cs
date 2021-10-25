@@ -30,9 +30,9 @@ namespace ASM.Controllers
                     ModelState.AddModelError("Email", "Please use a valid Email (abc@gmail.com)");
                 }
             }
-            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 21))
+            if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 30))
             {
-                ModelState.AddModelError("Email", "This email is not valid!");
+                ModelState.AddModelError("Email", "Email length must be more than 30 characters!");
             }
         }
 
@@ -225,11 +225,10 @@ namespace ASM.Controllers
                 var store = new UserStore<UserInfor>(context);
                 var manager = new UserManager<UserInfor>(store);
 
-                var user = await manager.FindByIdAsync(staff.Email);
+                var user = await manager.FindByIdAsync(staff.Id);
 
                 if (user != null)
                 {
-
 
                     user.UserName = staff.Email.Split('@')[0];
                     user.Email = staff.Email;
