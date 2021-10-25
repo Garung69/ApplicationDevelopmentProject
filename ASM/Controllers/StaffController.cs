@@ -360,7 +360,7 @@ namespace ASM.Controllers
                 }
             }
             @TempData["alert"] = "E-mail is being used";
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowTrainer");
 
         }
         //================================================================================================//
@@ -458,7 +458,7 @@ namespace ASM.Controllers
             }
 
             @TempData["alert"] = "E-mail is being used";
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowTrainee");
 
         }
 
@@ -577,7 +577,7 @@ namespace ASM.Controllers
             }
             else // if no book is found, back to index
             {
-                return RedirectToAction("Index"); //redirect to action in the same controller
+                return RedirectToAction("ShowTrainee"); //redirect to action in the same controller
             }
         }
 
@@ -731,7 +731,7 @@ namespace ASM.Controllers
             }
 
             @TempData["alert"] = "E-mail is being used";
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowTrainee");
 
         }
 
