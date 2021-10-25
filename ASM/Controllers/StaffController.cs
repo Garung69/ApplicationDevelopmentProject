@@ -64,22 +64,23 @@ namespace ASM.Controllers
         CMSContext db = new CMSContext();
         public ActionResult SearchCategory(string search)
         {
+            
             return View(db.courseCategoryEntities.Where(x => x.Name.Contains(search) || search == null).ToList());
         }
 
         public ActionResult SearchCourse(string search)
         {
-            return View(db.Courses.Where(y => y.Name.Contains(search) || search == null).ToList());
-        }
-
-        public ActionResult ShowCategory()
-        {
-
-            using (var classes = new EF.CMSContext())
-            {
-                var Classroom = classes.courseCategoryEntities.OrderBy(a => a.Id).ToList();
-                return View(Classroom);
-            }
+            /* var getnew = from a in db.Courses
+                          from b in db.courseCategoryEntities
+                          where a.CategoryId == b.Id
+                          select new
+                          {
+                              Name = a.Name,
+                              Description=a.Description,
+                              Category=b.Name
+                          };*/
+            
+            return View(db.Courses.Include("abc").Where(y => y.Name.Contains(search) || search == null).ToList());
         }
 
 

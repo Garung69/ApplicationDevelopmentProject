@@ -30,6 +30,7 @@
             <tr>
                 <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                <th scope="col">Category</th>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">&nbsp;</th>
             </tr>
@@ -39,19 +40,20 @@
         <tbody>
             @foreach (var c in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(model => c.Name)</td>
-                    <td>@Html.DisplayFor(model => c.Description)</td>
+            <tr>
+                <td>@Html.DisplayFor(model => c.Name)</td>
+                <td>@Html.DisplayFor(model => c.Description)</td>
+                <td>@Html.DisplayFor(model => c.abc.Name)</td>
 
-                    <td>
-                        <a type="button" class="btn btn-success btn-sm"
-                           href="@Url.Action("EditCourse", new {id = c.Id})">Edit</a>
-                    </td>
-                    <td>
-                        <a type="button" class="btn btn-danger btn-sm"
-                           href="@Url.Action("DeleteCourse", new {id = c.Id })">Delete</a>
-                    </td>
-                </tr>
+                <td>
+                    <a type="button" class="btn btn-success btn-sm"
+                       href="@Url.Action("EditCourse", new {id = c.Id})">Edit</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-danger btn-sm"
+                       href="@Url.Action("DeleteCourse", new {id = c.Id })">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
