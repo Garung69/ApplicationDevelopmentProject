@@ -70,16 +70,7 @@ namespace ASM.Controllers
 
         public ActionResult SearchCourse(string search)
         {
-            /* var getnew = from a in db.Courses
-                          from b in db.courseCategoryEntities
-                          where a.CategoryId == b.Id
-                          select new
-                          {
-                              Name = a.Name,
-                              Description=a.Description,
-                              Category=b.Name
-                          };*/
-            
+                 
             return View(db.Courses.Include("abc").Where(y => y.Name.Contains(search) || search == null).ToList());
         }
 
@@ -329,7 +320,7 @@ namespace ASM.Controllers
         public async Task<ActionResult> EditTrainer(string id, FormCollection f, UserInfor a)
         {
 
-            CustomValidationfTrainer(a);
+            
             
             CustomValidationfTrainer(a);
             var context = new CMSContext();
@@ -559,10 +550,7 @@ namespace ASM.Controllers
         public ActionResult Edit(string id)
         {
             
-
-            
-            
-            
+          
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);

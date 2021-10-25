@@ -194,10 +194,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("PassTemp", "Please input new Password");
             }
-            if (!string.IsNullOrEmpty(staff.PassTemp) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
-            {
-                ModelState.AddModelError("PassTemp", "Password must longer than 7 charactors");
-            }
+            
             if (string.IsNullOrEmpty(staff.PassTempConfirm))
             {
                 ModelState.AddModelError("PassTempConfirm", "Please input Confirm Password");

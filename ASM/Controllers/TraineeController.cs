@@ -19,12 +19,12 @@ namespace ASM.Controllers
 
         public async Task<ActionResult> Index()
         {
-            TempData["username"] = TempData["username"];
+            TempData["username"] = TempData["username"]; // để tránh lặp và xách định ai đang đăng nhập
             var context = new CMSContext();
             var store = new UserStore<UserInfor>(context);
             var manager = new UserManager<UserInfor>(store);
 
-            var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com");
+            var user = await manager.FindByEmailAsync(TempData["username"].ToString() + "@gmail.com"); // tìm email để 
             return View(user);
         }
 
@@ -87,10 +87,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("PassTemp", "Please input new Password");
             }
-            if (!string.IsNullOrEmpty(staff.PassTemp) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PasswordHash.Length <= 7) && (staff.PassTemp.Length <= 7))
-            {
-                ModelState.AddModelError("PassTemp", "Password must longer than 7 charactors");
-            }
+           
             if (string.IsNullOrEmpty(staff.PassTempConfirm))
             {
                 ModelState.AddModelError("PassTempConfirm", "Please input Confirm Password");

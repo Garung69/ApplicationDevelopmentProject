@@ -65,10 +65,7 @@ namespace ASM.Controllers
             {
                 ModelState.AddModelError("Email", "This email is not valid!");
             }
-            if (!string.IsNullOrEmpty(user.PasswordHash) && user.PasswordHash.Length <= 7)
-            {
-                ModelState.AddModelError("PasswordHash", "PassWord need more than 7 characters");
-            }
+            
         }
         public ActionResult Logout()
         {
