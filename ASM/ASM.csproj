@@ -398,6 +398,8 @@
     <Content Include="Views\Trainer\ShowCourse.cshtml" />
     <Content Include="Views\Login\NotFound.cshtml" />
     <Content Include="Views\Trainer\ShowCourseAssign.cshtml" />
+    <Content Include="Views\Admin\ResetPassTrainer.cshtml" />
+    <Content Include="Views\Admin\ResetPassStaff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

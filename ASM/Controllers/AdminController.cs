@@ -128,7 +128,7 @@ namespace ASM.Controllers
 
         [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
-        public async Task<ActionResult> CreateStaff(UserInfor staff, FormCollection fc)
+        public async Task<ActionResult> CreateStaff(UserInfor staff)
         {
             CustomValidationfStaff(staff);
             if (!ModelState.IsValid)
@@ -210,7 +210,7 @@ namespace ASM.Controllers
 
         [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
-        public async Task<ActionResult> EditStaff(string id, UserInfor staff)
+        public async Task<ActionResult> EditStaff(UserInfor staff)
         {
 
             CustomValidationfStaff(staff);
@@ -325,7 +325,7 @@ namespace ASM.Controllers
 
         [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
-        public async Task<ActionResult> CreateTrainer(UserInfor staff, FormCollection fc)
+        public async Task<ActionResult> CreateTrainer(UserInfor staff)
         {
             CustomValidationfStaff(staff);
             if (!ModelState.IsValid)
@@ -409,7 +409,7 @@ namespace ASM.Controllers
 
         [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
-        public async Task<ActionResult> EditTrainer(string id, UserInfor staff)
+        public async Task<ActionResult> EditTrainer( UserInfor staff)
         {
 
             CustomValidationfStaff(staff);
@@ -462,6 +462,7 @@ namespace ASM.Controllers
             }
         }
 
+
         [Authorize(Roles = SecurityRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> DeleteTrainer(string id, UserInfor staff)
@@ -479,6 +480,101 @@ namespace ASM.Controllers
             @TempData["alert"] = "You have successful delete a Trainer";
             return RedirectToAction("AMTrainer");
 
+        }
+
+        [Authorize(Roles = SecurityRoles.Admin)]
+        [HttpGet]
+        public ActionResult ResetPassStaff(string id)
+        {
+            using (var FAPCtx = new EF.CMSContext())
+            {
+                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
+
+                if (staff != null)
+                {
+                    TempData["StaffId"] = id;
+                    TempData["StaffUN"] = staff.UserName;
+                    return View(staff);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+        }
+
+
+
+
+
+        [HttpPost]
+        [Authorize(Roles = SecurityRoles.Admin)]
+        public async Task<ActionResult> ResetPassStaff(string id, UserInfor trainer)
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+            var user = await manager.FindByIdAsync(id);
+
+            if (user != null)
+            {
+                String newPassword = "123qwe123";
+                String hashedNewPassword = manager.PasswordHasher.HashPassword(newPassword);
+                user.PasswordHash = hashedNewPassword;
+                await store.UpdateAsync(user);
+                @TempData["alert"] = "Change PassWord successful!";
+                return RedirectToAction("Index", "Admin");
+            }
+            @TempData["alert"] = "Change PassWord unsuccessful, User not found!";
+            return RedirectToAction("Index", "Admin");
+        }
+
+
+
+
+        [Authorize(Roles = SecurityRoles.Admin)]
+        [HttpGet]
+        public ActionResult ResetPassTrainer(string id)
+        {
+            using (var FAPCtx = new EF.CMSContext())
+            {
+                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
+
+                if (staff != null)
+                {
+                    TempData["StaffId"] = id;
+                    TempData["StaffUN"] = staff.UserName;
+                    return View(staff);
+                }
+                else
+                {
+                    return RedirectToAction("AMTrainer");
+                }
+
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = SecurityRoles.Admin)]
+        public async Task<ActionResult> ResetPassTrainer(string id, UserInfor trainer)
+        {
+            var context = new CMSContext();
+            var store = new UserStore<UserInfor>(context);
+            var manager = new UserManager<UserInfor>(store);
+            var user = await manager.FindByIdAsync(id);
+
+            if (user != null)
+            {
+                String newPassword = "123qwe123";
+                String hashedNewPassword = manager.PasswordHasher.HashPassword(newPassword);
+                user.PasswordHash = hashedNewPassword;
+                await store.UpdateAsync(user);
+                @TempData["alert"] = "Change PassWord successful!";
+                return RedirectToAction("AMTrainer", "Admin");
+            }
+            @TempData["alert"] = "Change PassWord unsuccessful, User not found!";
+            return RedirectToAction("AMTrainer", "Admin");
         }
 
     }
