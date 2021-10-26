@@ -35,16 +35,16 @@ namespace ASM.Controllers
 
 
         [HttpGet]
-        public ActionResult EditTrainer(string id)
+        public ActionResult EditTrainer(string username)
         {
             using (var FAPCtx = new EF.CMSContext())
             {
-                var student = FAPCtx.Users.FirstOrDefault(c => c.UserName == id);
+                var trainer = FAPCtx.Users.FirstOrDefault(c => c.UserName == username);
 
-                if (student != null)
+                if (trainer != null)
                 {
-                    TempData["username"] = id;
-                    return View(student);
+                    TempData["username"] = username;
+                    return View(trainer);
                 }
                 else
                 {
@@ -54,7 +54,7 @@ namespace ASM.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> EditTrainer(string id, UserInfor trainer)
+        public async Task<ActionResult> EditTrainer(string username, UserInfor trainer)
         {
 
             CustomValidationTrainer(trainer);
@@ -157,9 +157,9 @@ namespace ASM.Controllers
 
 
         [HttpGet]
-        public ActionResult ChangePass(string id)
+        public ActionResult ChangePass(string username)
         {
-            TempData["username"] = id;
+            TempData["username"] = username;
             return View();
         }
         [HttpPost]
@@ -221,6 +221,10 @@ namespace ASM.Controllers
             if (!string.IsNullOrEmpty(staff.PassTempConfirm) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PassTemp != staff.PassTempConfirm))
             {
                 ModelState.AddModelError("PassTempConfirm", "New password and Confirm password not match");
+            }
+            if (!string.IsNullOrEmpty(staff.PassTempConfirm) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PassTemp.Length <=7))
+            {
+                ModelState.AddModelError("PassTempConfirm", "New password must longer than 7 character");
             }
         }
 

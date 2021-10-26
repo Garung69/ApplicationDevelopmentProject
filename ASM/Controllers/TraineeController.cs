@@ -30,16 +30,16 @@ namespace ASM.Controllers
 
 
         [HttpGet]
-        public ActionResult ChangePass(string id)
+        public ActionResult ChangePass(string username)
         {
-            TempData["username"] = id;
+            TempData["username"] = username;
             return View();
         }
         [HttpPost]
         public async Task<ActionResult> ChangePass(FormCollection fc, UserInfor userInfor)
         {
 
-            CustomValidationTrainer(userInfor);
+            CustomValidationTrainee(userInfor);
 
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace ASM.Controllers
                             user.PasswordHash = hashedNewPassword;
                             await store.UpdateAsync(user);
                             @TempData["alert"] = "Change PassWord successful";
-                    }
+                        }
                         else
                         {
                             ModelState.AddModelError("PasswordHash", " Old Password incorrect!");
@@ -77,7 +77,7 @@ namespace ASM.Controllers
                 return RedirectToAction("Index", "Trainee");
             }
         }
-        public void CustomValidationTrainer(UserInfor staff)
+        public void CustomValidationTrainee(UserInfor staff)
         {
             if (string.IsNullOrEmpty(staff.PasswordHash))
             {
@@ -95,6 +95,10 @@ namespace ASM.Controllers
             if (!string.IsNullOrEmpty(staff.PassTempConfirm) && !string.IsNullOrEmpty(staff.PassTemp)  && (staff.PassTemp != staff.PassTempConfirm))
             {
                 ModelState.AddModelError("PassTempConfirm", "New password and Confirm password not match");
+            }
+            if (!string.IsNullOrEmpty(staff.PassTempConfirm) && !string.IsNullOrEmpty(staff.PassTemp) && (staff.PassTemp.Length <= 7))
+            {
+                ModelState.AddModelError("PassTempConfirm", "New password must longer than 7 character");
             }
         }
 

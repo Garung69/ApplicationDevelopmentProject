@@ -3,6 +3,7 @@
     TempData["username"] = TempData["username"];
     Layout = "~/Views/Trainer/_LayoutTrainer.cshtml";
 
+
 }
 <div style="background-image: url(https://premierpaintroller.com/wp-content/uploads/2018/06/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg)">
     <div class="text-center" style="padding-top: 2%; border: 1px solid #e5deda; width: 30%; margin-left: 35%; background-color: lemonchiffon">
@@ -57,8 +58,8 @@
          htmlAttributes = new { @class = "font-weight-bold" }
      })
     </div>
-        <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { id = TempData["username"]})">EditProfile</a>
-        <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { id = TempData["username"] })">ChangePassword</a>
+        <a class="btn btn-primary" href="@Url.Action("EditTrainer", "Trainer", new { username = TempData["username"]})">EditProfile</a>
+        <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainer", new { username = TempData["username"] })">ChangePassword</a>
         <div style="height: 50px;">
 
         </div>

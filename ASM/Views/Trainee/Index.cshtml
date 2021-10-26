@@ -96,7 +96,7 @@
              htmlAttributes = new { @class = "font-weight-bold" }
          })
         </div>
-        <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainee", new { id = TempData["username"] })">ChangePassword</a>
+        <a class="btn btn-warning" href="@Url.Action("ChangePass", "Trainee", new { username = TempData["username"] })">ChangePassword</a>
         <div style="height: 50px;">
 
         </div>

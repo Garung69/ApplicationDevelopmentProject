@@ -32,7 +32,7 @@ namespace ASM.Controllers
             }
             if (!string.IsNullOrEmpty(staff.Email) && (staff.Email.Length >= 30))
             {
-                ModelState.AddModelError("Email", "Email length must be more than 30 characters!");
+                ModelState.AddModelError("Email", "Email length must be less than 30 characters!");
             }
         }
 
