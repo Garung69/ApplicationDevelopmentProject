@@ -8,6 +8,7 @@
 <div class="manage">
     <img src="https://png.pngtree.com/png-vector/20190411/ourlarge/pngtree-business-male-icon-vector-png-image_916468.jpg" alt="Alternate Text" width="70%" height="auto" /> <br />
     <a class="btn btn-primary" href="@Url.Action("EditStaff", new {id = TempData["StaffId"]})" role="button">Edit account</a> <br />
+    <a class="btn btn-info" href="@Url.Action("ResetPassStaff",new {id = TempData["StaffId"]})" role="button">Reset Password</a> <br />
     <a role="button" class="btn btn-danger btn-sm" href="@Url.Action("DeleteStaff", new {id = TempData["StaffId"]})">Delete Account</a>
     <br />
     <a class="btn btn-success" href="@Url.Action("Index","Admin")" role="button">Go back</a> <br />

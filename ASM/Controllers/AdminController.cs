@@ -37,34 +37,26 @@ namespace ASM.Controllers
         }
 
 
-        [Authorize(Roles = SecurityRoles.Admin)]
+        [Authorize(Roles = SecurityRoles.Admin)] //only user has role admin can access this action
         public ActionResult Index()
         {
-            using (CMSContext context = new CMSContext())
+            using (CMSContext context = new CMSContext()) //create a connection with the database
             {
-                var usersWithRoles = (from user in context.Users
-                                      select new
+                var usersWithRoles = (from user in context.Users //select User entity
+                                      select new { UserId = user.Id, Username = user.UserName, Email = user.Email, Name = user.Name, //property will be select
+                                          RoleNames = (from userRole in user.Roles          //
+                                                       join role in context.Roles           // Get the roles that the user owns
+                                                       on userRole.RoleId equals role.Id    //
+                                                       select role.Name).ToList()           // Select role name that the user owns
+                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "staff").Select(p => new UserInRole() //Select user has "staff" role
                                       {
-                                          UserId = user.Id,
-                                          Username = user.UserName,
-                                          Email = user.Email,
-                                          Name = user.Name,
-                                          //More Propety
-
-                                          RoleNames = (from userRole in user.Roles
-                                                       join role in context.Roles on userRole.RoleId
-                                                       equals role.Id 
-                                                       select role.Name).ToList()
-                                      }).ToList().Where(p => string.Join(",", p.RoleNames) == "staff").Select(p => new UserInRole()
-
-                                      {
-                                          UserId = p.UserId,
-                                          Username = p.Username,
-                                          Name = p.Name,
-                                          Email = p.Email,
-                                          Role = string.Join(",", p.RoleNames)
+                                          UserId = p.UserId,                    //
+                                          Username = p.Username,                //property will be select
+                                          Name = p.Name,                        //
+                                          Email = p.Email,                      //
+                                          Role = string.Join(",", p.RoleNames)  //Convert list roles to string roles
                                       });
-                return View(usersWithRoles);
+                return View(usersWithRoles); //Redirect view with user data and has "staff" role
             }
         }
 
@@ -500,7 +492,6 @@ namespace ASM.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-
             }
         }
 

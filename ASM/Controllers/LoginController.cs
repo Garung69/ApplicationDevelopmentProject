@@ -67,16 +67,15 @@ namespace ASM.Controllers
             }
             
         }
-        public ActionResult Logout()
+        public ActionResult Logout() // function to Logout
         {
             if (User.Identity.IsAuthenticated)
             {
-                HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                ViewData.Clear();
-                Session.RemoveAll();
+                HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie); //Signout authentication cookie  
+                ViewData.Clear(); // Clear All ViewData
+                Session.RemoveAll(); // Clear All Session
             }
-
-            return RedirectToAction("LogIn", "Login");
+            return RedirectToAction("LogIn", "Login"); // Redirect user to login page
         }
 
         // GET: Login
@@ -89,64 +88,53 @@ namespace ASM.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> LogIn(UserInfor user)
+        public async Task<ActionResult> LogIn(UserInfor user) //function use to Login to system
         {
-            CustomValidation(user);
-
+            CustomValidation(user); //check validation
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View(user); //if data not pass validation user need login again
             }
-            else
+            else //if login data pass validation data login will be verify
             {
-                var context = new CMSContext();
-                var store = new UserStore<UserInfor>(context);
-                var manager = new UserManager<UserInfor>(store);
-
-                var signInManager
-                    = new SignInManager<UserInfor, string>(manager, HttpContext.GetOwinContext().Authentication);
-
-                var fuser = await manager.FindByEmailAsync(user.Email);
-
-                var result = await signInManager.PasswordSignInAsync(userName: user.Email.Split('@')[0], password: user.PasswordHash, isPersistent: false, shouldLockout: false);
-
-                if (result == SignInStatus.Success)
+                var context = new CMSContext();                     //
+                var store = new UserStore<UserInfor>(context);      //create a connection with the database
+                var manager = new UserManager<UserInfor>(store);    //Create data manager 
+                var signInManager = new SignInManager<UserInfor, string>(manager, HttpContext.GetOwinContext().Authentication); //create authentication cookie          
+                var result = await signInManager.PasswordSignInAsync(userName: user.Email.Split('@')[0], password: user.PasswordHash, isPersistent: false, shouldLockout: false); //signin/verify user
+                if (result == SignInStatus.Success)// if user signin success redirect to pages by role
                 {
-                    var userStore = new UserStore<UserInfor>(context);
-                    var userManager = new UserManager<UserInfor>(userStore);
-
-
-                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))
+                    var fuser = await manager.FindByEmailAsync(user.Email); //find user in database
+                    var userStore = new UserStore<UserInfor>(context);      //
+                    var userManager = new UserManager<UserInfor>(userStore);///Create user manager 
+                    if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Admin))// if user has role admin -> do action
                     {
-                        /*SessionLogin(fuser.UserName);*/
-                        TempData["UN"] = fuser.UserName;
-                        return RedirectToAction("Index", "Admin");
+                        TempData["UN"] = fuser.UserName; // Mark who is logged in
+                        return RedirectToAction("Index", "Admin"); // redirect to Admin page
                     }
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Staff))
                     {
                         TempData["UN"] = fuser.UserName;
                         return RedirectToAction("SearchCategory", "Staff");
-                    }
-
+                    }  // if user has role staff -> do action
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainer))
                     {
                         TempData["username"] = fuser.UserName;
                         return RedirectToAction("Index", "Trainer");
-                    }
+                    }  // if user has role trainer -> do action
                     if (await userManager.IsInRoleAsync(fuser.Id, SecurityRoles.Trainee))
                     {
                         TempData["username"] = fuser.UserName;
                         return RedirectToAction("Index", "Trainee");
-                    }
+                    }    // if user has role trainee -> do action
                     else return Content($"Comming Soon!!!");
                 }
-                else
+                else //if login data not pass validation 
                 {
-                    ModelState.AddModelError("PasswordHash", "User Name or Password incorrect!");
-                    return View();
+                    ModelState.AddModelError("PasswordHash", "User Name or Password incorrect!"); //create notifications for users
+                    return View(); // User login again
                 }
             }
-
         }
 
 
