@@ -409,6 +409,7 @@ namespace ASM.Controllers
 
             if (!ModelState.IsValid)//if user input wrong
             {
+                TempData["abc"] = f["formatIds[]"];
                 SetViewBag();// call function get viewbag to return the data when the user input wrong
                 return View(a); 
             }
