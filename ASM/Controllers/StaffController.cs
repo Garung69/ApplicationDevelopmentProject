@@ -592,9 +592,9 @@ namespace ASM.Controllers
 
         public ActionResult ShowTrainee(string option, string search)
         {
-            using (CMSContext context = new CMSContext())
+            using (CMSContext context = new CMSContext())// call from context
             {
-                var usersWithRoles = (from user in context.Users
+                var usersWithRoles = (from user in context.Users//call all object in Users and set the anonymous
                                       select new
                                       {
                                           UserId = user.Id,
@@ -610,9 +610,10 @@ namespace ASM.Controllers
                                           RoleNames = (from userRole in user.Roles
                                                        join role in context.Roles on userRole.RoleId
                                                        equals role.Id
-                                                       select role.Name).ToList()
+                                                       select role.Name).ToList()//join Roles in DbContext with Roles in IdentityUser by id
+                                                                                 //in context
                                       }).ToList().Where(p => string.Join(",", p.RoleNames) == "trainee").Select(p => new UserInRole()
-
+                                      //join and set the annonymous value to new UserInRole Models
                                       {
                                           UserId = p.UserId,
                                           Name = p.Name,
@@ -624,7 +625,7 @@ namespace ASM.Controllers
                                           Toeic = p.Toeic,
                                           Language = p.language
                                       });
-                return View(usersWithRoles);
+                return View(usersWithRoles);// return Type UserInRole to VIew
             }
         }
 
@@ -635,10 +636,10 @@ namespace ASM.Controllers
             {
                 var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
 
-                if (staff != null)
+                if (staff != null)//found trainee
                 {
-                    TempData["StaffId"] = id;
-                    TempData["StaffUN"] = staff.UserName;
+                    TempData["StaffId"] = id;//get the id from tempdata
+                    TempData["StaffUN"] = staff.UserName;//get username from tempdata
                     return View(staff);
                 }
                 else
@@ -654,12 +655,12 @@ namespace ASM.Controllers
         {
             using (var FAPCtx = new EF.CMSContext())
             {
-                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);
+                var staff = FAPCtx.Users.FirstOrDefault(c => c.Id == id);//find the trainee by the email
 
-                if (staff != null)
+                if (staff != null)//found trainee
                 {
-                    TempData["StaffId"] = id;
-                    TempData["StaffUN"] = staff.UserName;
+                    TempData["StaffId"] = id;//get the id from tempdata
+                    TempData["StaffUN"] = staff.UserName;//get username from tempdata
                     return View(staff);
                 }
                 else
@@ -673,18 +674,18 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> DeleteTrainee(string id, UserInfor staff)
         {
-            var context = new CMSContext();
-            var store = new UserStore<UserInfor>(context);
-            var manager = new UserManager<UserInfor>(store);
+            var context = new CMSContext();//call from context
+            var store = new UserStore<UserInfor>(context);//user store
+            var manager = new UserManager<UserInfor>(store);//user managger
 
-            var user = await manager.FindByIdAsync(id);
+            var user = await manager.FindByIdAsync(id);//find trainee bt id
 
-            if (user != null)
+            if (user != null)//found trainee
             {
-                await manager.DeleteAsync(user);
+                await manager.DeleteAsync(user);//delete trainee
             }
             @TempData["alert"] = "You have successful delete a Trainee";
-            return RedirectToAction("ShowTrainee");
+            return RedirectToAction("ShowTrainee");//return to Showtrainee page
 
         }
 

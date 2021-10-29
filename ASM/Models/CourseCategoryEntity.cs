@@ -10,10 +10,11 @@ namespace ASM.Models
     {
         public CourseCategoryEntity()
         {
-            list = new List<CourseEntity>();
+            list = new List<CourseEntity>();// Code first relationship One to Many 
         }
         
-        public List<CourseEntity> list { get; set; }
+        public List<CourseEntity> list { get; set; }//One CourseCategoryEntitycan 
+                                                    //have many Course
         public int Id { get; set; }
         [Required(ErrorMessage = "Need to input name")]
         public string Name { get; set; }

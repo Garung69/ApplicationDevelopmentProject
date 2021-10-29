@@ -11,21 +11,22 @@ namespace ASM.Models
     {
         public CourseEntity()
         {
-            listTrainer = new List<UserInfor>();
+            listTrainer = new List<UserInfor>();//Code first Many to Many relationship
+                                                //between class UserInfor and CourseEntity
         }
         [Display(Name = "Category")]
-        public virtual int CategoryId { get; set; }
+        public virtual int CategoryId { get; set; }// Set the foreign key acrroding
+                                                   //to CategoryId
         [ForeignKey("CategoryId")]
-        public virtual CourseCategoryEntity abc { get; set; }
+        public virtual CourseCategoryEntity abc { get; set; }//Connect to CourseCategoryEntity 
+                                                             // by relationship Many To Ome
         public List<UserInfor> listTrainer { get; set; }
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } //set the primary key for this class
         [Required(ErrorMessage = "Need to input name")]
-        public string Name { get; set; }
+        public string Name { get; set; }//property
 
-
-
-        public string Description { get; set; }
+        public string Description { get; set; }//property
     }
 }
