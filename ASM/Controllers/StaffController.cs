@@ -664,7 +664,7 @@ namespace ASM.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("SHowTrainee");
+                    return RedirectToAction("ShowTrainee");
                 }
 
             }
