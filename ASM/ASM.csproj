@@ -176,9 +176,9 @@
     <Compile Include="Controllers\TraineeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="EF\CMSContext.cs" />
-    <Compile Include="EF\Migrations\202110250842179_InitialCreate.cs" />
-    <Compile Include="EF\Migrations\202110250842179_InitialCreate.designer.cs">
-      <DependentUpon>202110250842179_InitialCreate.cs</DependentUpon>
+    <Compile Include="EF\Migrations\202110260632535_InitialCreate.cs" />
+    <Compile Include="EF\Migrations\202110260632535_InitialCreate.designer.cs">
+      <DependentUpon>202110260632535_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="EF\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -414,8 +414,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EF\Migrations\202110250842179_InitialCreate.resx">
-      <DependentUpon>202110250842179_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="EF\Migrations\202110260632535_InitialCreate.resx">
+      <DependentUpon>202110260632535_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

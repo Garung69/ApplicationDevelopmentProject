@@ -8,10 +8,10 @@
     List<int> abc = new List<int>();
 
 
-    if (TempData["FormatIds"] != null)
+    if (TempData["abc"] != null)
     {
         //validation, load from previous request
-        abc = TempData["FormatIds"].ToString().Split(',')
+        abc = TempData["abc"].ToString().Split(',')
                 .Select(id => Int32.Parse(id))
                 .ToList();
     }

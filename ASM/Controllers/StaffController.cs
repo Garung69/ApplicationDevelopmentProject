@@ -148,13 +148,15 @@ namespace ASM.Controllers
         }
         private List<SelectListItem> getList()
         {
-            using (var abc = new EF.CMSContext())
+            using (var abc = new EF.CMSContext()) //create a new value abc is an object of CMSContext
             {
-                var stx = abc.courseCategoryEntities.Select(p => new SelectListItem
+                var stx = abc.courseCategoryEntities.Select(p => new SelectListItem //Select anonymous
                 {
                     Text = p.Name,
                     Value = p.Id.ToString()
-                }).ToList();
+                }).ToList();//Create a variabli stx change all the DB context of
+                            //courseCategoryEntities to SelectListItem 
+
                 return stx;
             }
         }
@@ -377,7 +379,7 @@ namespace ASM.Controllers
         }
         private void SetViewBag()
         {
-            using (var bwCtx = new EF.CMSContext())
+            using (var bwCtx = new EF.CMSContext())// use a variable named bwCtx of CMSContext 
             {
                 ViewBag.Publishers = bwCtx.Courses
                                   .Select(p => new SelectListItem
@@ -385,15 +387,16 @@ namespace ASM.Controllers
                                       Text = p.Name,
                                       Value = p.Id.ToString()
                                   })
-                                  .ToList();
+                                  .ToList();//Set all the object in Courses of DBset into a
+                                            //DropDownList by Select Linq anonymous
 
-                ViewBag.Formats = bwCtx.Courses.ToList(); //select *
+                ViewBag.Formats = bwCtx.Courses.ToList(); //select all data from Courses in DbSet
             }
         }
         [HttpGet]
         public ActionResult CreateTrainee()
         {
-            SetViewBag();
+            SetViewBag();// use function setViewBag to get viewbag to view
             return View();
         }
 
@@ -402,27 +405,26 @@ namespace ASM.Controllers
         public async Task<ActionResult> CreateTrainee(UserInfor a, FormCollection f)
         {
 
-            CustomValidationfTrainee(a);
+            CustomValidationfTrainee(a);//use Validation function to check user input from httpget
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid)//if user input wrong
             {
-                SetViewBag();
-                return View(a); // return lai Create.cshtml
-                                    //di kem voi data ma user da go vao
+                SetViewBag();// call function get viewbag to return the data when the user input wrong
+                return View(a); 
             }
             else
             {
-                if (f["classId[]"].IsEmpty())
+                if (f["formatIds[]"].IsEmpty())//check the all textbox named formantIds[] is emty or not
             {
-                var context = new CMSContext();
-                var store = new UserStore<UserInfor>(context);
-                var manager = new UserManager<UserInfor>(store);
+                var context = new CMSContext();//context
+                var store = new UserStore<UserInfor>(context);//userstore
+                var manager = new UserManager<UserInfor>(store);//usermanager
 
-                var user = await manager.FindByEmailAsync(a.Email);
+                var user = await manager.FindByEmailAsync(a.Email);//find IdentityUser in db by email
 
                 if (user == null)
                 {
-                    user = new UserInfor
+                    user = new UserInfor//if user = null, create a new user with property take from form
                     {
                         UserName = a.Email.Split('@')[0],
                         Email = a.Email,
@@ -438,11 +440,12 @@ namespace ASM.Controllers
                         Age = a.Age,
                         ProgrammingLanguage = a.ProgrammingLanguage
                     };
-                    user.listCourse = Convert(context, f["formatIds[]"]);
-                    await manager.CreateAsync(user, user.PasswordHash);
-                    await CreateRole(a.Email, "trainee");
+                    user.listCourse = Convert(context, f["formatIds[]"]);//use function convert to unite
+                                                                         //the value in checkbox with IdentityUser 
+                    await manager.CreateAsync(user, user.PasswordHash);//create a new user
+                    await CreateRole(a.Email, "trainee");//createRole
                         @TempData["alert"] = "You have successful add a Trainee";
-                        return RedirectToAction("ShowTrainee");
+                        return RedirectToAction("ShowTrainee");//return to page show trainee
                     }
 
             }
@@ -555,23 +558,23 @@ namespace ASM.Controllers
 
         [HttpGet]
         public ActionResult Edit(string id)
-        {
-            
-          
-            var context = new CMSContext();
-            var store = new UserStore<UserInfor>(context);
-            var manager = new UserManager<UserInfor>(store);
+        {                    
+            var context = new CMSContext();//call from context
+            var store = new UserStore<UserInfor>(context);//userStore
+            var manager = new UserManager<UserInfor>(store);//user manager
 
 
-            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == id);
+            var a = manager.Users.Include(x => x.listCourse).FirstOrDefault(b => b.Id == id);//find the IdentityUser by the id
+                                                                                             //that from the button include all the
+                                                                                             //object in the listCourse in UserInfor
 
-            if (a != null) // if a book is found, show edit view
+            if (a != null) //if user is found, return the view with all data of that user
             {
                 //ViewBag.Publishers = GetPublishersDropDown();
                 SetViewBag();
                 return View(a);
             }
-            else // if no book is found, back to index
+            else // if no user is found, back to page show trainee
             {
                 return RedirectToAction("ShowTrainee"); //redirect to action in the same controller
             }
@@ -687,39 +690,38 @@ namespace ASM.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(string id, FormCollection f, UserInfor a)
         {
-            CustomValidationfTrainee(a);
+            CustomValidationfTrainee(a);//user Validation to check user input
 
-            if (!ModelState.IsValid)
-            {
-                SetViewBag();
-                return View(a); // return lai Create.cshtml
-                                //di kem voi data ma user da go vao
-            }
-            else
-            {
-            var context = new CMSContext();
-            var store = new UserStore<UserInfor>(context);
-            var manager = new UserManager<UserInfor>(store);
-            var user = await manager.FindByEmailAsync(a.Email);
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid)//if staff input wrong, go back to that view
+                                    // with the data
             {
                 TempData["abc"] = f["formatIds[]"];
                 SetViewBag();
                 return View(a);
             }
-
-            if (user != null)
+            else
             {
-                using (var FAPCtx = new EF.CMSContext())
+            var context = new CMSContext();//call from context
+            var store = new UserStore<UserInfor>(context);//User Store
+            var manager = new UserManager<UserInfor>(store);//User Manager
+            var user = await manager.FindByEmailAsync(a.Email);//find IdentityUser by email 
+            
+
+            if (user != null)//found user with that id
+            {
+                using (var FAPCtx = new EF.CMSContext())//create var FAPctx type CMSContext
                 {
-                    a.PasswordHash = user.PasswordHash;
-                    a.SecurityStamp = user.SecurityStamp;
-                    FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;
+                    a.PasswordHash = user.PasswordHash;//set property UserInfor a to the new User find byEmail
+                    a.SecurityStamp = user.SecurityStamp;//set property UserInfor a to the new User find byEmail
+                    FAPCtx.Entry<UserInfor>(a).State = System.Data.Entity.EntityState.Modified;//allow the staff to change
+                                                                                               // the information
+                    FAPCtx.Entry<UserInfor>(a).Collection(x => x.listCourse).Load();//Load the new information of the 
+                                                                                    //check box to overwrite inoformation
+                                                                                    //of the old checkbox
+                        a.listCourse = Convert(FAPCtx, f["formatIds[]"]);//Unite the modified user with the new checked
+                                                                         //checkbox
 
-                    FAPCtx.Entry<UserInfor>(a).Collection(x => x.listCourse).Load();
-                    a.listCourse = Convert(FAPCtx, f["formatIds[]"]);
-
-                    FAPCtx.SaveChanges();
+                    FAPCtx.SaveChanges();//save to the database
                         @TempData["alert"] = "You have successful update a Trainee";
                         return RedirectToAction("ShowTrainee");
                     }
