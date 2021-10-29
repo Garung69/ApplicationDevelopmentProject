@@ -1,10 +1,10 @@
-﻿@{ 
+﻿@{
     TempData["UN"] = TempData["UN"];
 }
 @model ASM.Models.UserInfor
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title">Are you Sure Delete This Staff?</h5>
+        <h5 class="modal-title">Are you sure reset password for this Staff?</h5>
     </div>
 
 
@@ -18,8 +18,8 @@
             </fieldset>
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="Delete">
-            <a class="btn btn-danger float-right" href="@Url.Action("Index", "Admin")" role="button">Cancel</a>
+            <input type="submit" class="btn btn-primary" value="Confirm">
+            <a class="btn btn-danger float-right" href="@Url.Action("AMTrainer", "Admin")" role="button">Cancel</a>
         </div>
     </form>
 
